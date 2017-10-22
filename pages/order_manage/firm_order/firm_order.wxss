@@ -1,0 +1,441 @@
+/* pages/order_manage/firm_order/firm_order.wxss */
+
+page {
+  letter-spacing: 4rpx;
+}
+
+wx-text {
+  color: #777;
+  font-size: 24rpx;
+}
+
+.img_return {
+  width: 16rpx;
+  height: 27rpx;
+  margin-right: 44rpx;
+}
+
+.wrapper {
+  padding-bottom: 100rpx;
+}
+
+.nav_choose_area {
+  border-bottom: 1rpx solid #d0d0d0;
+  box-shadow: 0 1px 5px #e6e6e6 inset;
+}
+
+.choose_area {
+  width: 100%;
+  height: 120rpx;
+  line-height: 120rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #efefef;
+}
+
+.choose_area wx-text {
+  font-size: 28rpx;
+}
+
+.area_user {
+  display: flex;
+  align-items: center;
+  margin-left: 44rpx;
+  line-height: 60rpx;
+  padding-top: 15rpx;
+  justify-content: space-between;
+  margin-right: 44rpx;
+}
+
+.area_user wx-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.area_info {
+  display: flex;
+  align-items: center;
+  margin-left: 44rpx;
+  line-height: 60rpx;
+  margin-bottom: 15rpx;
+}
+
+.area_info wx-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10rpx;
+}
+
+.area_info wx-image {
+  width: 16rpx;
+  height: 27rpx;
+  margin-right: 44rpx;
+}
+
+.add_logo_wrapper {
+  margin-left: 44rpx;
+  margin-right: 32rpx;
+}
+
+.add_logo {
+  width: 34rpx;
+  height: 4rpx;
+  background-color: #777;
+  border-radius: 2rpx;
+}
+
+.add_rotate {
+  transform: translateY(-1px) rotate(90deg);
+}
+
+.time_served {
+  height: 86rpx;
+  line-height: 86rpx;
+  border-bottom: 1rpx solid #c3c3c3;
+  padding-left: 44rpx;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.time_served wx-image {
+  width: 16rpx;
+  height: 27rpx;
+  margin-right: 45rpx;
+}
+
+.setting {
+  padding-left: 44rpx;
+  padding-right: 46rpx;
+  line-height: 54rpx;
+  margin-top: 15rpx;
+  padding-bottom: 30rpx;
+}
+
+.setting wx-image {
+  width: 16rpx;
+  height: 27rpx;
+}
+
+.make_time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.setting_color {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.make_time .img_return, .setting_color .img_return {
+  margin-right: 0;
+}
+
+.leave_message {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  width: 660rpx;
+  height: 120rpx;
+  /* overflow: hidden; */
+}
+
+.leave_message wx-text {
+  width: 88rpx;
+  line-height: 30rpx;
+  padding: 7rpx 0;
+  /* float: left; */
+  margin-right: 6rpx;
+}
+
+.leave_message  wx-textarea {
+  /* float: left; */
+  font-size: 24rpx;
+  width: 560rpx;
+  /* margin-top: -6rpx;     */
+  flex: 1;
+  height: 110rpx;
+  line-height: 30rpx; 
+  padding-top: 8rpx;
+  color: #333;
+  display: block;
+}
+
+.leave_message .ios_textarea {
+  margin-top: -3%;
+}
+
+.leave_message .has_message {
+  position: absolute;
+  top: 0;
+  left: 104rpx;
+  color: #aaa;
+  display: block;
+  width: 200rpx;
+  line-height: 30rpx;
+  height: 30rpx;
+  font-size: 24rpx;
+}
+
+.total {
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: 2rpx solid #ebebeb;
+  z-index: 1000;
+  /* background-color: #fff;   */
+  background: rgba(255, 255, 255, 1);
+}
+
+.total wx-text {
+  display: block;
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  border-right: 1rpx solid #ddd;
+  box-sizing: border-box;
+}
+
+.total wx-button {
+  border: none;
+  background-color: #fff;
+  width: 50%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  height: 100%;
+  box-sizing: border-box;
+  line-height: 98rpx;
+}
+
+.total wx-button:after {
+  border: none;
+}
+
+.tip_message_con {
+  bottom: 20%;
+}
+
+.drawer_screen {
+  display: block;
+}
+
+/*人工调色  */
+
+.setColor_con {
+  max-height: 850rpx;
+}
+
+/* .drawer_box {
+ 
+} */
+
+.drawer_top {
+  width: 690rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  color: #333;
+  font-size: 28rpx;
+  margin: 0 30rpx;
+  border-bottom: 1rpx solid #c7c7c7;
+}
+
+.drawer_main {
+  padding: 0 30rpx;
+  width: 690rpx;
+}
+
+.color_set {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 0;
+  letter-spacing: 2rpx;
+  justify-content: flex-start;
+}
+
+.input_color {
+  display: inline-block;
+  width: 137rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  /* margin-left: 23rpx; */
+  border: 1rpx solid #c9c9c9;
+  border-radius: 8rpx;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  letter-spacing: 4rpx;
+  word-spacing: 4rpx;
+}
+
+.input_color1 {
+  width: 182rpx;
+  margin-right: 20rpx;
+}
+
+.color_set_last .input_color {
+  width: 137rpx;
+}
+
+.color_set_last .input_color1 {
+  width: 182rpx;
+}
+
+.add_color {
+  width: 150rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding-right: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #289dee;
+  margin-left: 520rpx;
+  padding-top: 5rpx;
+  padding-bottom: 25rpx;
+}
+
+.color_delte {
+  width: 65rpx;
+  height: 58rpx;
+  border: none;
+  font-size: 24rpx;
+  color: #9f9f9f;
+  background-color: #fff;
+  padding: 0;
+  line-height: 58rpx;
+  padding-left: 20rpx;
+}
+
+.add_color wx-image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+.confirm_wrapper {
+  width: 100%;
+  height: 68rpx;
+  display: flex;
+  letter-spacing: 5rpx;
+}
+
+.confirm_wrapper > wx-view {
+  height: 67rpx;
+  border-top: 1rpx solid #eee;
+  flex: 1;
+}
+
+.confirm_wrapper wx-button {
+  width: 181rpx;
+  height: 68rpx;
+  background-color: #289dee;
+  border-radius: 0;
+  font-size: 28rpx;
+  line-height: 68rpx;
+  color: #fff;
+}
+
+.color_d93737 {
+  color: #d93737;
+  margin-left: 30rpx;
+  line-height: 68rpx;
+  margin-right: 10rpx;
+}
+
+.tip_message_con {
+  bottom: 30%;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+/* 提示修改 */
+
+.tip_message {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/*提交按钮背景色设置  */
+
+.total .active {
+  background-color: #289dee;
+  color: #fff;
+  border-radius: 0;
+}
+
+/*新添加 购物车属性css  */
+
+.shopattribute-title {
+  position: relative;
+}
+
+.shopattribute-title wx-image {
+  position: absolute;
+  left: 124rpx;
+  top: 13rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.shopattribute-title > wx-text {
+  color: #333;
+}
+
+/* .shopattribute-content {
+  width: 420rpx;
+} */
+
+.shopattribute-content wx-view {
+  line-height: 43rpx;
+}
+
+.orderHeight {
+  display: none;
+}
+
+wx-navigator:hover {
+  background-color: #fff;
+}
+
+.order_commit_after {
+  width: 100%;
+  margin-top: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.order_commit_after wx-text {
+  font-size: 28rpx;
+}
+
+.return_index {
+  margin-top: 20rpx;
+  width: 200rpx;
+  height: 60rpx;
+  color: #fff;
+  background: #289dee;
+  border-radius: 10rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+}

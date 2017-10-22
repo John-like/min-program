@@ -1,0 +1,359 @@
+<!--tcbao.wxml-->
+<import src="../../template/template.wxml" />
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />
+<scroll-view scroll-y="{{isScroll}}" class='{{isScroll?"":"scroll_no"}}'>
+  <view class="contain">
+    <swiper class="topswiper" style="height:500rpx;" indicator-active-color="{{indicatorActivecolor}}" indicator-color="{{indicatorColor}}" circular="{{true}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{goodsContent.commodityImageTurns}}" wx:key="*this">
+        <swiper-item>
+          <image bindtap='previamgeTurn' src="{{item.fileUrl}}" class="slide-image" width="355" height="150" data-id="{{item.id}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- content -->
+    <view class="goodsTop-content">
+      <view class="goodsTop">
+        <view class="goodsTitle">
+          <block wx:if="{{goodsContent.brandName}}">[{{goodsContent.brandName}}] </block>
+          {{goodsContent.commodityName}}
+        </view>
+        <view class="goodsdetail">
+          {{goodsContent.lightSpot}}
+        </view>
+      </view>
+      <!-- <view class="goodspass">
+      <text>送货方式:</text>
+      <text>{{goodsContent.deliveryMethod}}</text>
+    </view> -->
+      <!--test  -->
+    </view>
+    <!--规格  -->
+    <view class="goodsStyle">
+      <view class="goodsLink" bindtap="showGoodchose" data-show="addShopModal" data-statu="open" data-id="{{goodsContent.commodityId}}">
+        <view>
+          <text>选择：</text>
+          <text>规格 颜色</text>
+        </view>
+        <image src="/images/goodslist-back.png"></image>
+      </view>
+    </view>
+
+
+    <!--属性 说明 服务  -->
+    <view class="goodsRule" wx:if="{{goodsContent.description||goodsContent.explain}}">
+      <view class="goodsRule-sx" wx:if="{{goodsContent.description}}">
+        <view class="goodsRule-sx-name">商品描述：</view>
+        <view class="goodsRule-sx-content">{{goodsContent.description}}</view>
+      </view>
+      <view class="goodsRule-sx" wx:if="{{goodsContent.explain}}">
+        <view class="goodsRule-sx-name">商品说明：</view>
+        <view class="goodsRule-sx-content">{{goodsContent.explain}}</view>
+      </view>
+      <!-- <view class="goodsRule-sx">
+      <view class="goodsRule-sx-name">
+        <image src="/images/tob-star.png"></image>
+        免费服务
+      </view>
+    </view> -->
+    </view>
+  </view>
+
+  <!--底部图片  -->
+  <view class="goodsImg">
+    <block wx:for="{{goodsContent.commodityImageDetail}}" wx:key="goodsContent.commodityImageDetail.id">
+
+      <image mode='widthFix' bindtap='previamgeDeatil' src="{{item.fileUrl}}" class="slide-image" width="355" height="150" />
+
+    </block>
+  </view>
+
+  <!--弹出层 商品详情  -->
+  <!--mask-->
+  <!-- <view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view> -->
+  <!--content-->
+  <!--使用animation属性指定需要执行的动画-->
+</scroll-view>
+
+
+<!--底部购物车 保存 下单部分  -->
+<view class="setCar">
+  <view class="setCar-car">
+    <view class="setCar-carcontent" bindtap="addBtn" data-show="shopCarModal" data-statu="open">
+      <image src="/images/goodscar.png"></image>
+      <view class="setCar-word" wx:if="{{(categoryNum>0)&&(categoryNum<=99)}}">{{categoryNum}}</view>
+      <view class="setCar-word" wx:elif="{{(categoryNum>0)&&(categoryNum>=100)}}">99+</view>
+    </view>
+  </view>
+  <view class="setCar-serve">
+    <view class='setCar-total'>
+      <view class='setCar-total-view'>
+        <!-- <view wx:if="{{shopCarVipTotalPrice&&(shopCarVipTotalPrice<shopCarTotalPrice)}}"> 
+               <view style='text-decoration: line-through;color: #999;'>
+                总计：
+                <text style='color: #999;font-size:24rpx;'>￥{{shopCarTotalPrice}}</text>
+              </view>
+              会员价总计：
+              <text style='color:#d71518;font-size:28rpx;'>￥{{shopCarVipTotalPrice}}</text>
+          </view> -->
+        <view>
+          零售价：
+          <text style='color:#d71518;font-size:28rpx;'>￥{{retailPrice}}</text>
+        </view>
+        <!-- <view class='setCar-total-num setCar-total-num-give'>
+          ￥21203
+        </view>  -->
+      </view>
+
+    </view>
+
+  </view>
+  <view class="setCar-serve active" bindtap='getMeaun'>
+    下单
+  </view>
+</view>
+
+<!--弹出层 商品详情  -->
+<!--mask-->
+<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+
+<!--添加商品执行的动画-->
+<view animation="{{showSignRemarks}}" class="drawer_box" wx:if="{{addShopModal}}">
+  <form bindsubmit="formSubmit">
+    <!--drawer content-->
+    <view class="drawer_content">
+      <!--弹窗 头部  -->
+      <view class="drawer_top">
+        <view class="drawer_top_img" wx:if="{{goodsChose.productImage.fileUrl}}">
+          <image src="{{goodsChose.productImage.fileUrl}}"> </image>
+        </view>
+        <view class="drawer_top_img" wx:else>
+          <image src="/images/tob-list.png"> </image>
+        </view>
+
+        <view class="drawer_top_word">
+          <view class="drawer_top_name" wx:if="{{goodsChose.commodityName}}">{{goodsChose.commodityName}}</view>
+          <view class="drawer_top_name" wx:else></view>
+          <view class="drawer_top_style" wx:if="{{goodsChose.brandName}}">品牌:{{goodsChose.brandName}}</view>
+          <view class="drawer_top_style" wx:else></view>
+        </view>
+      </view>
+      <!--弹窗 main  -->
+      <view class="drawer_main">
+        <view class="drawer_main_style">
+          <view wx:if="{{goodsChose.color != ''}}">
+            <view class="drawer_main_title">
+              颜色：
+            </view>
+            <view class="style_color">
+              <block wx:for="{{goodsChose.color}}" wx:key="{{index}}">
+                <view class="style_color_list {{colorId == item.id ? 'list_avtive' : ''}}" bindtap="switchColor" name="{{item.name}}" data-id="{{item.id}}">{{item.name}}</view>
+
+              </block>
+            </view>
+          </view>
+          <!--设置 类型  -->
+          <view wx:if="{{attriBute}}">
+            <block wx:for="{{attriBute}}" wx:for-index="i" wx:key="{{i}}">
+              <view class="drawer_main_title">
+                {{item.name}}：
+              </view>
+              <radio-group bindchange="radioCheckedChange" data-name="{{i}}" class="style_type style_color">
+                <block wx:for="{{attriBute[i].AttributeValue}}" wx:key="*key" wx:for-index="j">
+                  <label class="style_color_list {{NavNum[i]==j?'list_avtive':''}}" checked="{{j==0?'true':'false'}}" name="{{item.name}}" data-index="{{j}}" data-id="{{item.id}}">{{item.name}}
+                    <radio value="{{j}}" hidden='true'></radio>
+                  </label>
+                </block>
+              </radio-group>
+            </block>
+          </view>
+        </view>
+        <!--设置免费服务  -->
+        <view class="drawer_main_serve" wx:for="{{goodsChose.freeService}}" wx:key="{{index}}">
+          <view wx:if="{{item.name}}">*{{item.name}}</view>
+          <!-- <view>*{{item[index].name}}</view> -->
+        </view>
+        <view class="drawer_main_more">
+          <view class="drawer_main_title" wx:if="{{goodsChose.paidService.length>0}}">
+            其他服务：
+          </view>
+          <view>
+            <checkbox-group bindchange="checkboxChange" wx:if="{{goodsChose.paidService}}">
+              <label class="checkbox" wx:for="{{goodsChose.paidService}}" wx:key="{{index}}">
+                <view class="drawer_main_check">
+                  <checkbox color='#289dee' value="{{item.id}}" name="testname" checked="{{item.checked}}" />
+                  <text>{{item.name}}</text>
+                </view>
+              </label>
+            </checkbox-group>
+          </view>
+        </view>
+        <view class="drawer_main_number">
+          <view class="main_number_num">购买数量：
+            <text wx:if="{{goodsChose.unitName}}">{{goodsChose.unitName}}</text>
+          </view>
+          <!-- <view class="num-content">
+            <view class="num-reduce">
+              <image src="/images/tob-list-reduce.png"></image>
+            </view>
+            <view class="classname">{{shopCarnum}}</view>
+            <view class="num-add">
+              <image src="/images/tob-list-add.png"></image>
+            </view>
+          </view> -->
+
+          <view class="num-content">
+            <view class="num-reduce" bindtap="reduceBtn" bindtap='goodsCarnumReduce' wx:if="{{shopCarnum>=0}}">
+              <image src="/images/tob-list-reduce.png"></image>
+            </view>
+            <view class="classname" wx:if="{{shopCarnum>=0}}">
+              <input type='number' maxlength='3' name="name1" style='text-align:center' value='{{chooseNum}}' bindblur="chooseCommodityNum"></input>
+            </view>
+            <!-- <view class="classname" wx:else>
+              <input name="name1" style='text-align:center' value='1' disabled='disabled'></input>
+            </view>  -->
+            <view class="num-add" bindtap='goodsCarnumAdd'>
+              <image src="/images/tob-list-add.png"></image>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+    <button class="btn_ok" bindtap="addBtn" data-statu="close" formType="submit" data-growing-title="商品详情页中的选择规格">确定</button>
+  </form>
+
+</view>
+
+
+
+<!--添加购物车执行的动画-->
+<view animation="{{showSignRemarks}}" class="shopCar" wx:if="{{shopCarModal}}">
+  <!--drawer content-->
+  <view class='shopCar_top'>
+    <view>已选商品</view>
+    <view bindtap='clearShoppingCart'>清空</view>
+  </view>
+  <form bindlongtap='shopCarsubmit'>
+    <scroll-view class="shopCar_contetn" scroll-y="true" lower-threshold="20" bindscrolltolower="shoppingCartPullDown">
+
+      <!--列表  -->
+      <view class='shopCar_list' wx:for="{{shoppingcartLists}}" wx:key="{{index}}" wx:for-index="shopIndex">
+        <!-- <view class='shopCar_listName'>
+          客厅
+        </view> -->
+        <view class='shopCar_listContent'>
+          <view class='order_item'>
+            <view>
+              <image src='{{item.productImageUrl}}'></image>
+            </view>
+            <view class='shopCar-word-content'>
+              <view class='shopCar-content-remove' bindtap='shopCarRemove' data-id="{{item.id}}">
+                <image src='/images/delete_logo.png'></image>
+              </view>
+              <view class='goods_name'>{{item.commodityName}}</view>
+              <text>品牌：{{item.productBrandName}}</text>
+              <text wx:if="{{item.productColorName}}">颜色：{{item.productColorName}}</text>
+              <!-- <text>商品编号：{{item.commodityCode}}</text> -->
+              <view class='inline'>
+                <text class='first'>单位：{{item.productUnitName}}</text>
+                <view class="num-content num-image-space">
+                  <view class="num-reduce" bindtap="reduceBtn" data-id="{{item.id}}" data-index="{{shopIndex}}" bindtap='shopCarnumReduce' wx:if="{{shopCarnum>0}}">
+                    <image src="/images/tob-list-reduce.png"></image>
+                  </view>
+                  <view class="classname" wx:if="{{item.number>0}}">
+                    <input name="name1" maxlength='3' type="number" bindblur="shopCarwritenum" data-index="{{shopIndex}}" data-id="{{item.id}}" style='text-align:center' value='{{item.number}}'></input>
+                  </view>
+                  <view class="num-add" data-id="{{item.id}}" bindtap='shopCarnumAdd' data-index="{{shopIndex}}">
+                    <image src="/images/tob-list-add.png"></image>
+                  </view>
+                </view>
+              </view>
+              <view class='shopattribute'>
+                <view class='shopattribute-title' bindtap='shopCarattributeMore' data-id="{{item.id}}">
+                  <text data-id="{{item.id}}">属性详情</text>
+                  <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+                  <view class="{{heightnone==item.id?'':'orderHeight'}}">
+                    <block wx:for="{{item.attribute}}" wx:key="{{index}}" wx:for-item="shopCaritem">
+                      <view>{{shopCaritem.attributeName}} ： {{shopCaritem.attributeValueName}} </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+
+              <view class='shopattribute' wx:if="{{item.serve}}">
+                <view class='shopattribute-title' bindtap='shopCarServeMore' data-id="{{item.id}}">
+                  <text data-id="{{item.id}}">服务详情</text>
+                  <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+                  <view class="{{Servenone==item.id?'':'orderHeight'}}">
+                    <block wx:for="{{item.serve}}" wx:key="{{index}}" wx:for-item="shopCarServeitem">
+                      <view>服务项 ： {{shopCarServeitem.name}} </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--列表没有商品的时候  -->
+      <view class='shopCar-nolist' wx:if="{{shoppingcartLists.length==0}}">
+        <image src="/images/shopping_cart_default.png"></image>
+        购物车空空
+      </view>
+    </scroll-view>
+    <!-- 底部购物车 -->
+    <view class='shopCar_setcar'>
+      <view class="setCar-car">
+        <view class="setCar-carcontent" bindtap="addBtn" data-statu="close">
+          <image src="/images/goodscar.png"></image>
+          <view class="setCar-word" wx:if="{{(categoryNum>0)&&(categoryNum<=99)}}">{{categoryNum}}</view>
+          <view class="setCar-word" wx:elif="{{(categoryNum>0)&&(categoryNum>=100)}}">99+</view>
+        </view>
+      </view>
+
+      <view class="setCar-serve">
+        <view class='setCar-total'>
+          <view class='setCar-total-view'>
+            <view wx:if="{{shopCarVipTotalPrice&&(shopCarVipTotalPrice<shopCarTotalPrice)&&(customerStatus=='authentication')}}">
+              <view style='text-decoration: line-through;color: #999;font-size: 22rpx;'>
+                总计：
+                <text style='color: #999;font-size:20rpx;'>￥{{shopCarTotalPrice}}</text>
+              </view>
+              <view style='font-size:22rpx'>
+                会员价总计：
+                <text style='color: #d71518;font-size:24rpx;'>￥{{shopCarVipTotalPrice}}</text>
+              </view>
+              <view style='font-size:22rpx' wx:if="{{shopCarServePrice&&(shopCarServePrice>0)}}">
+                服务费：
+                <text style='color: #d71518;font-size:20rpx;'>￥{{shopCarServePrice}}</text>
+              </view>
+            </view>
+            <view wx:else>
+              <view>
+                总计：
+                <text style='color:#d71518;font-size:28rpx;'>￥{{shopCarTotalPrice}}</text>
+              </view>
+              <view style='font-size:22rpx' wx:if="{{shopCarServePrice&&(shopCarServePrice>0)}}">
+                服务费：
+                <text style='color: #d71518;font-size:20rpx;'>￥{{shopCarServePrice}}</text>
+              </view>
+            </view>
+            <!-- <view class='setCar-total-num setCar-total-num-give'>
+              ￥21203
+            </view> -->
+          </view>
+
+        </view>
+
+      </view>
+      <!-- <view class="setCar-serve active" bindtap='shopCargetmenu' bindtap="addBtn" data-statu="close">
+        下单
+      </view> -->
+      <view class="setCar-serve active" bindtap='getMeaun'>
+        下单
+      </view>
+    </view>
+  </form>
+
+</view>

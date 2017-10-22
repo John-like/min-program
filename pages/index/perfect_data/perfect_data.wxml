@@ -1,0 +1,76 @@
+<!--pages/index/perfect_data/perfect_data.wxml-->
+ <import src="../../template/template.wxml"/>
+
+<view class="draw-register" wx-if="{{!close}}">
+  <!-- <view class="register_title">完善资料</view> -->
+    <form class="register_grid" bindsubmit="formSubmit">
+    <view class="input_contain">
+      <label class=" input_title　input_title1">姓　　名：</label>
+      <input class="input_base " maxlength='12' name="name" placeholder="请输入姓名" placeholder-class="placeholder"></input>
+    </view>
+    <view class="input_contain">
+      <label class=" input_title　input_title1">手机号码：</label>
+      <input type='number' class="input_base " name="mobile" placeholder="请输入手机号码" placeholder-class="placeholder"></input>
+    </view>
+    <view class="input_contain" wx:if="{{false}}">
+      <label class=" input_title　input_title3">输入验证码：</label>
+      <input class="input_base iniput_code" name="code" placeholder="验证码" placeholder-class="placeholder"></input>
+      <view class="input_button">获取验证码</view>
+    </view>
+    <view class="input_contain">
+      <label class=" input_title　input_title1">公司名称：</label>
+      <input class="input_base " name="companyName" placeholder="请输入公司名称" placeholder-class="placeholder"></input>
+    </view>
+    <view class="input_contain">
+      <label class=" input_title　input_title2">推荐人手机：</label>
+      <input class="input_base " name="referrerMobile" placeholder="如无,可无需填写" placeholder-class="placeholder"></input>
+    </view>
+     <view class="input_contain input_radio">
+     <checkbox-group bindchange="checkboxChange">
+      <checkbox color="#00a0f5" name="follow" checked='checked' />
+      </checkbox-group>
+      <view class='protocol'>我已阅读<text bindtap='view_protocol'>《家饰佳购购买协议》</text>，并同意此协议</view>
+
+    </view> 
+    <!-- <view class='text_red'>*提交后请等待认证，通过后方可下单</view> -->
+    <view class="input_contain">
+      <button class="input_submit" formType="submit" data-statu="close">提交</button>
+    </view>
+  </form>  
+</view>
+<view class="drwa-close" wx:else>
+    <view class="close-icon">
+      <!-- <icon type="success" size="52"/>   -->
+      <image src="/images/tob-success.png"></image>
+    </view>
+    <view class="close-word">
+      资料已成功提交，
+    </view>
+    <view class="close-word">
+      我们将会尽快与您联系。
+    </view>
+    <view class="close-word close-button" bindtap='goIndex' data-statu="close">
+      开始浏览
+    </view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />
+
+
+
+
+
+
+
+
+<!-- <view class="container" wx:for="{{lists}}" wx:for-index="i" wx:key="{{i}}">  
+  <radio-group bindchange="radioCheckedChange" data-name="{{i}}">    
+    <view class="flex_box"  wx:for="{{lists[i].data}}" wx:for-index="j"  wx:key="{{j}}">  
+      <view class="flex_item">  
+        <label  class="{{NavNum[i]==j?'active':''}}" checked="{{j==0?'true':'false'}}" data-index="{{j}}">{{item}} 
+          <radio value="{{j}}" hidden='true'></radio>  
+        </label>  
+      </view>  
+    </view>  
+
+  </radio-group> 
+</view>   -->

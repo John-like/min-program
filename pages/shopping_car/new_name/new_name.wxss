@@ -1,0 +1,40 @@
+/* pages/shopping_car/new_name/new_name.wxss */
+page {
+  border-top: 1px solid #f1f1f1;
+}
+.list {
+  width: 100%;
+  display: flex;
+  font-size: 28rpx;
+  line-height: 88rpx;
+  height: 88rpx;
+  border-bottom: 1px solid #dddddd;
+  box-sizing: border-box;
+  padding-left: 44rpx;
+}
+.list input {
+  height: 88rpx;
+  padding-left: 22rpx;
+}
+.confirm {
+  width: 100%;
+  margin-top: 40rpx;
+}
+.confirm wx-button {
+  width: 240rpx;
+  height: 60rpx;
+  border: 1px solid #c9c9c9;
+  border-radius: 8rpx;
+  color: #333;
+  font-size: 28rpx;
+  text-align: center;
+  background-color: #fff;
+  line-height: 60rpx;
+  box-shadow: 0;
+}
+.confirm wx-button:after {
+  border: none;
+}
+.tip_message_con {
+  bottom: 50%;
+}

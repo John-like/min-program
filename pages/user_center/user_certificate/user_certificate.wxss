@@ -1,0 +1,29 @@
+/* pages/user_center/user_certificate/user_certificate.wxss */
+page{
+  background: #f5f5f5;
+}
+.container{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.person_certificate>wx-view{
+  border-bottom: 1px solid #f1f1f1;
+}
+.person_certificate>wx-view{
+  border-bottom: 1px solid #f1f1f1;
+}
+.person_certificate .certificate_row{
+  display: flex;
+ 
+  padding: 25rpx 38rpx;
+  background: #fff;
+}
+.person_certificate .certificate_row_last{
+  margin-top: 18rpx;
+}
+.certificate_left{
+  min-width: 170rpx;
+}
+.certificate_right{
+  max-width: 500rpx;
+}

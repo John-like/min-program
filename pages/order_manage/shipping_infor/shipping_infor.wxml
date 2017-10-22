@@ -1,0 +1,300 @@
+<!--pages/order_manage/shipping_infor/shipping_infor.wxml-->
+<view>
+  <view class='order_list'>
+    <view class='shipping_time'>
+      <text class='first'>发货时间：2017-08-23 18:00:00</text>
+      <text>已发货</text>
+      <image class='{{open?"":"shrink"}}' bindtap='shrink' src='../../../images/arrow_bottom.png'></image>
+    </view>
+    <view class='{{open?"show":"hide"}}'>
+      <view class='logistics'>
+        <view class='logistics_static'>
+          <text>订单状态：已发货</text>
+          <text>物流公司：天地华宇</text>
+          <text>物流单号：8888888888</text>
+          <scroll-view class='logistics_follow' scroll-y="true" enable-back-to-top="true" scroll-top="0">
+            <text class='marginT30'>物流信息：</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+          </scroll-view>
+          <!-- <view class="share" bindtap='share'>分享</view> -->
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>客厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>餐厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='order_list'>
+    <view class='shipping_time'>
+      <text class='first'>发货时间：2017-08-23 18:00:00</text>
+      <text>已发货</text>
+      <image class='{{open?"":"shrink"}}' bindtap='shrink' src='../../../images/arrow_bottom.png'></image>
+    </view>
+    <view class='{{open?"show":"hide"}}'>
+      <view class='logistics'>
+        <view class='logistics_static'>
+          <text>订单状态：已发货</text>
+          <text>物流公司：天地华宇</text>
+          <text>物流单号：8888888888</text>
+          <scroll-view class='logistics_follow' scroll-y="true" enable-back-to-top="true" scroll-top="0">
+            <text>物流信息：</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+          </scroll-view>
+          <!-- <view class="share" bindtap='share'>分享</view> -->
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>客厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>餐厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='order_list'>
+    <view class='shipping_time'>
+      <text class='first'>发货时间：2017-08-23 18:00:00</text>
+      <text>已发货</text>
+      <image class='{{open?"":"shrink"}}' bindtap='shrink' src='../../../images/arrow_bottom.png'></image>
+    </view>
+    <view class='{{open?"show":"hide"}}'>
+      <view class='logistics'>
+        <view class='logistics_static'>
+          <text>订单状态：已发货</text>
+          <text>物流公司：天地华宇</text>
+          <text>物流单号：8888888888</text>
+          <scroll-view class='logistics_follow' scroll-y="true" enable-back-to-top="true" scroll-top="0">
+            <text>物流信息：</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+            <text>2017-08-23：等待揽收</text>
+          </scroll-view>
+          <!-- <view class="share" bindtap='share'>分享</view> -->
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>客厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="order_classify">
+        <view class='order_title'>餐厅</view>
+        <view class='order_goods'>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+          <view class='order_item'>
+            <view>
+              <image src='../../../images/order_goods.png'></image>
+            </view>
+            <view>
+              <text class='goods_name'>斯米克地砖1</text>
+              <text>品牌：斯米克</text>
+              <text>颜色：白色</text>
+              <text>型号：M31060KPP0</text>
+              <view class='inline'>
+                <text class='first'>单位：平方</text>
+                <text>数量：50</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 顶部定位  -->
+<!-- <view class='shipping_time shipping_time_top'>
+  <text class='first'>发货时间：2017-08-23 18:00:00</text>
+  <text>已发货</text>
+  <image src='../../../images/arrow_bottom.png'></image>
+</view> -->

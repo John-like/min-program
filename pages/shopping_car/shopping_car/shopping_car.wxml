@@ -1,0 +1,49 @@
+<!--pages/component/shopping_car.wxml-->
+<import src="../../template/template.wxml"/>
+<view>
+  <!-- <block wx:for="{{lists}}" wx:key="{{index}}"> -->
+  <view  class='{{aaa ? "hide" : "show" }}'>
+    <view class="tab-content">
+      <view class="order-detail">
+        <text>时间：2017-08-25 10:00:00</text>
+        <text>类型：套餐包</text>
+      </view>
+      <view class='tab-tc-wrapper'>
+        <navigator url="../../index/comboBag/comboBag">
+          <view class="tab-tc">
+            <view class="tab-tc-fl">
+              <image src="/images/tob-list.png"></image>
+              <view class="fl-float">
+                <view class="classname">家网·惠选</view>
+                <view class="fl-word">399套餐包</view>
+              </view>
+            </view>
+            <view class="tab-tc-fr">
+              <view class='user'>
+                <text>{{user.name}}</text>
+                <text class='tel'>{{user.phone}}</text>
+              </view>
+              <text class='font24 classify'>客厅(2) 餐厅(3) 主卧(2) 次卧(2)  厨房(2) 卫生间(2)</text>
+              <text class='font24'>共13件商品</text>
+              
+            </view>
+          </view>
+        </navigator>
+        <!-- <navigator class='editor_user' url='../new_name/new_name?name={{user.name}}&phone={{user.phone}}'>
+          <image src='../../../images/editor_gray.png'></image>
+        </navigator> -->
+      </view>
+      <view class='editor_order'>
+        <view bindtap='cancel_order' data-orderId="{{111}}">取消订单</view>
+        <!-- <navigator url='../../index/comboBag/comboBag'><view>修改订单</view></navigator> -->
+      </view>
+    </view>
+  </view>
+</view>
+<!--默认页面  -->
+<view class='default {{aaa ? "show" : "hide" }}'>
+  <image src='../../../images/shopping_cart_default.png'></image>
+  <text>购物车是空的</text>
+  <view class='to_index' bindtap='goIndex' url='../../index/index/index'>去首页逛逛</view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

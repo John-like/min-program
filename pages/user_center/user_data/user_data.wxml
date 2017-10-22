@@ -1,0 +1,29 @@
+<!--pages/user_center/user_data/user_data.wxml-->
+<import src="../../template/template.wxml" />
+<view>
+    <view class="user_info_con">
+        <image src="../../../images/user_bg_02.png"></image>
+        <view class='user_info'>
+            <image src="{{wx_user.portrait}}"></image>
+            <text>{{wx_user.name}}</text>
+        </view>
+    </view>
+    <view class='user_data'>
+      <text>姓名：{{user.name}}</text>
+      <text>手机号：{{user.mobile}}</text>
+      <text>公司名称：{{user.companyName}}</text>
+      <view class='email'>
+        <text>邮箱：</text>
+        <text class='{{editor?"hide":"show"}} email-text'>{{user.email}}</text>
+        <input class='{{editor?"show":"hide"}}' confirm-type="done" focus="{{editor}}" bindblur="close_editor" bindconfirm="close_editor" value='{{user.email}}'></input>
+        <!-- <image class='{{editor?"hide":"show"}}' bindtap='editor' src='../../../images/editor.png'></image> -->
+      </view>
+      <text>类型：{{user.customerTypeCn}}</text>
+      <text wx:if="user.customerType='personage'">角色：{{user.roleCn}}</text>
+    </view>
+    <view class='tip'>
+      <text>*订单清单可直接发至上述填写邮箱中</text>
+    </view>
+</view>
+<!--提示信息  -->
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

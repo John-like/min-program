@@ -1,0 +1,548 @@
+@import "pages/template/template.wxss";
+
+/**app.wxss**/
+/* .container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}  */
+
+/**app.wxss**/
+
+.contain {
+  background: #fff;
+  height: 100%;
+}
+
+/*头部搜索  */
+
+.space {
+  width: 100%;
+  height: 6rpx;
+  background: #f1f1f1;
+  box-shadow: 1px 1px #f1f1f1;
+}
+
+.header {
+  padding: 24rpx 22rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header wx-image {
+  width: 170rpx;
+  height: 64rpx;
+}
+
+.hd-form {
+  width: 516rpx;
+  height: 76rpx;
+  background: #f8f8f8;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.form-contain {
+  width: 100%;
+  height: 100%;
+}
+
+.form-contain wx-image {
+  width: 38rpx;
+  height: 38rpx;
+  padding-right: 10rpx;
+  padding-left: 20rpx; 
+}
+
+.hd-form .input {
+  width: 430rpx;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  font-size: 24rpx;
+}
+
+/*tab 套餐包  */
+
+.tab-tc {
+  padding: 16rpx 10rpx;
+  display: flex;
+}
+
+.tab-tc-fl {
+  width: 182rpx;
+  height: 182rpx;
+  margin-right: 22rpx;
+  position: relative;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.tab-tc-fl> wx-image {
+  width: 100%;
+  height: 100%;
+}
+
+.fl-float {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fl-float wx-view {
+  margin: 6rpx auto;
+  text-align: center;
+}
+
+.fl-word {
+  width: 138rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  background: url(http://www.soloav.com/images/tob-word.png) no-repeat;
+  background-size: 99% 101%;
+}
+
+/*套餐 右边部分  */
+
+.tab-tc-fr {
+  width: 514rpx;
+  min-height: 182rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.fr-title {
+  padding: 14rpx 0rpx;
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.fr-num {
+  font-size: 26rpx;
+  color: #999;
+  font-weight: bold;
+}
+
+.fr-goods {
+  font-size: 28rpx;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 26rpx;
+}
+
+.fr-goods-all-img {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fr-goods-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 108rpx;
+  height: 48rpx;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.fr-goods-all-img .fr-goods-img:nth-last-child(1) {
+  margin-right: 0rpx;
+}
+
+.fr-goods-img wx-image {
+  width: 108rpx;
+  height: 48rpx;
+}
+
+/* 下单 保存 购物车 */
+
+.setCar {
+  width: 100%;
+  height: 98rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background: #fff;
+  border-top: 1px solid #f2f2f2;
+  display: flex;
+}
+
+.setCar-car {
+  width: 21%;
+  border-right: 1px solid #f2f2f2;
+  display: flex;
+  position: relative;
+}
+
+.setCar-carcontent {
+  width: 112rpx;
+  height: 112rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -56rpx;
+  bottom: 8rpx;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.setCar-carcontent wx-image {
+  width: 64rpx;
+  height: 68rpx;
+}
+
+.setCar-word {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: #d71518;
+  color: #fff;
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  text-align: center;
+  line-height: 44rpx;
+  font-size: 20rpx;
+}
+
+.setCar-serve {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 36rpx;
+}
+.setCar-total{
+  width: 100%;
+  height: 100%;
+  font-size: 26rpx;
+  display: flex;
+}
+.setCar-total-view{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 6%;
+}
+.setCar-total-num{
+  color: #d71518;
+}
+.setCar-total-num-give{
+  text-decoration:line-through;
+}
+.active {
+  background: #289dee;
+  color: #fff;
+}
+
+/*  立即下单 */
+.setCar-menu{border: none;box-shadow: 1px 1px 10px #ccc;}
+.setCar-car-menu{border: none}
+.setCar-getmenu {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.setCar-getmenu-immidle {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 36rpx;
+}
+
+
+
+/*选择商品 遮层  */
+/*mask*/ 
+.drawer_screen { 
+ width: 100%; 
+ height: 100%; 
+ position: fixed; 
+ top: 0; 
+ left: 0; 
+ z-index: 100; 
+ background: #000; 
+ opacity: 0.5; 
+ overflow: hidden; 
+} 
+/*content*/ 
+.drawer_box { 
+ width:100%; 
+ overflow: hidden; 
+ position: fixed; 
+ bottom:0; 
+ left: 0; 
+ z-index: 101; 
+ background: #FAFAFA; 
+ border-radius: 3px; 
+} 
+
+.drawer_content { 
+ max-height: 820rpx; 
+ padding: 38rpx 38rpx 10rpx 38rpx;
+ overflow-y: scroll; /*超出父盒子高度可滚动*/ 
+} 
+/* 弹窗头部  */
+.drawer_top{
+  display: flex;
+  justify-content: space-between;
+}
+.drawer_top_img{
+  width:136rpx;
+  height:136rpx;
+  margin-right:18rpx;
+  position:relative;
+  border-radius:6rpx;
+  overflow:hidden;
+}
+.drawer_top_img wx-image{
+  width: 100%;
+  height: 100%;
+}
+.drawer_top_word{
+  width: 500rpx;
+}
+.drawer_top_name{
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  padding: 10rpx 0rpx;
+}
+.drawer_top_style{
+  font-size: 26rpx;
+  font-weight: 300;
+  color: #666;
+  padding: 20rpx 0rpx;
+}
+/* 弹窗头部 main */
+.drawer_main{
+  padding: 18rpx 0rpx;
+   font-size: 24rpx;
+  color:#666;
+}
+/* .drawer_main_style{
+
+} */
+.drawer_main_title{
+  font-size: 26rpx;
+  padding: 8rpx 0rpx;
+}
+.style_color{
+  display: flex;
+  /* justify-content: space-between; */
+  margin-bottom: 18rpx;
+   flex-wrap: wrap;
+}
+.style_color wx-button{
+  border: none;
+    padding: 0;
+  margin: 0;
+}
+.style_color wx-button::after{
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.style_color .style_color_list{
+  /* width: 198rpx; */
+  height: 38rpx;
+  border: 1px solid #f5f5f5;
+  text-align: center;
+  line-height: 38rpx;
+  border-radius: 4rpx;
+  margin: 8rpx 46rpx 8rpx 0rpx;
+  color: #777;
+  font-size: 26rpx;
+  padding: 2rpx 8rpx;
+  display: flex;
+}
+.style_color .list_avtive{
+  color: #fff;
+ border: 1px solid #289dee;
+  background: #289dee;
+  /* width: 200rpx; */
+   height: 38rpx;
+}
+.drawer_main_more{
+  margin: 10rpx 0rpx;
+}
+
+ .drawer_main_check{
+  margin: 12rpx 6rpx;  
+  /* height: 50rpx; */
+  display: flex;
+} 
+.drawer_main_check wx-text {
+  display: block;
+  line-height: 50rpx;
+}
+.drawer_main_number{
+  margin-top: 32rpx;
+}
+.main_number_num{
+  margin-bottom: 14rpx;
+}
+
+.btn_ok{ 
+ height: 100rpx;
+ line-height: 100rpx;
+ font: 32rpx; 
+ text-align: center; 
+ color: #fff; 
+ background: #289dee;
+} 
+/*加 减 按钮样式  */
+.num-content{
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   width: 238rpx;
+   /* position: absolute;
+   right: 0;
+   bottom: 0; */
+}
+.num-content wx-view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46rpx;
+  height: 46rpx;
+}
+.num-content .classname {
+  width: 100rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 8rpx;
+  margin: 0 20rpx;
+}
+.num-content wx-view wx-image{
+  width: 46rpx;
+  height: 46rpx;
+}
+
+/* 公用筛选右侧滑动  */
+
+.screening{
+  width: 90%;
+  height: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  left: 10%;
+  z-index: 101;
+  background: #fff;
+  font-size: 24rpx;
+  color: #777;
+}
+.screening-contetn{
+  height: 100%;
+}
+.screening_form{
+   height: 100%;
+   width: 100%;
+   display: block;
+   position: relative;
+}
+.screening_form_content{
+  height: 92%;
+ overflow-y: scroll;
+  padding: 0rpx 30rpx;
+}
+.screening_btm{
+  width: 100%;
+  height: 8%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+}
+.screening_btm > wx-view{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 32rpx;
+  border-top: 1px solid #ccc;
+}
+.screening_btm .screening_btm_sure{
+   border-top: none;
+   background: #f23030;
+   color: #fff;
+}
+.screening-price{
+  display: flex;
+  justify-content: space-around; 
+}
+.screening_title{
+  margin-bottom: 36rpx;
+  font-size: 30rpx;
+  color: #333333;
+  margin-top: 36rpx;
+}
+.screening-price wx-input{
+  width: 286rpx;
+  height: 66rpx;
+  border-radius: 6rpx;
+  background: #efefef;
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+}
+.screening-price wx-view{
+  line-height: 66rpx;
+}
+.screening_brand{
+  clear: both;
+  overflow: hidden;
+}
+.brand_pic{
+  float: left;
+  margin-left: 78rpx;
+  width: 188rpx;
+  height: 84rpx;
+  border:1px solid #c7c7c7;
+  border-radius: 4rpx; 
+    margin-bottom: 36rpx;
+}
+.brand_pic-active{
+  border: 1px solid #f23030;
+}
+.brand_pic wx-image{
+  width: 100%;
+  height: 100%;
+}

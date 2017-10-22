@@ -1,0 +1,139 @@
+/* page/component/pages/tcbao/tcbao.wxss */
+page{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 24rpx;
+  color: #777777;
+}
+.contain{
+  position: fixed;
+  top: 0;
+  left:0 ;
+}
+.container{
+  height: 100%;
+}
+/*左边部分  */
+.nav_left{
+  float: left;
+  width: 160rpx;
+  background: #f5f5f5;
+  text-align: center;
+  color: #777777;
+  /* overflow: scroll; */
+  height: 100%;
+}
+.color_ccc{
+  color: #333;
+  font-size: 30rpx;
+}
+.nav_left .nav_left_items{
+  height: 112rpx;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+  border-bottom: 1px solid #dedede;
+  font-size: 28rpx;
+}
+.nav_left .nav_left_items.active{
+  background: #fff;
+  color: #333;
+  border: none;
+  font-weight: bold;
+}
+/*右边部分  */
+.nav_right{
+  display: inline-block;
+  width: 565rpx;
+  height: 100%;
+  margin: 0rpx 0rpx 10rpx 24rpx;
+  background: #fff;
+  box-sizing: border-box;
+  clear: both;
+  color: #777777;
+  font-size: 28rpx;
+   /* overflow: scroll; */
+ 
+}
+.order-form{
+  position: relative;
+  height: 100%;
+  display: block;
+
+  
+}
+.order-submit{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  height: 98rpx;
+  box-shadow: 0px -1px 2px #f1f1f1;
+  border-radius: 0;
+}
+.order-submit::after{
+  border: none;
+}
+.right-time{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  padding-right: 20rpx;
+  color: #333;
+}
+.right-time wx-image{
+  width: 36rpx;
+  height: 36rpx;
+}
+
+/*右边 列表循环部分  */
+.right-list{
+  padding: 27rpx 6rpx 0rpx 0rpx;
+  border-bottom: 1px solid #dddddd
+}
+.list-title-name{
+  display: inline-block;
+  font-size: 30rpx;
+}
+.right-list>wx-view{
+  margin-bottom: 30rpx;
+}
+.list-main{
+  display: flex
+}
+.list-left{
+  display: flex;
+  justify-content: flex-start;
+ padding-top: 6rpx;
+ height: 138rpx;
+ align-items: center;
+}
+.list-left-checkbox{
+  margin-right: 16rpx;
+}
+.list-left-img{
+ width: 138rpx;
+  height: 138rpx;
+  overflow: hidden;
+}
+.list-left-img wx-image{
+  width: 100%;
+  height: 100%;
+}
+
+.list-right{
+  display: inline-block;
+  width: 310rpx;
+  margin-left: 24rpx;
+}
+.list-right wx-view{
+  margin-bottom: 4rpx;
+  font-size: 24rpx;
+}
+.list-right .list-right-title{
+  font-size: 30rpx;
+  color: #333;
+}

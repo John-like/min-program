@@ -1,0 +1,35 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": false,
+		"minified": true
+	},
+	"compileType": "weapp",
+	"libVersion": "1.5.3",
+	"appid": "wx731262261f6fb38d",
+	"projectname": "toB_weixin",
+	"condition": {
+		"weapp": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "1011",
+					"pathName": "pages/index/authenticate/authenticate",
+					"query": "name=aaa",
+					"scene": "1011"
+				}
+			]
+		},
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

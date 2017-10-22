@@ -1,0 +1,304 @@
+/* pages/order_manage/order_detail/order_detail.wxss */
+
+page{
+  width: 100%;
+  height: 100%;
+  color: #777;
+  font-size: 24rpx;
+}
+.container {
+  padding-bottom: 100rpx;
+}
+.container_overflow {
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+/*头部 message  */
+.message-title{
+  line-height: 80rpx;
+  border-bottom: 1px solid #c3c3c3;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40rpx;
+  color: #333;
+}
+.message-main{
+  padding: 0rpx 38rpx;
+  margin-top: 32rpx;
+}
+.message-main>wx-view{
+  margin-bottom: 30rpx;
+}
+.main-btn-content{
+  display: flex;
+  justify-content: flex-end;
+}
+.main-btn {
+  width: 140rpx;
+  height: 48rpx;
+  border: 1px solid #c9c9c9;
+  border-radius: 8rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  line-height: 50rpx;
+}
+.main-btn:nth-last-child(1){
+  margin-right: 0rpx;
+}
+.message-btm{
+  padding: 4rpx 38rpx;
+  color: #d71518;
+}
+
+/*中间公用部分*/
+.sendTime{
+  padding: 30rpx 40rpx;
+  border-top: 1px solid #c3c3c3;
+  border-bottom: 1px solid #c3c3c3;
+  background: #f5f5f5;
+  color: #777777;
+}
+.order_classify {
+  width: 100%;
+  padding:0 44rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #d0d0d0;
+}
+.order_title {
+  font-size: 24rpx;
+  color: #777;
+  line-height: 85rpx;
+}
+.order_item {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30rpx;
+}
+.order_item wx-image{
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 30rpx;
+}
+.goods_name {
+  font-size: 28rpx;
+  color: #333;
+  margin-top: -10rpx;
+}
+.order_item wx-text {
+  display: block;
+  line-height: 43rpx;
+}
+.order_item .orderDetail_num{
+ position: relative;
+  height: 40rpx
+}
+.orderDetail_num wx-view{
+  display: block;
+}
+.orderDetail_num .orderDetailNum{
+ color: #333;
+
+position: absolute;
+right: 10rpx;
+top:0rpx;
+}
+.order_item .orederDetail_attribute{
+  line-height: 43rpx;
+}
+.orderDetail-seemore{
+  position: relative;
+}
+.orderDetail-seemore wx-image{
+  position: absolute;
+  right: 0;
+  top: 16rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+.orderHeight{
+  display: none;
+}
+
+.order_item .inline {
+  /* margin-top: -8rpx; */
+}
+.order_item .inline wx-text{
+  display: inline-block;
+  line-height: 43rpx;
+}
+.order_item .first {
+  margin-right: 40rpx;
+}
+
+/*底部 价格  */
+.detail-btm{
+  font-size: 28rpx;
+  text-align: right;
+   line-height: 82rpx;
+   color: #333;
+   padding-right: 40rpx;
+}
+
+/*新添加 购物车属性css  */
+
+.shopattribute-title {
+  position: relative;
+  font-size: 24rpx;
+  color: #777;
+}
+
+.shopattribute-title wx-image {
+  position: absolute;
+  left: 124rpx;
+  top: 13rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+.shopattribute-title > wx-text {
+  color: #333;
+}
+/* .shopattribute-content {
+  width: 420rpx;
+} */
+
+.shopattribute-content wx-view {
+  line-height: 43rpx;
+}
+.orderHeight{
+  display: none;
+}
+
+/*新添加 购物车属性css  */
+
+.shopattribute-title {
+  position: relative;
+}
+
+.shopattribute-title wx-image {
+  position: absolute;
+  left: 124rpx;
+  top: 13rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+/* .shopattribute-content {
+  width: 420rpx;
+} */
+
+.shopattribute-content wx-view {
+  line-height: 43rpx;
+}
+.orderHeight{
+  display: none;
+}
+wx-navigator:hover{
+  background-color: #fff;
+}
+
+.total {
+  width: 100%;
+  height: 98rpx;
+  line-height: 98rpx;
+  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: 2rpx solid #ebebeb;
+  z-index: 1000;
+  /* background-color: #fff;   */
+  background: rgba(255, 255, 255, 1);
+}
+
+.total wx-text {
+  display: block;
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  border-right: 1rpx solid #ddd;
+  box-sizing: border-box;
+}
+
+/* 选择支付方式 */
+.total wx-button {
+  border: none;
+  background-color: #289dee;
+  width: 50%;
+  text-align: center;
+  font-size: 28rpx;
+  /* color: #333; */
+  height: 100%;
+  box-sizing: border-box;
+  line-height: 98rpx;
+  border-radius: 0;
+  color: #fff;
+}
+
+.total wx-button:after {
+  border: none;
+}
+/*支付方式弹层  */
+.pay_title {
+  line-height: 88rpx;
+  color: #737373;
+  margin-left: 22rpx;
+  font-size: 28rpx;
+}
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: 22rpx;
+}
+.radio {
+  display: block;
+  line-height: 50rpx;
+  margin-bottom: 10rpx;
+  color: #333;
+  font-size: 24rpx;
+}
+.radio wx-radio {
+  display: none;
+}
+.commit-wrapper {
+  width: 100%;
+  display: flex;
+  margin:38rpx 0 48rpx;
+}
+.commit-wrapper button {
+  width: 214rpx;
+  height: 60rpx;
+  background: #289dee;
+  color: #fff;
+  border-radius: 10rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+}
+.commit-wrapper button:after {
+  border: none;
+}
+.pay_bank_info {
+  margin-left: 64rpx;
+}
+.pay_bank_item {
+  line-height: 50rpx;
+}
+.pay_bank_item .font_color {
+  color: #333;
+  font-weight: bold;
+}
+.pay_bank_tip {
+  margin-left: 64rpx;
+  color: #d44340;
+}
+.pay_wrapper {
+   height: 600rpx; 
+}  
+/* .hide_css {
+  margin-bottom: 410rpx;
+}  */

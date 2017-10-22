@@ -1,0 +1,212 @@
+/* pages/component/order_manage.wxss */
+
+page {
+  font-size: 24rpx;
+  color: #777;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.order-title {
+  white-space: nowrap;
+  font-size: 28rpx;
+  color: #333;
+  /* padding-left: 36rpx; */
+  border-bottom: 1px solid #f1f1f1;
+  box-sizing: border-box;
+}
+
+.title-part {
+  display: inline-block;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  padding: 0rpx 20rpx;
+  position: relative;
+  width:100%;
+}
+
+/* .order_active {
+  color: #d71518;
+} */
+
+/* .order_active .title_mark {
+  width: 70rpx;
+  height: 4rpx;
+  background: #d71518;
+  position: absolute;
+  left: 50%;
+  margin-left: -35rpx;
+  bottom: 4rpx;
+} */
+
+/*公用 列表  */
+
+.order-list {
+  padding: 32rpx 42rpx;
+  border-bottom: 1px solid #c9c9c9;
+}
+
+.list-title {
+  display: flex;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.list-title wx-view {
+  width: 50%;
+}
+
+.list-title wx-view:nth-child(2) {
+  text-align: right;
+}
+
+.list-main {
+  display: flex;
+  padding: 18rpx 0rpx;
+}
+
+.order-right {
+  width: 458rpx;
+}
+
+.order-right > wx-view {
+  padding: 4rpx 4rpx;
+  line-height: 40rpx;
+}
+.order-right .orderRight_dot{
+  width: 460rpx;
+  height: 80rpx;
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
+
+}
+
+/* .order-right > wx-view:nth-last-child(1) {
+  color: #333;
+} */
+
+.order-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6rpx;
+}
+
+.btn-box {
+  width: 140rpx;
+  height: 52rpx;
+  border: 1px solid #c9c9c9;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin-right: 18rpx;
+}
+
+.btn-box:nth-last-child(1) {
+  margin-right: 0rpx;
+}
+
+/*订单底部签收  */
+
+.drawer_box {
+  padding-bottom: 30rpx;
+  min-height: 480rpx;
+}
+
+.order-sign {
+  text-align: center;
+  color: #333;
+  font-size: 30rpx;
+  margin: 20rpx 0rpx 60rpx 0rpx;
+}
+
+.order-confirm {
+  width: 460rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-confirm wx-view {
+  padding: 16rpx 40rpx;
+  border: 1px solid #c7c7c7;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+.order-remarks {
+  padding: 20rpx 32rpx;
+}
+
+.remarks-reason {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.remarks-input {
+  width: 434rpx;
+  height: 64rpx;
+  background: #fff;
+  margin: 0rpx 40rpx;
+  border: 1px solid #ccc;
+  padding-left: 20rpx;
+  color: #333;
+}
+
+.remarks-btn {
+  width: 456rpx;
+  height: 70rpx;
+  margin: 30rpx auto;
+}
+
+.remarks-btn wx-button {
+  width: 100%;
+  height: 70rpx;
+  border: none;
+  background: #289dee;
+  color: #fff;
+  line-height: 70rpx;
+  border-radius: 35rpx;
+}
+
+/* 默认页面  */
+
+.order_default {
+  width: 100%;
+  overflow: hidden;
+}
+
+.order_default_img {
+  width: 263rpx;
+  height: 263rpx;
+  margin: 200rpx auto 0;
+}
+
+.order_default_img wx-image {
+  width: 263rpx;
+  height: 263rpx;
+}
+
+.order_default wx-text {
+  width: 100%;
+  display: block;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.order_default .to_index {
+  width: 240rpx;
+  height: 86rpx;
+  border: 1rpx solid #c7c7c7;
+  line-height: 86rpx;
+  text-align: center;
+  margin:0 auto;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #777;
+}

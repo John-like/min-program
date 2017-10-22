@@ -1,0 +1,18 @@
+<!--pages/shopping_car/new_name/new_name.wxml-->
+<import src="../../template/template.wxml" />
+<view>
+  <form bindsubmit="formSubmit">
+    <view class='list'>
+      <label>用户名称：</label>
+      <input type='text' name="name" placeholder='请输入用户名' value='{{user.name}}'></input>
+    </view>
+    <view class='list'>
+      <label>手机号码：</label>
+      <input type='number' name="phone" placeholder='请输入手机号' value='{{user.phone}}'></input>
+    </view>
+    <view class='confirm'>
+      <button formType="submit">确定</button>
+    </view>
+  </form>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

@@ -1,0 +1,185 @@
+<!--pages/order_manage/firm_order/firm_order.wxml-->
+<import src="../../template/template.wxml" />
+<form bindsubmit="formSubmit">
+  <view class='wrapper'>
+  <!-- url='../../user_center/user_address/user_address?choose="true"' class='nav_choose_area' -->
+    <view bindtap='chooseGoodsAddress' class='nav_choose_area'>
+      <view wx:if="{{!user}}" class='choose_area'>
+        <view class='add_logo_wrapper'>
+          <view class='add_logo'></view>
+          <view class='add_logo add_rotate'></view>
+        </view>
+        <text>选择收货地址</text>
+      </view>
+      <view wx:else>
+        <view class='area_user'>
+          <text>收货人：{{user.name}}</text>
+          <text>{{user.mobile}}</text>
+        </view>
+        <view class='area_info'>
+          <text>收货地址：{{user.provinceName}}{{user.cityName}}{{user.areaName}}{{user.address}}</text>
+          <image class='img_return' src='../../../images/return_user.png'></image>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='time_served'>
+      <text>要求送达时间：2017-09-09</text>
+      <image src='../../../images/return_user.png'></image>
+    </view> -->
+    
+    <!-- <template is="classify_goods" data="{{shoppingcartLists}}" /> -->
+      <view class="order_classify">
+    <!-- <view class='order_title'>客厅</view> -->
+    <view class='order_goods'>
+      <block wx:for="{{shoppingcartLists}}" wx:key="{{index}}">
+        <view class='order_item'>
+          <view>
+            <image src='{{item.productImageUrl}}'></image>
+          </view>
+          <view>
+            <text class='goods_name'>{{item.commodityName}}</text>
+            <text>品牌：{{item.productBrandName}}</text>
+            <text wx:if="{{item.productColorName}}">颜色：{{item.productColorName}}</text>
+            <!-- <text>型号：{{item.commodityCode}}</text> -->
+            <view class='inline'>
+              <text class='first'>单位：{{item.productUnitName}}</text>
+              <text>数量：{{item.number}}</text>
+            </view>
+            <view class='shopattribute'>
+              <view class='shopattribute-title' bindtap='shopCarattributeMore' data-id="{{item.id}}">
+                <text data-id="{{item.id}}">属性详情</text>
+                <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+                <view class="{{heightnone==item.id?'':'orderHeight'}}">
+                  <block wx:for="{{item.attribute}}" wx:key="{{index}}" wx:for-item="shopCaritem">
+                    <view>{{shopCaritem.attributeName}} ： {{shopCaritem.attributeValueName}} </view>
+                 </block>
+                </view>
+              </view>
+            </view>
+
+            <view class='shopattribute'wx:if="{{item.serve}}">
+                <view class='shopattribute-title' bindtap='shopCarServeMore' data-id="{{item.id}}">
+                  <text data-id="{{item.id}}">服务详情</text>
+                  <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+                  <view class="{{Servenone==item.id?'':'orderHeight'}}">
+                    <block wx:for="{{item.serve}}" wx:key="{{index}}" wx:for-item="shopCarServeitem">
+                      <view>服务项 ： {{shopCarServeitem.name}} </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+
+          </view>
+          
+        </view>
+      </block>
+
+    </view>
+  </view>
+
+    <!-- <view class="order_classify">
+       <view class='order_title'>客厅</view> 
+       <view class='order_goods'>
+        <block wx:for="{{shoppingcartLists}}">
+          <view class='order_item'>
+            <view>
+              <image src='{{item.productImageUrl}}'></image>
+            </view>
+            <view>
+              <text class='goods_name'>{{item.commodityName}}</text>
+              <text>品牌：{{item.productBrandName}}</text>
+              <text>颜色：白色</text>
+              <text>型号：{{item.commodityCode}}</text>
+              <view class='inline'>
+                <text class='first'>单位：{{item.productUnitName}}</text>
+                <text>数量：{{item.number}}</text>
+              </view>
+            </view>
+          </view>
+        </block> 
+
+      </view>
+    </view> -->
+
+    <view class='setting'>
+      <text>配送方式： 根据各商品说明</text>
+      <!-- <view class='make_time'>
+        <text>预约测量时间：</text>
+        <text></text>
+        <image class='img_return' src='../../../images/return_user.png'></image>
+      </view> -->
+      <!-- <view class='setting_color' data-statu="open" bindtap="show_setColor">
+        <text>设置人工调色</text>
+        <image class='img_return' src='../../../images/return_user.png'></image>
+      </view> -->
+      <view class='leave_message'>
+        <text>留言：</text>
+        <textarea class='{{ios?"ios_textarea":""}}' maxlength="60" name="leave_message" bindfocus="focus_message" bindblur="blur_message" placeholder-class="placeholder"></textarea>
+        <text class='{{has_message?"hide":"has_message"}}'>点击给商家留言</text>
+      </view>
+      <!-- <checkbox-group bindchange="follow" name="follow">
+        <label class="checkbox">
+          <checkbox value="true" checked="true" color='#289dee' />
+          <text>关注公众号，实时了解订单进展</text>
+        </label>
+      </checkbox-group> -->
+      <checkbox-group bindchange="agreeStateChange" name="agreement">
+        <label class="checkbox">
+          <checkbox value="" checked="true" color='#289dee' />
+          <text>同意签署</text>
+        </label>
+        <text bindtap='show_protocol'>《平台协议》</text>
+      </checkbox-group>
+    </view>
+  </view>
+
+  <view class='total'>
+    <text wx:if="{{orderGoodsServePrice}}">合计(含服务费)：￥{{orderGoodsTotalPrice}}</text>
+    <text wx:else>合计：￥{{orderGoodsTotalPrice}}</text>
+    <button formType="submit" disabled='{{isChooseProtocal}}' class='{{isChooseProtocal?"":"active"}}' data-growing-title="确认订单中的提交">提交</button>
+  </view>
+</form>
+
+<!--弹出层 设置人工调色  -->
+<!--mask-->
+<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+  <form bindsubmit="form_submit_color">
+
+    <!--drawer content-->
+    <scroll-view class="setColor_con" scroll-y="false">
+
+      <!--弹窗 头部  -->
+      <view class="drawer_top">
+        <text>人工调色</text>
+      </view>
+      <!--弹窗 main  -->
+      <view class="drawer_main">
+        <view wx:for="{{set_color_num}}" wx:key="{{index}}" class='color_set'>
+          <text>颜色：</text>
+          <input class='input_color input_color1' name="color{{index}}" placeholder='请填写色号' placeholder-class="placeholder"></input>
+          <text>调色数量(桶)：</text>
+          <input class='input_color' type='number' name="num{{index}}" placeholder='1' placeholder-class="placeholder"></input>
+          <text class='color_delte {{(index==set_color_num-1)&&(set_color_num!=1)?"show":"hide"}}' data-index="{{index}}" bindtap='delete_color'>删除</text>
+        </view>
+        <view class='add_color' bindtap='add_color'>
+          <image src='../../../images/add_logo_blue.png'></image>
+          <text>添加</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class='confirm_wrapper'>
+      <view>
+        <text class='color_d93737'>*</text>
+        <text>剩下的乳胶漆数量会按照白色发货</text>
+      </view>
+      <button form-type='submit' data-statu="close">确定</button>
+    </view>
+  </form>
+</view>
+
+
+<!-- 提示信息   -->
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

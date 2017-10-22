@@ -1,0 +1,94 @@
+<!--pages/component/order_manage.wxml-->
+<import src="../../template/template.wxml" />
+<view class="contain">
+  <view class="space"></view>
+
+  <view wx:if="{{orderLists.length >0}}">
+    <scroll-view class="order-title" scroll-x style="width: 100%" scroll-into-view="leftTOP">
+      <!-- <block wx:for="{{orderPagination}}" wx:key="{{index}}"> -->
+        <view id="leftTOP" class="title-part {{curNav == item.id ? 'order_active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">
+          全部({{orderPagination.allSize}})
+          <view class="title_mark"> </view>
+        </view>
+      <!-- </block> -->
+    </scroll-view>
+
+    <view class="order-contain">
+      <scroll-view style="height:{{scrollHeight}}px;"  bindscrolltolower="lower" scroll-y="{{true}}" scroll-into-view="top{{topindex}}" scroll-top="0">
+        <block wx:for="{{orderLists}}" wx:key="{{index}}">
+          <view class="order-list" id="top{{index}}" data-index="{{index}}">
+            <view class="list-title">
+              <view class="classname">类型：{{item.typeStr}}</view>
+              <view class="classname">状态：{{item.statusStr}}</view>
+            </view>
+            <view class="list-content">
+              <navigator url="../order_detail/order_detail?id={{item.id}}&index={{index}}">
+                <view class="list-main">
+                  <view class="tab-tc-fl">
+                    <image src="{{item.orderImageUrl}}"></image>
+                  </view>
+                  <view class="order-right">
+                    <view class="classname">订单编号：{{item.code}}</view>
+                    <view class="classname">下单时间：{{item.orderTimeStr}}</view>
+                    <view class="classname" wx:if="{{item.orderServeMoney}}">金额：{{item.orderMoney + item.orderServeMoney}}.00</view>
+                    <view class="classname" wx:else>金额：{{item.orderMoney}}.00</view>
+                    <view class="orderRight_dot">{{item.description}}</view>
+                  </view>
+                </view>
+              </navigator>
+              <view class="order-btn">
+                <!-- <navigator wx:if="{{item.send}}" class="btn-box" url="../firm_order/firm_order">
+                {{item.send}}
+              </navigator> -->
+                <!-- <view wx:if="{{item.status}}" bindtap='cancelItem' class="btn-box">
+                {{item.status}}
+              </view> -->
+                <!-- <view wx:if="{{item.ingsend}}" bindtap="addBtn" data-statu="open" class="btn-box" url="url">
+                {{item.ingsend}}
+              </view> -->
+              </view>
+            </view>
+          </view>
+        </block>
+         <view hidden='{{btmhidden}}' style='background:#f1f1f1; text-align:center;font-size:28rpx;line-height:70rpx;height:70rpx;color:#999;'>我到底线啦！</view>
+      </scroll-view>
+      
+    </view>
+  </view>
+  <view wx:else class="order_default">
+    <view class="order_default_img">
+      <image src='../../../images/my_order_default.png'></image>
+    </view>
+    <text>您还没有相关订单哦~</text>
+    <view class='to_index' bindtap='goIndex' url='../../index/index/index'>去首页逛逛</view>
+  </view>
+</view>
+
+<!--弹出层 商品详情  -->
+<!--mask-->
+<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_content">
+    <view class="order-sign">请确认您是否签收：</view>
+    <view class="order-confirm">
+      <view bindtap="rufuseSign">未签收</view>
+      <view bindtap="Sign">签收</view>
+    </view>
+  </view>
+  <view class="order-remarks" wx:if="{{showSignRemarks}}">
+    <form bindsubmit="formSubmit">
+      <view class="remarks-reason">
+        <text>备注：</text>
+        <input name="remarksWord" class='remarks-input' type="text" />
+      </view>
+      <view class="remarks-btn">
+        <button data-statu="close" formType="submit">确定</button>
+      </view>
+    </form>
+  </view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

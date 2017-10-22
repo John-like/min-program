@@ -1,0 +1,77 @@
+<!--pages/index/authenticate/authenticate.wxml-->
+<import src="../../template/template.wxml" />
+<view>
+  <view class='bar_img'>
+    <image src="https://go.jiaw.com/upload/static_vip.png"></image>
+  </view>
+  <view>
+    <form bindsubmit="commit">
+      <view class='type'>
+        <text>类型</text>
+        <radio-group class="radio-group" bindchange="radioChange">
+          <label class="radio {{type=='personage'?'radio_check':''}}">
+            <radio value="personage" checked="true" />
+            <text>个人</text>
+          </label>
+          <label class="radio {{type=='enterprise'?'radio_check':''}}">
+            <radio value="enterprise" />
+            <text>企业</text>
+          </label>
+        </radio-group>
+      </view>
+      <view wx:if="{{type=='personage'}}" class='role'>
+        <text>角色</text>
+        <view class='role_picker'>
+          <picker mode="selector" bindchange="roleChange" value="{{role_index}}" range="{{role}}">
+            <view class="picker">
+              {{role[role_index]}}
+            </view>
+            <view class='arrow_botoom'></view>
+          </picker>
+
+        </view>
+      </view>
+      <!-- <view class='id_cards'>
+        <text>身份证</text>
+        <view class='id_img_wrapper'>
+          <view wx:for="{{IDimg}}" wx:key="{{index}}">
+            <view class='upload_wrapper'>
+              <image mode=" widthFix" class='uploadedImg' src='{{item}}'></image>
+              <image bindtap='deleteID' mode=" widthFix" class='delete' src='../../../images/delete.png' data-index="{{index}}"></image>
+            </view>
+          </view>
+          <view wx:if="{{!IDimg || IDimg.length < 2}}">
+            <image bindtap='addIdImg' class='add_img {{IDimg.length==1?"add_img1":""}}' src="../../../images/add_img.png"></image>
+          </view>
+        </view>
+      </view> -->
+      <view wx:if="{{type=='personage'}}" class='id_cards_info'>
+        <view class='id_cards_name'>
+          <text>姓名 </text>
+          <input name="name" maxlength="10" placeholder='请输入姓名'></input>
+        </view>
+        <view class='id_cards_id'>
+          <text>身份证号 </text>
+          <input type='idcard' name="identity" placeholder='请输入身份证号' ></input>
+        </view>
+      </view>
+      <view wx:if="{{type=='enterprise'}}" class='id_cards_info'>
+        <view class='id_cards_name'>
+          <text>企业名称</text>
+          <input name="companyName" maxlength="20" placeholder='请输入企业名称'></input>
+        </view>
+        <view class='id_cards_id'>
+          <text>统一社会信用代码 </text>
+          <input name="license" placeholder='请输入统一社会信用代码' ></input>
+        </view>
+      </view>
+      <view class='commit'>
+        <button form-type='submit'>提交</button>
+      </view>
+      <view class="tip">
+        <text>点击提交即表示已阅读并同意遵守《家饰佳购会员须知》</text>
+      </view>
+    </form>
+  </view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

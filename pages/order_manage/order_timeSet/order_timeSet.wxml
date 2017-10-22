@@ -1,0 +1,79 @@
+<!--tcbao.wxml-->
+<view class="contain">
+  <view class="space"></view>
+
+  <!-- 套餐包包含种类 -->
+
+  <view class="container">
+    <view class="nav_left">
+      <scroll-view scroll-y="true" style="height: 860rpx;">
+        <block wx:for="{{navLeftItems}}">
+          <view class="nav_left_items {{curNav == item.id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="nav_right">
+      <form class='order-form' bindsubmit="formSubmit">
+        <view class='right-time' bindtap=''>
+         
+          <picker mode="date" value="{{date}}" start="2017-09-15" end="2020-09-01" bindchange="bindDateChange">
+            <view class="picker">
+            要求送达时间： {{date}}
+            </view>
+          </picker>
+
+          <image src='/images/goodslist-back.png'></image>
+        </view>
+        <view style='color:#d71518;'>*同品牌商品不分次送货</view>
+        <scroll-view scroll-y="true" scroll-top="0" style="height: 1006rpx;" lower-threshold="50" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+
+          <!--列表2  -->
+          <block wx:for="{{lists}}" wx:key="*this" wx:for-item="list">
+            <!--标题  -->
+            <view class='right-list'>
+              <view class='list-title'>
+                <checkbox class='list-left-checkbox ' checked='{{checked}}' color='#289dee'></checkbox>
+                <view class='color_ccc list-title-name'> {{list.title}}</view>
+              </view>
+              <block wx:for="{{list.content}}" wx:key="*this" wx:for-item="content">
+                <!-- main  -->
+                <view class='list-main'>
+                  <view class='list-left'>
+                    <checkbox class='list-left-checkbox' checked='{{content.check}}' color='#289dee'></checkbox>
+                    <view class='list-left-img'>
+                      <image src='/images/tob-list.png'></image>
+                    </view>
+                  </view>
+                  <view class='list-right'>
+                    <view class='list-right-title'>
+                      {{content.name}}
+                    </view>
+                    <view>
+                      品牌：{{content.brand}}
+                    </view>
+                    <view>
+                      颜色：{{content.color}}
+                    </view>
+                    <view>
+                      型号：{{content.type}}
+                    </view>
+                    <view>
+                      单位：{{content.unit}}　数量：{{content.num}}
+                    </view>
+                  </view>
+                </view>
+              </block>
+
+
+            </view>
+          </block>
+
+
+        </scroll-view>
+        <button formType="submit" class='order-submit'>确定</button>
+      </form>
+
+    </view>
+  </view>
+
+</view>

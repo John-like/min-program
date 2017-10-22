@@ -1,0 +1,13 @@
+<!--pages/user_center/user_about/user_about.wxml-->
+<view>
+    <view class='logo'>
+        <image src='../../../images/jsj_logo.png'></image>
+    </view>
+    <view class='information'>
+      <text>版本号：1.0.2</text>
+       <!-- <text>官方网址：www.jiaw.com</text>  -->
+       <text>联系方式：4008208369</text> 
+       <text>邮箱：lh.zhou@cg-c.com</text> 
+    </view>
+</view>
+

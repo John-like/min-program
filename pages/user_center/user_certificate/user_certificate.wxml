@@ -1,0 +1,84 @@
+<!--pages/user_center/user_certificate/user_certificate.wxml-->
+<view class='container'>
+  <!--个人认证  -->
+  <view class='person_certificate' wx:if="{{user.customerType == 'personage'||user.customerType == ''||user.customerType == undefined}}">
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        类型：
+      </view>
+      <view class='certificate_right'>
+        {{user.customerTypeCn}}
+      </view>
+    </view>
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        角色
+      </view>
+      <view class='certificate_right'>
+       {{user.roleCn}}
+      </view>
+    </view>
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        姓名：
+      </view>
+      <view class='certificate_right'>
+        {{user.name}}
+      </view>
+    </view>
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        身份证号：
+      </view>
+      <view class='certificate_right'>
+        {{user.identity}}
+      </view>
+    </view>
+    <view class='certificate_row certificate_row_last'>
+      <view class='certificate_left'>
+        认证状态：
+      </view>
+      <view class='certificate_right'>
+       {{user.statusStr=='authentication'?"已认证":"认证中"}}
+      </view>
+     
+    </view>
+  </view>
+  
+  <!--企业认证  -->
+  <view class='person_certificate' wx:else>
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        类型：
+      </view>
+      <view class='certificate_right'>
+        企业
+      </view>
+    </view>
+    <view class='certificate_row'>
+      <view class='certificate_left'>
+        企业名称：
+      </view>
+      <view class='certificate_right'>
+        {{user.companyName}}
+      </view>
+    </view>
+    <view class='certificate_row'>
+      <view class='certificate_left' style='margin-right:20rpx;'>
+        统一社会信息代码：
+      </view>
+      <view class='certificate_right'>
+       {{user.license}}
+      </view>
+    </view>
+    <view class='certificate_row certificate_row_last'>
+      <view class='certificate_left'>
+        认证状态：
+      </view>
+      <view class='certificate_right'>
+        {{user.statusStr=='authentication'?"已认证":"认证中"}}
+      </view>
+    </view>
+  </view>
+
+</view>

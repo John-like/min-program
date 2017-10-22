@@ -1,0 +1,85 @@
+<import src="../../template/template.wxml" />
+<!--pages/user_center/user_add_address/user_add_address.wxml-->
+
+<view class='wrapper'>
+  <view>
+    <form bindsubmit="formSubmit">
+
+      <!-- <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <text>先生</text>
+          <radio value="{{}}" name="sex" checked="{{address.sex?address.sex:true}}" />
+        </label>
+        <label class="radio">
+          <text>女士</text>
+          <radio value="{{}}" name="sex" checked="{{address.sex}}" />
+        </label>
+      </radio-group> -->
+      <view>
+        <view class="input-list">
+          <text>收货人</text>
+          <input type="text" placeholder="请输入收货人姓名" maxlength="12" name="name" value="{{address.name}}"></input>
+        </view>
+        <view class="input-list">
+          <text>联系电话</text>
+          <input type="number" placeholder="请输入收货人电话" name="mobile" value="{{address.mobile}}"></input>
+        </view>
+        <!-- <view class="input-list input-list-picker" bindtap="changeLocation">
+                    <picker mode="region" bindchange="area_change">
+                        <text class='title'>所在地区</text>
+                        <text class='content'></text>
+                    </picker>
+                </view> -->
+        <view class="input-list input-list-picker" bindtap="set_location">
+          <text class='title'>所在地区</text>    
+          <block wx:if="{{new_address}}">
+          <text class='content'>{{new_address.provinceName}} {{new_address.cityName}} {{new_address.areaName}}</text>
+          </block>
+          <block wx:else>
+          <text class='content'>{{address.provinceName}} {{address.cityName}} {{address.areaName}}</text>
+          </block>
+        </view>
+        <view class="input-list-last">
+          <text>联系地址</text>
+          <textarea type="text" disabled="{{textDisabled}}" name="address" value="{{address.address}}" maxlength="70" bindinput='change' />
+          <block wx:if="{{placeholder && !address.address}}">
+            <text class='placeholder'>请输入收货人地址</text>
+          </block>
+        </view>
+      </view>
+      <!-- <view class='input-list default'>
+        <label>
+         <checkbox></checkbox>
+         <text>设为默认</text>
+        </label>
+      </view> -->
+      <view class='submit'>
+        <button id="button" disabled="{{click_disabled}}" form-type="submit" data-growing-title="新增收获地址中的确定">确定</button>
+      </view>
+    </form>
+  </view>
+</view>
+<!--提示信息  -->
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />
+
+<!--弹出地址选择  -->
+<view class="select_location {{show_location?'show':'hide'}}">
+  <view class="select_curtain" bindtap="cancel"></view>
+  <view class="select_inner">
+    <view class='select_sure'>
+      <text bindtap="cancel">取消</text>
+      <text class='sure' catchtap='get_location'>确定</text>
+    </view>
+    <picker-view class='picker-con' indicator-class="indicator_location" value="{{value}}" bindchange="bindChange">
+      <picker-view-column>
+        <view wx:for="{{area_name.province}}" wx:key="{{index}}" class='select-text'>{{item}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{area_name.city}}" wx:key="{{index}}" class='select-text'>{{item}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{area_name.area}}" wx:key="{{index}}" class='select-text'>{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</view>

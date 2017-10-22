@@ -1,0 +1,89 @@
+/* pages/user_center/user_data/user_data.wxss */
+page {
+  background-color: #f5f5f5;
+}
+.user_info_con {
+  width: 100%;
+  height: 365rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+.user_info_con  wx-image {
+  width: 100%;
+  height: 100%;
+}
+.user_info {
+  position: absolute;
+  top:30rpx;
+  left: 73rpx;
+  width: 634rpx;
+  height: 345rpx;
+}
+.user_info wx-image {
+  width:238rpx;
+  height: 238rpx;
+  border-radius: 50%;
+  display: block;
+  margin:0 auto; 
+}
+.user_info wx-text {
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-size: 36rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.user_data wx-text {
+  display: block;
+  height: 87rpx;
+  padding-left: 42rpx;
+  background-color: #fff;
+  border-bottom: 2rpx solid #f5f5f5;
+  line-height: 87rpx;
+  font-size: 28rpx;
+}
+.tip wx-text{
+  display: block;
+  font-size: 28rpx;
+  padding-left: 42rpx;
+  line-height: 87rpx;
+}
+.user_data .email {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.email wx-image{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+  margin-left: 30rpx;
+}
+.user_data .email wx-text {
+  border:none;
+}
+.email .email-text {
+  flex:1;
+  padding:0;
+}
+.user_data wx-input {
+  font-size: 32rpx;
+  flex:1;
+  color:#555;
+   display: block;
+  height: 85rpx;
+  /* border: 1rpx solid #333;
+  padding-left: 20rpx;
+  border-radius: 8rpx;  */
+}
+.user_data .hide {
+  display: none;
+}
+.user_data .show {
+  display: block;
+}
+

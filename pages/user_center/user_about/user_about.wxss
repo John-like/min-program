@@ -1,0 +1,28 @@
+/* pages/user_center/user_about/user_about.wxss */
+page {
+  background-color: #fff;
+}
+.logo {
+  width:238rpx;
+  height: 238rpx;
+  border:1rpx solid #c9c9c9;
+  margin:0.3rpx auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.logo wx-image {
+  display: block;
+  width: 242rpx;
+  height: 242rpx;
+  margin: -1rpx auto;
+}
+.information {
+  width: 100%;
+}
+.information wx-text {
+  display: block;
+  text-align: center;
+  line-height: 90rpx;
+  color: #222;
+  font-size: 28rpx;
+}

@@ -1,0 +1,158 @@
+<!--index.wxml-->
+<import src="../../template/template.wxml" />
+
+<view class="contain {{isSlider?'slider':''}}">
+  <!--顶部广告栏  -->
+  <!-- <view class='index-ad' hidden='{{hiddenad}}'>
+    <navigator hover-class='none' class='index-ad-navigator' url='../perfect_data/perfect_data'>
+      <image class='index-ad-img' mode='widthFix' src='/images/index-ad.png'></image>
+    </navigator>
+    <view class='index-ad-err' bindtap='hiddenad'>
+      <image src='/images/cicle_cancel.png' mode='widthFix'></image>
+    </view>
+  </view> -->
+  <view class='searchBar'>
+    <view bindtap="focus_search" class='search_con'>
+      <input placeholder='墙地砖' disabled bindfocus="focus_search"></input>
+      <image src='../../../images/search_logo.png'></image>
+    </view>
+    <view class='user_contact'>
+      <contact-button type="default-light" size="27" session-from="weapp">
+      </contact-button>
+      <image class='contact_img' src='../../../images/service.png'></image>
+    </view>
+  </view>
+  <swiper class='header-banner'>
+    <block>
+      <swiper-item bindtap="userGuide">
+        <image src='https://go.jiaw.com/upload/E39F69C49084979E9E70B306BD8E7B5B.jpg' class="slide-image" />
+        <!-- <image src='https://go.jiaw.com/upload/static_list_1.png' class="slide-image" /> -->
+      </swiper-item>
+    </block>
+  </swiper>
+  <view>
+    <view class='production-category'>
+      <navigator class='category-item' wx:for="{{titleData}}" wx:key="{{index}}" url="{{item.url}}" hover-class="none">
+        <view class="fr-category-img">
+          <image src='{{item.img}}'></image>
+        </view>
+        <text>{{item.title}}</text>
+      </navigator>
+    </view>
+  </view>
+  <view class='superValue'>
+    <text>热卖推荐</text>
+    <block>
+      <view class="superValue_item">
+        <navigator url="../goods-detail/goods-detail?id=620">
+          <image src="https://go.jiaw.com/upload/690DFC3A4FCBA97530C58AF51C4E0E45.jpg" class="slide-image" />
+        </navigator>
+        <navigator url="../goods-detail/goods-detail?id=621">
+          <image src="https://go.jiaw.com/upload/24CCF2E2A6A33031D4D684A082A64EAC.jpg" class="slide-image" />
+        </navigator>
+        <navigator url="../goods-detail/goods-detail?id=619">
+          <image src="https://go.jiaw.com/upload/D5F43470784BF0B6B544ABBC9327AC7B.jpg" class="slide-image" />
+        </navigator>
+      </view>
+    </block>
+  </view>
+</view>
+<view data-show="addFirstModel" wx:if="{{customerStatus == 'unregister'}}" data-statu="open" class='register_first' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" bindtap='showFirstOrderRegistor'>
+    <image src='/images/first_order_img.png' class='discount'></image>
+    <image src='/images/first_order_discount.png' animation="{{animationCloudData}}" class='discount_eight'></image> 
+</view>
+<!--弹出层 注册手机首单立减  -->
+<!--mask-->
+<view class="drawer_screen" bindtap='addBtn' wx:if="{{showModalStatus}}" data-statu="close"></view>
+<!--动画  -->
+<view animation="{{animationData}}" class="drawer_box phone_discount" wx:if="{{showModalStatus}}">
+  <view class='phone_register'>
+    <image src='/images/button_cancel.png' class='register_close' bindtap='registerClose' data-statu="close"></image>
+    <image src='/images/phone_register.png' class='register_background'></image>
+    <image src='/images/register_word.png' class='phone_register_word'></image>
+    <view class='register_form'>
+      <form class='first_order_register' bindsubmit='formSubmit'>
+        <view class='register_item register_mobile'>
+          <label class='register_input_word'>手机号码</label>
+          <input type='number' class='register_input' name="mobile" placeholder='请输入手机号码' placeholder-class="placeholder" bindinput='getMobile'></input>
+        </view>
+        <view class='register_item register_code'>
+          <label class='register_input_word'>验证码</label>
+          <input type='number' class='register_input' name="code" placeholder='请输入验证码' placeholder-class="placeholder"></input>
+          <view class="input_button {{getCodeDisable ? 'get_code_disable' : ''}}" bindtap='getCode' data-phone="{{phoneNumber}}">{{codeMsg == "获取验证码" ? codeMsg : codeMsg + "秒后再试"}}</view>
+        </view>
+        <view class='register_item register_referre'>
+          <label class='register_input_word'>推荐人</label>
+          <input type='number' class='register_input' name='referreMobile' placeholder='请输入推荐人手机号码' placeholder-class='placeholder'></input>
+        </view>
+        <view class='register_submit'>
+          <button class="input_submit" formType="submit" data-statu="close">立即注册</button>
+        </view>
+        <view class='register_protocal'>
+          <text>点击注册即表示已阅读并同意遵守</text>
+          <text>《家饰佳购购买须知》</text>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>
+
+<!--弹出层 商品详情  -->
+<!--mask-->
+<view class="drawer_screen" wx:if="{{false}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="index-draw" wx:if="{{false}}">
+  <!--drawer content-->
+  <!-- <view class="index-draw">
+      <view class="btn_ok" bindtap="addBtn" data-statu="close">确定</view>
+  </view> -->
+  <view class="draw-register" wx:if="{{hasNum}}">
+    <view class="register_title">完善资料</view>
+    <form class="register_grid">
+      <view class="input_contain">
+        <label class=" input_title">姓名:</label>
+        <input class="input_base " name="rName" placeholder="请输入姓名"></input>
+      </view>
+      <view class="input_contain">
+        <label class=" input_title">手机号码:</label>
+        <input class="input_base " name="rName" placeholder="请输入手机号码"></input>
+      </view>
+      <view class="input_contain">
+        <label class=" input_title">输入验证码:</label>
+        <input class="input_base iniput_code" name="rName" placeholder="验证码"></input>
+        <view class="input_button">获取验证码</view>
+      </view>
+      <view class="input_contain">
+        <label class=" input_title">公司名称:</label>
+        <input class="input_base " name="rName" placeholder="请输入公司名称"></input>
+      </view>
+      <view class="input_contain">
+        <label class=" input_title">推荐人:</label>
+        <input class="input_base " name="rName" placeholder="如无,可无需填写"></input>
+      </view>
+      <view class="input_contain input_radio">
+        <checkbox color="#00a0f5" checked='cheecked' />关注公众号，了解实时信息}
+      </view>
+      <view class="input_contain">
+        <button class="input_submit" formType="submit" bindtap="closeBtn" data-statu="close" data-growing-title="完善资料和提交认证中的提交">提交</button>
+      </view>
+    </form>
+  </view>
+  <view class="drwa-close" wx:else>
+    <view class="close-icon">
+      <!-- <icon type="success" size="52"/>   -->
+      <image src="/images/tob-success.png"></image>
+    </view>
+    <view class="close-word">
+      资料已成功提交，
+    </view>
+    <view class="close-word">
+      我们将会尽快与您联系。
+    </view>
+    <view class="close-word close-button" data-statu="close" bindtap="addBtn">
+      关闭小程序
+    </view>
+  </view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

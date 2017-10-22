@@ -1,0 +1,118 @@
+/* pages/component/shopping_car.wxss */
+
+.font24 {
+  font-size: 24rpx;
+  color: #777;
+} 
+
+page {
+  background-color: #fff;
+  border-top: 6rpx solid #f1f1f1;
+}
+.tab-content {
+  border-bottom: 1px solid #d0d0d0;
+}
+.order-detail {
+  margin-top: 15rpx;
+}
+.order-detail wx-text{
+  display: block;
+  margin-left: 44rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 58rpx;
+}
+.tab-tc {
+  margin-left: 34rpx;
+}
+.tab-tc-fr {
+  border-bottom: none;
+  margin-right: 44rpx;
+}
+.tab-tc-fr .user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab-tc-fr .user wx-text {
+  font-size: 28rpx;
+  color: #333;
+  margin-right: 25rpx;
+}
+.tab-tc-fr .user .tel {
+  flex: 1;
+}
+.tab-tc-wrapper {
+  position: relative;
+}
+.tab-tc-wrapper .editor_user {
+  position: absolute;
+  right: 44rpx;
+  top: 0;
+  padding:10rpx;
+}
+.tab-tc-wrapper .editor_user wx-image{
+ width: 35rpx;
+  height: 35rpx;
+}
+.tab-tc-fr wx-text {
+  display: block;
+  line-height: 40rpx;
+}
+.tab-tc-fr .classify {
+  margin:10rpx 0;
+  width: 425rpx;
+}
+.editor_order {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 44rpx;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.editor_order wx-view {
+  width: 138rpx;
+  height: 50rpx;
+  border: 1px solid #c7c7c7;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #777;
+  text-align: center;
+  border-radius: 8px;
+  display: inline-block;
+  margin-left: 22rpx;
+}
+
+
+
+
+/*默认页面  */
+.default {
+  width:100%;
+  margin-top: 200rpx;
+}
+.default wx-image {
+  width: 263rpx;
+  height: 263rpx;
+  display: block;
+  margin: 0 auto;
+}
+.default wx-text {
+   width: 100%;
+  display: block;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #777;
+}
+.default .to_index {
+  width: 240rpx;
+  height: 86rpx;
+  border: 1rpx solid #c7c7c7;
+  line-height: 86rpx;
+  text-align: center;
+  margin:0 auto;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #777;
+}

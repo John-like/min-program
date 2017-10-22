@@ -1,0 +1,17 @@
+ 
+<view class="container" wx:for="{{lists}}" wx:for-index="i" wx:key="{{i}}">  
+  <radio-group bindchange="radioCheckedChange" data-name="{{i}}">    
+    <view class="flex_box"  wx:for="{{lists[i].data}}" wx:for-index="j"  wx:key="{{j}}">  
+      <view class="flex_item">  
+        <label  class="{{NavNum[i]==j?'active':''}}" checked="{{j==0?'true':'false'}}" data-index="{{j}}">{{item}} 
+          <radio value="{{j}}" hidden='true'></radio>  
+        </label>  
+      </view>  
+    </view>  
+
+  </radio-group> 
+</view>   
+
+<view bindtap='uploadImage'>
+上传图片
+</view>

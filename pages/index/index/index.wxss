@@ -1,0 +1,324 @@
+/**index.wxss**/
+.contain {
+  background: #fff;
+}
+.slider {
+  position: fixed;
+}
+/*搜索栏  */
+.searchBar {
+  padding-top: 10rpx;
+  width: 750rpx;
+  height: 90rpx;
+  padding-bottom: 12rpx;
+  padding-left: 20rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 100;
+  background: #fff;
+  box-sizing: border-box;
+}
+.searchBar .search_con wx-input {
+  width: 636rpx;
+  height: 64rpx;
+  border-radius: 8rpx;
+  background: #efefef;
+  line-height: 64rpx;
+  font-size: 28rpx;
+  color: #333;
+  padding-left: 109rpx;
+  box-sizing: border-box;
+}
+.searchBar .search_con wx-image {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 47rpx;
+  top: 22rpx;
+}
+.user_contact {
+  /* position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0; */
+  position: relative;
+  flex: 1;
+  padding-right: 20rpx;
+}
+.user_contact wx-contact-button{
+  /* padding-left:16rpx; */
+  opacity: 0;
+  width: 100%;
+  height: 60rpx;
+}
+.user_contact .contact_img {
+  position: absolute;
+  top: 5rpx;
+  right: 26rpx;
+  z-index: -1;
+  width: 50rpx;
+  height: 50rpx;
+  display: block;
+}
+
+/*轮播栏  */
+.header-banner {
+  margin-top: 90rpx;
+}
+.contain swiper {
+  height: 320rpx;
+}
+.production-category {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  color: #353535;
+  flex-wrap:wrap;
+
+}
+.category-item {
+    width: 25%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+.category-item wx-text {
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
+.production-category .category-img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.category-img wx-image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.fr-category-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 108rpx;
+  height: 108rpx;
+  border: 0px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.fr-category-img wx-image {
+  width: 108rpx;
+  height: 108rpx;
+}
+
+/*热卖推荐  */
+.superValue {
+  width: 100%;
+  padding:0 23rpx;
+  box-sizing: border-box;
+  border-top: 20rpx solid #efefef;
+}
+.superValue wx-text{
+  color: #333;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
+.superValue_item {
+  display: flex;
+  justify-content: space-between;
+}
+.superValue_item wx-navigator {
+  width:228rpx;
+  height: 322rpx;
+  overflow: hidden;
+  box-shadow: 2px 0 8px #dcdcdc;
+  border-radius: 8rpx;
+}
+.slide-image {
+  width: 100%;
+  height: 100%;
+  background-color: #efc5c6;
+  overflow: hidden;
+  border-radius: 4rpx;
+}
+
+/*头部广告栏  */
+.index-ad{
+  width: 100%;
+  height: 88rpx;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+.index-ad-navigator{
+    width: 100%;
+    display: block;
+}
+.index-ad-img{
+  width: 100%;
+  display: block;
+}
+.index-ad-err{
+  position: absolute;
+  right: 8rpx;
+  top: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+}
+.index-ad-err wx-image{
+    width: 38rpx;
+    opacity: 0.8;
+}
+.drawer_screen {
+   z-index: 600; 
+}
+.drawer_box {
+   z-index: 700;
+   bottom: 6%;
+   left: 0;
+   background: rgba(0, 0, 0, 0)
+}
+/*手机注册  */
+.register_first {
+  position: fixed; 
+  z-index: 500; 
+  top: 700rpx; 
+  right: -128rpx; 
+  width: 250rpx; 
+  height: 250rpx;
+}
+.discount {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  width: 117rpx;
+  height: 188rpx
+}
+.discount_eight {
+  position: absolute; 
+  top: 67rpx; 
+  left: -14rpx; 
+  width: 135rpx; 
+  height: 82rpx;
+}
+.phone_register {
+  position: relative;
+  width: 750rpx; 
+  height: 900rpx;
+  z-index: 1000;
+}
+.phone_register_word {
+  position: absolute;
+  top: 160rpx;
+  left: 210rpx;
+  width: 328rpx;
+  height: 40rpx;
+}
+.phone_register .register_close {
+  position: absolute;
+  top: 34rpx;
+  right: 47rpx;
+  width: 72rpx;
+  height: 72rpx;
+}
+.register_background {
+  width: 737rpx; 
+  height: 887rpx;
+}
+.register_form {
+  position: absolute;
+  top: 200rpx;
+  left: 100rpx;
+}
+.register_form .register_item {
+  width: 100%;
+  padding: 0 55rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.register_form .register_input_word {
+  display: block;
+  font-size: 22rpx;
+  color: #fff;
+}
+.register_form .register_input {
+  width: 318rpx;
+  height: 69rpx;
+  border-radius: 6rpx;
+  margin-left: 12rpx;
+  background: #fff;
+  padding-left: 15rpx;
+  font-size: 28rpx;
+}
+.register_form .register_mobile {
+  margin-top: 30rpx;
+}
+.register_form .placeholder {
+  font-size: 22rpx;
+  color: #ffca8e;
+}
+.register_code .register_input {
+  width: 172rpx;
+  margin-left: 33rpx;
+}
+.register_item .input_button {
+  width: 136rpx;
+  height: 69rpx;
+  line-height: 69rpx;
+  margin-left: 11rpx;
+  border-radius: 6rpx;
+  background: #fff;
+  font-size: 22rpx;
+  color: #ffa23a;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+}
+.register_item .get_code_disable {
+  background: #dcdcdc;
+}
+.register_form .register_submit {
+  width: 432rpx;
+  height: 69rpx;
+  padding: 0 55rpx;
+   margin-top: 33rpx;
+}
+.register_submit .input_submit {
+  width: 432rpx;
+  height: 69rpx;
+  line-height: 69rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #fff;
+  background: #ffc803;
+  letter-spacing: 2rpx;
+  box-shadow: 0rpx 7rpx 5rpx #ffe5ab inset;
+}
+.register_form .register_protocal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 453rpx;
+  padding: 0 50rpx;
+  margin-top: 12rpx;
+}
+.register_protocal wx-text {
+  display: flex;
+  justify-content: center;
+  font-size: 20rpx;
+  color: #ff95a4;
+}
+.register_referre .register_input {
+  margin-left: 33rpx;
+}

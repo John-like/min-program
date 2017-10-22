@@ -1,0 +1,133 @@
+/* pages/user_center/user_address/user_address.wxss */
+page {
+  background-color: #f5f5f5;
+  border-top: 1rpx solid #f5f5f5;
+}
+.radio-group {
+  padding-bottom: 120rpx;
+}
+.list {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+.list_info {
+  width: 100%;
+  height: 75rpx;
+  display: flex;
+  line-height: 75rpx;
+
+}
+.list wx-text {
+  color: #333;
+  font-size: 28rpx;
+}
+.list_info > wx-text:nth-of-type(1) {
+  margin-left: 44rpx;
+  margin-right:20rpx;
+}
+.list_info > wx-text:nth-of-type(2) {
+  margin-right:44rpx;
+}
+.list_info > wx-text {
+  display: block;
+}
+.list_sex {
+  flex:1;
+}
+.list_sex wx-text {
+  line-height: 75rpx;
+  display: block;
+}
+.list_address {
+  width: 750rpx;
+  padding:0 42rpx 0 44rpx;
+  box-sizing: border-box;
+  padding-bottom:10rpx;
+  min-height: 75rpx;
+  line-height: 50rpx;
+  display: block;
+}
+.list_address wx-text {
+  display: block;
+  font-size: 28rpx;
+}
+.add {
+  position:fixed;
+  bottom:0;
+  left:0;
+  width: 100%;
+  height: 98rpx;
+  background-color: #00a0f5;
+  color:#fff;
+}
+.add wx-text {
+  width: 100%;
+  display: block;
+  text-align: center;
+  line-height: 98rpx;
+}
+.set_default {
+  width: 662rpx;
+  height: 82rpx;
+  padding:0 44rpx;
+  display: flex;
+  align-items: center;
+  border-top: 1rpx dashed #adadad;
+}
+.set_default wx-label {
+  font-size: 28rpx;
+  color: #333;
+}
+.set_default wx-navigator{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color: #333;
+  margin-left:340rpx;
+  padding:0 10rpx;
+}
+.set_default wx-text {
+  display: block;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding:0 10rpx;
+}
+/* 默认页面  */
+
+.default {
+  width: 100%;
+  overflow: hidden;
+  background-color: #fff;
+  height: 1130rpx;
+}
+
+.default_img {
+  width: 263rpx;
+  height: 263rpx;
+  margin: 110rpx auto 0;
+}
+
+.default_img wx-image {
+  width: 263rpx;
+  height: 263rpx;
+}
+
+.default wx-text {
+  width: 100%;
+  display: block;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.default wx-navigator {
+  margin: 0 auto;
+  display: block;
+  width: 178rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border: 1px solid #c7c7c7;
+  border-radius: 8rpx;
+}

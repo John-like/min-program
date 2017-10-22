@@ -1,0 +1,40 @@
+<template name="tip">
+  <view animation="{{animationData}}" class='tip_message_con {{control=="open"?"show":"hide"}}'>
+    <view class='tip_message'>{{message}}</view>
+  </view>
+</template>
+
+<!-- 
+  html:
+    <import src="../../template/template.wxml"/>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />
+  js:
+    const tip = require('../../../utils/tip');
+tip.tip_msg(this,"message")
+/> -->
+
+<template name="classify_goods">
+  <view class="order_classify">
+    <!-- <view class='order_title'>客厅</view> -->
+    <view class='order_goods'>
+       <block wx:for="{{shoppingcartLists}}" wx:key="{{index}}"> 
+        <view class='order_item'>
+          <view>
+            <image src='{{item.productImageUrl}}'></image>
+          </view>
+          <view>
+            <text class='goods_name'>{{item.commodityName}}</text>
+            <text class='{{item.productBrandName?"":"color_white"}}'>品牌：{{item.productBrandName}}</text>
+            <text  wx:if="{{item.productColorName}}">颜色：{{item.productColorName}}</text>
+            <text>商品编号：{{item.commodityCode}}</text>
+            <view class='inline'>
+              <text class='first'>单位：{{item.productUnitName}}</text>
+              <text>数量：{{item.number}}</text>
+            </view>
+          </view>
+        </view>
+       </block> 
+
+    </view>
+  </view>
+</template>

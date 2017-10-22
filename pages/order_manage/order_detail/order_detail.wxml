@@ -1,0 +1,172 @@
+<!--pages/order_manage/order_detail/order_detail.wxml-->
+
+<view class='container {{showModalStatus?"container_overflow":""}}'>
+  <view class='space'></view>
+  <!--头部套餐 信息  -->
+  <view class='detail-message'>
+    <view class='message-title'>
+      <view>订单类型：{{orderdetailLists.typeStr}}</view>
+      <view>状态：{{orderdetailLists.statusStr}}</view>
+    </view>
+    <view class='message-main'>
+      <view>
+        订单编号：{{orderdetailLists.code}}
+      </view>
+      <view>
+        下单时间：{{orderdetailLists.orderTimeStr}}
+      </view>
+      <view>
+        收货人：{{orderdetailLists.addressName}} {{orderdetailLists.addressMobile}}
+      </view>
+      <view>
+        地址：{{orderdetailLists.address}}
+      </view>
+      <view>
+        备注：
+        <view style='overflow:hidden' wx:if="{{orderdetailLists.remark}}">{{orderdetailLists.remark}}</view>
+      </view>
+      <!-- <view class='main-btn-content'> -->
+        <!-- <view class='main-btn'>
+            分享
+          </view>
+           <navigator class='main-btn' url='../shipping_infor/shipping_infor'>
+              发货信息
+           </navigator> -->
+
+      <!-- </view> -->
+    </view>
+    <view class='message-btm'>
+      *如需预约送达时间，请及时联系客服
+    </view>
+  </view>
+
+  <!-- 列表 循环部分  -->
+
+  <!--列表2  -->
+  <!-- <view class="sendTime">
+    要求送达时间：2017-08-23 10:00:00
+  </view> -->
+  <view style='margin-top:30rpx;' class="order_classify" wx:for="{{orderdetailLists.orderCommodityInfos}}" wx:key="{{orderdetailLists.orderCommodityInfos.id}}">
+    <!-- <view class='order_title'>客厅</view> -->
+    <view class='order_goods'>
+      <view class='order_item'>
+        <view>
+          <image src='{{item.commodityImageUrl}}'></image>
+        </view>
+        <view style='width:480rpx;'>
+          <view class='goods_name'>{{item.commodityName}}</view>
+          <view class='orderDetail_num'>
+            <view>品牌：{{item.brandName}}</view>
+            <view class='orderDetailNum'>数量：{{item.commodityNumber}} {{item.commodityUnit}}</view>
+          </view>
+          <view wx:if="{{item.commodityColor}}">颜色：{{item.commodityColor}}</view>
+          <!-- <text wx:if="{{item.productColorName}}">颜色：{{item.productColorName}}</text> -->
+          <!-- <view class='orederDetail_attribute'>
+            <view class='orderDetail-seemore' bindtap='orderTypemore'>
+              <text>属性详情</text>
+              <image src="../../../images/order-more.png"></image>
+            </view>
+            <block wx:for="{{item.commodityAttribute}}" wx:for-item="orderDetailtype" wx:key="{{index}}">
+              <view class="{{heightnone? 'orderHeight':''}}">{{orderDetailtype.attributeName}} : {{orderDetailtype.attributeValueName}}</view>
+            </block>
+          </view> -->
+
+          <view class='shopattribute' wx:if="{{item.commodityAttribute.length>0}}">
+            <view class='shopattribute-title' bindtap='orderTypemore' data-index="{{index}}" data-id="{{item.id}}">
+              <text data-id="{{item.id}}">属性详情</text>
+              <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+              <!-- <view class="{{heightnone==item.id?'':'orderHeight'}}"> -->
+              <block wx:for="{{item.commodityAttribute}}" wx:key="{{index}}" wx:for-item="shopCaritem">
+                <view class="{{item.viewMore? 'orderHeight':''}}">{{shopCaritem.attributeName}} : {{shopCaritem.attributeValueName}}</view>
+              </block>
+              <!-- </view> -->
+            </view>
+          </view>
+
+          <view class='shopattribute' wx:if="{{item.commodityServe.length>0}}">
+            <view class='shopattribute-title' bindtap='shopCarServeMore' data-id="{{item.id}}">
+              <text data-id="{{item.id}}">服务详情</text>
+              <image src="../../../images/order-more.png" data-id="{{item.id}}"></image>
+              <view class="{{Servenone==item.id?'':'orderHeight'}}">
+                <block wx:for="{{item.commodityServe}}" wx:key="{{index}}" wx:for-item="shopCarServeitem">
+                  <view>服务项 ： {{shopCarServeitem.name}} </view>
+                </block>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <!-- 底部 总价  -->
+  <view wx:if="{{orderdetailLists.status!='unpaid'}}">
+    <view class='detail-btm' wx:if="{{orderdetailLists.orderServeMoney}}">
+      总额(含服务费)：￥{{orderdetailLists.orderMoney + orderdetailLists.orderServeMoney}}
+    </view>
+    <view class='detail-btm' wx:else>
+      总额：￥{{orderdetailLists.orderMoney}}
+    </view>
+  </view>
+</view>
+<view wx:if="{{orderdetailLists.status=='unpaid'}}" class='total'>
+  <text wx:if="{{orderdetailLists.orderServeMoney}}">合计(含服务费)：￥{{orderdetailLists.orderMoney + orderdetailLists.orderServeMoney}}</text>
+  <text wx:else>合计：￥{{orderdetailLists.orderMoney}}</text>
+  <button bindtap="showPayType" data-statu="open" data-growing-title="选择支付方式">支付方式</button>
+</view>
+
+<!--mask-->
+<view class="drawer_screen" bindtap="addBtn" data-statu="{{payTypeMask_show_default}}" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+  <view class='pay_wrapper'>
+    <view class='pay_title'>支付方式:</view>
+    <view>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio">
+          <radio color='#289dee' value="pos" />1、 线下POS机支付
+        </label>
+        <label class='radio'>
+          <radio color='#289dee' value="transfer" />2、 线下转账支付，请汇款至:
+          <view wx:if="{{pay_bankInfo_show}}" >
+            <view class='pay_bank_info'>
+              <!-- <text>请汇款至:</text> -->
+              <view class='pay_bank_item'>
+                <text class='font_color'>公司名称：</text>
+                <text>上海岙檀贸易有限公司</text>
+              </view>
+              <view class='pay_bank_item'>
+                <text class='font_color'>开户银行：</text>
+                <text>交通银行宜山路支行</text>
+              </view>
+              <view class='pay_bank_item'>
+                <text class='font_color'>银行帐号：</text>
+                <text>310066218018800036425</text>
+              </view>
+              <view class='pay_bank_item'>
+                <text class='font_color'>税号：</text>
+                <text>91310230MA1JXRQ64C</text>
+              </view>
+              <view class='pay_bank_item'>
+                <text class='font_color'>公司地址：</text>
+                <text>上海市中山西路1695号</text>
+              </view>
+              <view class='pay_bank_item'>
+                <text class='font_color'>电话：</text>
+                <text>021-64275055</text>
+              </view>
+            </view>
+            <view>
+              <text class='pay_bank_tip'>*请在汇款备注中填写相应订单编号。</text>
+            </view>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+    <!-- <view class='commit-wrapper'>
+      <button bindtap='commitPayType'>确定</button>
+    </view> -->
+  </view>
+</view>

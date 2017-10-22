@@ -1,0 +1,66 @@
+<!--pages/component/user_center.wxml-->
+<import src="../../template/template.wxml" />
+<view>
+  <view class="user_info_con">
+    <image src="../../../images/user_bg_02.png"></image>
+    <view class='user_info'>
+      <image src="{{user.portrait}}"></image>
+      <text>{{user.name}}</text>
+      <block wx:if="{{customerStatus=='unregister'}}">
+        <view class='authentication tourist'>游客</view>
+      </block>
+      <block wx:if="{{customerStatus=='forArchives'||customerStatus=='approving'}}">
+        <view class='authentication'>普通会员</view>
+      </block>
+      <block wx:if="{{customerStatus=='authentication'}}">
+        <view class='authentication'>认证会员</view>
+      </block>
+    </view>
+    <view class='user_contact'>
+      <contact-button type="default-light" size="24" session-from="weapp">
+      </contact-button>
+      <!-- <image class='contact_img' src='../../../images/about_user.png'></image> -->
+      <text>客服</text>
+    </view>
+  </view>
+  <view class="user_function">
+    <view class='user_function_info' url="../../user_center/user_data/user_data" bindtap='is_examine' data-link='0'>
+      <image class="user_fct_icon" src="../../../images/personal_user.png"></image>
+      <text>个人资料</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </view>
+    <view class="user_function_info authen" bindtap="is_examine" data-link='1'>
+      <image class="user_fct_icon" src="../../../images/authentication.png"></image>
+      <text>资质认证</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </view>
+    <!-- <view wx:if="{{customerStatus=='authentication'}}" class="user_function_info show_vip_price">
+      <text>购物车是否显示认证会员价</text>
+      <checkbox-group class="checkbox_wrapper" bindchange="showVIP">
+        <label class="checkbox">
+          <checkbox class='checkbox_item' value="showVIP" checked="checked" />
+          <view class='checkbox_checked_con {{value.length==0?"checkbox_checked":""}}'>
+            <view></view>
+          </view>
+        </label>
+      </checkbox-group>
+    </view> -->
+    <navigator class='user_function_info location' url="../../user_center/user_address/user_address">
+      <image class="user_fct_icon" src="../../../images/location_user.png"></image>
+      <text>收货地址管理</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </navigator>
+    <view class="concat_customer" bindtap="concat">
+      <image class="user_fct_icon" src="../../../images/concat_user.png"></image>
+      <text>{{system =='android'?"客服电话":"联系客服"}}</text>
+      <text wx:if="{{system =='android'}}" class="tel">4008208369</text>
+      <image wx:if="{{system !='android'}}" class="user_return" src="../../../images/return_user.png"></image>
+    </view>
+    <navigator url='../../user_center/user_about/user_about'>
+      <image class="user_fct_icon" src="../../../images/about_user.png"></image>
+      <text>关于</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </navigator>
+  </view>
+</view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

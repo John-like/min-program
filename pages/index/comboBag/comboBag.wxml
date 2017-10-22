@@ -1,0 +1,297 @@
+<!--tcbao.wxml-->
+<view class="contain">
+  <view class="space"></view>
+  <!--头部 套餐包类型-->
+  <view class="tab-content">
+    <view class="tab-tc">
+      <view class="tab-tc-fl">
+        <image src="/images/tob-list.png"></image>
+        <view class="fl-float">
+          <view class="classname">家网·惠选</view>
+          <view class="fl-word">399套餐包</view>
+        </view>
+      </view>
+      <view class="tab-tc-fr">
+        <view class="fr-title">
+          399套餐包
+        </view>
+        <view class="fr-num">
+          月销量
+          <text>999+</text>
+        </view>
+        <view class="fr-goods">
+          <text>热门品牌:</text>
+          <view class="fr-goods-all-img">
+            <view class="fr-goods-img">
+              <image src="/images/tob-listlog.png"></image>
+            </view>
+            <view class="fr-goods-img">
+              <image src="/images/tob-listlog.png"></image>
+            </view>
+            <view class="fr-goods-img">
+              <image src="/images/tob-listlog.png"></image>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 套餐包包含种类 -->
+  <view class="tc-main">
+    <view class="container">
+      <view class="nav_left">
+        <scroll-view scroll-y="true" style="height: 860rpx;">
+          <block wx:for="{{navLeftItems}}">
+            <view class="nav_left_items {{curNav == item.id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+          </block>
+        </scroll-view>
+      </view>
+      <view class="nav_right">
+        <scroll-view scroll-y="true" scroll-top="0" style="height: 860rpx;" lower-threshold="50" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+          <view class="right-title">
+            瓷砖
+          </view>
+          <!--content1  -->
+          <block wx:for="{{lists}}">
+            <view class="right-content">
+              <navigator url="../goods-detail/goods-detail">
+                <view class="right-img">
+                  <image src="/images/tob-list.png"></image>
+                </view>
+              </navigator>
+              <view class="right-word">
+                <navigator url="../goods-detail/goods-detail">
+                  <view class="right-word-title">{{item.name}}</view>
+                  <view class="right-word-name">
+                    <text>品牌：</text>
+                    <text></text>
+                  </view>
+                </navigator>
+                <view class="right-word-num">
+                  <view>月销量：
+                    <text>999+</text>
+                  </view>
+                  <view class="num-content">
+                    <view class="num-reduce" bindtap="reduceBtn">
+                      <image src="/images/tob-list-reduce.png"></image>
+                    </view>
+                    <view class="classname">{{shopCarnum}}</view>
+                    <view class="num-add" bindtap="addBtn" data-show="addShopModal" data-statu="open">
+                      <image src="/images/tob-list-add.png"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+
+          </block>
+
+          <view class="classname" wx:if="{{showNomore}}" style="widht:100%;height:40px;">
+            暂无更多
+          </view>
+        </scroll-view>
+        <!-- <view wx:if="{{navRightItems[curIndex].tree.nodes[1].tree.nodes}}">
+          <block wx:for="{{navRightItems[curIndex].tree.nodes[1].tree.nodes}}">
+            <view class="nav_right_items">
+              <navigator url="../list/index?brand={{item.tree.id}}&typeid={{navRightItems[curIndex].id}}">
+                <view>
+                  <block wx:if="{{item.tree.logo}}">
+                    <image src="{{item.tree.logo}}"></image>
+                  </block>
+                  <block wx:else>
+                    <image src="https://temp.im/50x30"></image>
+                  </block>
+                </view>
+                <view wx:if="{{item.tree.desc}}">
+                  <text>{{item.tree.desc}}</text>
+                </view>
+                <view wx:else>
+                  <text>{{item.tree.desc2}}</text>
+                </view>
+              </navigator>
+            </view>
+          </block>
+        </view>
+        <view wx:else>暂无数据</view> -->
+      </view>
+    </view>
+  </view>
+</view>
+<!--底部购物车 保存 下单部分  -->
+<view class="setCar">
+  <view class="setCar-car">
+    <view class="setCar-carcontent" bindtap="addBtn" data-show="shopCarModal" data-statu="open">
+      <image src="/images/goodscar.png"></image>
+      <view class="setCar-word">{{shopCarnum}}</view>
+    </view>
+  </view>
+  <view class="setCar-serve active">
+    保存
+  </view>
+  <view class="setCar-serve">
+    下单
+  </view>
+</view>
+<!--弹出层 商品详情  -->
+<!--mask-->
+<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+
+<!--添加商品执行的动画-->
+<view animation="{{showSignRemarks}}" class="drawer_box" wx:if="{{addShopModal}}">
+  <!--drawer content-->
+  <view class="drawer_content">
+    <!--弹窗 头部  -->
+    <view class="drawer_top">
+      <view class="drawer_top_img">
+        <image src="/images/tob-list.png"> </image>
+      </view>
+      <view class="drawer_top_word">
+        <view class="drawer_top_name">地砖</view>
+        <view class="drawer_top_style">品牌:斯米克</view>
+      </view>
+    </view>
+    <!--弹窗 main  -->
+    <view class="drawer_main">
+      <view class="drawer_main_style">
+        <view class="drawer_main_title">
+          颜色：
+        </view>
+        <view class="style_color">
+          <block wx:for="{{itemstyle}}">
+            <view class="style_color_list  {{colorNav == item.id ? 'list_avtive' : ''}}" bindtap="switchColor" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+          </block>
+        </view>
+        <view class="drawer_main_title">
+          型号：
+        </view>
+        <view class="style_type style_color">
+          <block wx:for="{{itemColor}}">
+            <view class="style_color_list  {{typeNav == item.id ? 'list_avtive' : ''}}" bindtap="switchType" data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
+          </block>
+        </view>
+      </view>
+      <view class="drawer_main_serve">
+        <view>*包含免费测量</view>
+        <view>*送货至单元楼楼下</view>
+      </view>
+      <view class="drawer_main_more">
+        <view class="drawer_main_title">
+          其他服务：
+        </view>
+        <view>
+          <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox" wx:for="{{items}}">
+              <view class="drawer_main_check">
+                <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+              </view>
+            </label>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class="drawer_main_number">
+        <view class="main_number_num">购买数量：
+          <text>平方</text>
+        </view>
+        <view class="num-content">
+          <view class="num-reduce">
+            <image src="/images/tob-list-reduce.png"></image>
+          </view>
+          <view class="classname">{{shopCarnum}}</view>
+          <view class="num-add">
+            <image src="/images/tob-list-add.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btn_ok" bindtap="addBtn" data-statu="close">确定</view>
+</view>
+
+
+
+<!--添加购物车执行的动画-->
+<view animation="{{showSignRemarks}}" class="shopCar" wx:if="{{shopCarModal}}">
+  <!--drawer content-->
+   <view class='shopCar_top'>
+      <view>已选商品</view>
+      <view>清空</view>
+    </view>
+  <view class="shopCar_contetn">
+   
+    <!--列表  -->
+    <view class='shopCar_list'>
+      <view class='shopCar_listName'>
+        客厅
+      </view>
+      <view class='shopCar_listContent'>
+
+        <view class='order_item'>
+          <view>
+            <image src='../../../images/order_goods.png'></image>
+          </view>
+          <view>
+            <text class='goods_name'>斯米克地砖1</text>
+            <text>品牌：斯米克</text>
+            <text>颜色：白色</text>
+            <text>型号：M31060KPP0</text>
+            <view class='inline'>
+              <text class='first'>单位：平方</text>
+              <view class="num-content num-image-space">
+                <view class="num-reduce" bindtap="reduceBtn">
+                  <image src="/images/tob-list-reduce.png"></image>
+                </view>
+                <view class="classname">{{shopCarnum}}</view>
+                <view class="num-add ">
+                  <image src="/images/tob-list-add.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='order_item'>
+          <view>
+            <image src='../../../images/order_goods.png'></image>
+          </view>
+          <view>
+            <text class='goods_name'>斯米克地砖1</text>
+            <text>品牌：斯米克</text>
+            <text>颜色：白色</text>
+            <text>型号：M31060KPP0</text>
+            <view class='inline'>
+              <text class='first'>单位：平方</text>
+              <view class="num-content num-image-space">
+                <view class="num-reduce">
+                  <image src="/images/tob-list-reduce.png"></image>
+                </view>
+                <view class="classname">{{shopCarnum}}</view>
+                <view class="num-add">
+                  <image src="/images/tob-list-add.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+   
+  </view>
+ <!-- 底部购物车 -->
+    <view class='shopCar_setcar'>
+      <view class="setCar-car">
+        <view class="setCar-carcontent" bindtap="addBtn" data-statu="close">
+          <image src="/images/goodscar.png"></image>
+          <view class="setCar-word">{{shopCarnum}}</view>
+        </view>
+      </view>
+      <view class="setCar-serve">
+        保存
+      </view>
+      <view class="setCar-serve">
+        下单
+      </view>
+    </view>
+</view>

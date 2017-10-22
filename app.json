@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index/index",
+    "pages/index/search/search",
+    "pages/user_center/user_certificate/user_certificate",
+    "pages/index/authenticate/authenticate",
+    "pages/index/search_result/search_result",
+    "pages/index/perfect_data/perfect_data",
+    "pages/index/comboBag/comboBag",
+    "pages/index/optionalBag/optionalBag",
+    "pages/index/CombinationBag/CombinationBag",
+    "pages/index/goods-detail/goods-detail",
+    "pages/order_manage/order_manage/order_manage",
+    "pages/order_manage/order_timeSet/order_timeSet",
+    "pages/order_manage/order_detail/order_detail",
+    "pages/order_manage/shipping_infor/shipping_infor",
+    "pages/order_manage/firm_order/firm_order",
+    "pages/shopping_car/shopping_car/shopping_car",
+    "pages/shopping_car/new_name/new_name",
+    "pages/user_center/user_center/user_center",
+    "pages/user_center/user_add_address/user_add_address",
+    "pages/user_center/user_data/user_data",
+    "pages/user_center/user_address/user_address",
+
+    "pages/user_center/user_about/user_about"
+
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#d71518",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index/index",
+        "text": "首页",
+        "iconPath": "images/home_icon.png",
+        "selectedIconPath": "images/home_selected_icon.png"
+      },
+      {
+        "pagePath": "pages/order_manage/order_manage/order_manage",
+        "text": "订单管理",
+        "iconPath": "images/order_icon.png",
+        "selectedIconPath": "images/order_selected_icon.png"
+      },
+      {
+        "pagePath": "pages/user_center/user_center/user_center",
+        "text": "个人中心",
+        "iconPath": "images/people_icon.png",
+        "selectedIconPath": "images/people_selected_icon.png"
+      }
+    ]
+  }
+}
