@@ -2,6 +2,11 @@
 page {
   background-color: #f5f5f5;
 }
+.slider_no {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
 .user_row {
   display: flex;
   width: auto;
@@ -58,6 +63,16 @@ page {
   font-size: 28rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
+}
+/*二维码  */
+.user_info_con .two_dimensional_code {
+  position: absolute;
+  bottom: 30rpx;
+  right: 200rpx;
+}
+.two_dimensional_code wx-image {
+  width: 40rpx;
+  height: 40rpx;
 }
 .user_info {
   position: absolute;
@@ -132,6 +147,9 @@ page {
 .location {
   margin-top: 20rpx;
 }
+.location_bot {
+  margin-bottom: 20rpx;
+}
 /*资质认证  */
 /* .user_function .authen {
   margin-bottom: 20rpx;
@@ -140,6 +158,14 @@ page {
   width: 40rpx;
   height: 45rpx;
 }  
+.user_function .user_function_info .icon_bank {
+  width: 39rpx;
+  height: 27rpx;
+}
+.user_function .user_function_info .icon_payment{
+  width: 37rpx;
+  height: 37rpx;
+}
 /*是否显示会员价  */
 .show_vip_price {
   padding-left: 44rpx;
@@ -179,7 +205,7 @@ page {
   background: #fff;
   margin-left: -2rpx;
   transform: translateX(40rpx);
-  margin-top: -2rpx;
+  margin-top: -1rpx;
 }
 .checkbox_checked {
    background: #fff;
@@ -187,4 +213,24 @@ page {
 }
 .checkbox_checked wx-view {
   transform: translateX(0);
+}
+/*二维码弹层  */
+.drawer_box {
+  background: rgba(0,0,0,0);
+}
+.user_code {
+  top: 360rpx;
+  left: 190rpx; 
+  width: 388rpx;
+  height: 388rpx;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+.drawer_box wx-image {
+  width: 388rpx;
+  height: 388rpx;
 }

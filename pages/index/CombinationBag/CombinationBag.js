@@ -33,6 +33,8 @@ Page({
 
     shopCarModal: false, //购物车弹窗 控制
 
+    screeningShop: false,//删选弹窗 控制
+
     shopCarnum: 1,
 
     totalNum: 20,
@@ -57,7 +59,7 @@ Page({
       "/images/tob_zh_logo2.png",
       "/images/tob_zh_logo3.png"
     ], //头部logo img
-
+    rightSlide: 'left',
   },
 
   onLoad: function (options) {
@@ -204,6 +206,14 @@ Page({
         }
       }
     })
+    //如果购物车弹窗是打开状态,设置隐藏
+    if (that.data.shopCarModal) {
+      that.setData({
+        shopCarModal: false,
+        showModalStatus: false,
+        mask_show: false
+      })
+    }
   },
   scroll: function (event) {
     // console.log(event)
@@ -967,6 +977,25 @@ Page({
     this.setData({
       Servenone: ServenoneNum
     })
+  },
+  // 商品筛选
+  screeningShop: function (e) {
+    var that = this;
+    console.log(e.currentTarget.dataset)
+    var currentStatu = e.currentTarget.dataset.statu;
+    var showThis = e.currentTarget.dataset.show;
+    var dataId = e.currentTarget.dataset.id;
+
+    console.log(showThis)
+
+    that.setData({
+      mask_show: true,
+      rightSlide: 'right'
+    })
+
+
+    common.common(currentStatu, that, 300, showThis);
+
   },
   //搜索聚焦跳转至搜索页面
   focus_search: function () {

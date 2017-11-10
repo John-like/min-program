@@ -80,14 +80,33 @@ Page({
       search_history = [];
     }
     let content = e.detail.value.content;
+    console.log(content);
     if (content == "") {
       content = e.currentTarget.dataset.placeholder;
+    }
+    if (content.trim() == "") {
+      console.log(1221)
+      tip.tip_msg(that, "搜索内容不能为空");
+      return;
     }
     // 跳转到搜索详情页
     wx.redirectTo({
       url: '../search_result/search_result?search_content=' + content
     })
     that.searchHistorySort(content);
+  },
+  searchConfirm: function (e) {
+    let that = this;
+    let searchContent = e.detail.value;
+    if (searchContent.trim() == "") {
+      tip.tip_msg(that, "搜索内容不能为空");
+      return;
+    }
+    // 跳转到搜索详情页
+    wx.redirectTo({
+      url: '../search_result/search_result?search_content=' + searchContent
+    })
+    that.searchHistorySort(searchContent);
   },
   //最近搜索跳转
   latelySearch: function(res){

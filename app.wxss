@@ -457,11 +457,11 @@
 /* 公用筛选右侧滑动  */
 
 .screening{
-  width: 90%;
+  width: 76%;
   height: 100%;
   position: fixed;
   bottom: 0rpx;
-  left: 10%;
+  left: 24%;
   z-index: 101;
   background: #fff;
   font-size: 24rpx;
@@ -490,19 +490,26 @@
   bottom: 0;
   background: #fff;
 }
-.screening_btm > wx-view{
-  width: 50%;
+
+.screening_btm button{
+   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
   font-size: 32rpx;
   border-top: 1px solid #ccc;
+  border-radius: 0rpx;
 }
 .screening_btm .screening_btm_sure{
    border-top: none;
    background: #f23030;
    color: #fff;
+}
+.screening_btm .screening_btm_rest{
+   border-top: 1px solid #ccc;
+   background: #fff;
+   color: #000;
 }
 .screening-price{
   display: flex;
@@ -515,11 +522,11 @@
   margin-top: 36rpx;
 }
 .screening-price wx-input{
-  width: 286rpx;
+  width: 210rpx;
   height: 66rpx;
   border-radius: 6rpx;
   background: #efefef;
-  color: #999;
+  color: #333;
   font-size: 28rpx;
   text-align: center;
 }
@@ -532,7 +539,7 @@
 }
 .brand_pic{
   float: left;
-  margin-left: 78rpx;
+  margin-left: 42rpx;
   width: 188rpx;
   height: 84rpx;
   border:1px solid #c7c7c7;
@@ -545,4 +552,21 @@
 .brand_pic wx-image{
   width: 100%;
   height: 100%;
+}
+
+/*右侧搜索为空图片样式  */
+/* 没有结果默认页  */
+.searchResult_no wx-image {
+  width: 263rpx;
+  height: 263rpx;
+  display: block;
+  margin: 84rpx auto 50rpx;
+}
+.searchResult_no wx-text {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
 }

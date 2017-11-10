@@ -1,25 +1,33 @@
 <!--pages/index/search_result/search_result.wxml-->
 <import src="../../template/template.wxml" />
 
-<view class='search_bar'>
+<view class='search_bar {{filterModal==true?"search_zIndex":""}}'>
   <form class='search' bindsubmit="searchSubmit" bindreset="formReset">
-    <input name="searchContent" confirm-type="search" bindconfirm="searchSubmitInput" placeholder="{{search_placeholder}}" value="{{search_content}}"></input>
+    <view class='input_con'>
+      <input name="searchContent" confirm-type="search" placeholder='{{search_placeholder}}' bindconfirm="searchSubmitInput" value="{{search_content}}" bindfocus="clearSearchContent" bindblur='getSearchContent'>
+      <!--focus='{{search_focus_control}}'  -->
+      </input>
+      <image wx:if="{{delete_search_show}}" class='search_delete' src='../../../images/search_delete.png' bindtap='delete_searchContent'></image>
+
+    </view>
     <button formType="submit">搜索</button>
   </form>
-  <!-- <view class='options'>
-    <view class='options_title'>
-      <view class='option checked'>
-        <text>品牌</text>
-        <view class='arrow_bottom'></view>
+  <view class='options' wx:if="{{lists.length > 0}}">
+    <view>
+      <text>搜索结果</text>
+    </view>
+    <view class='right-title-con2' bindtap='screeningShop' data-show="screeningShop" data-statu="open" data-id="{{curNav}}">
+      <view class="{{screenLock?'':'screenRed'}}">
+        筛选
       </view>
-      <view class='option'>
-        <text>价格</text>
-        <view class='arrow_bottom'></view>
+      <view class="scring_icon">
+        <image hidden="{{!screenLock}}" src='/images/zc_screening.png'></image>
+        <image hidden="{{screenLock}}" src='/images/zc_screening_red.png'></image>
       </view>
     </view>
-  </view> -->
+  </view>
 </view>
-<view wx:if="{{lists.length>0}}" class='goods_lists {{mask_show?"overHidden":""}}' scroll-y="{{!mask_show}}" bindscrolltolower="goods_toLower" lower-threshold="20">
+<view wx:if="{{lists.length>0}}" class='goods_lists {{mask_show?"overHidden":""}}'>
   <view class='goods_list_wrapper' wx:for="{{lists}}" wx:key="{{*this}}">
     <navigator class='goods_list' hover-class='none' url="../goods-detail/goods-detail?id={{item.id}}">
       <view class="goods_img">
@@ -27,8 +35,8 @@
       </view>
       <view class="goods_detail">
         <view class='goods_detail_title '>
-          <image wx:if="{{item.sortWeight==999}}"  src='../../../images/hot.png'></image>
-          <text class='{{item.sortWeight==999?"hot":""}}'>{{item.commodityName}}</text>   
+          <image wx:if="{{item.sortWeight==999}}" src='../../../images/hot.png'></image>
+          <text class='{{item.sortWeight==999?"hot":""}}'>{{item.commodityName}}</text>
         </view>
         <view class="goods_detail_brand {{item.productBrandName?'':'color_fff'}}">
           <text>品牌：</text>
@@ -50,11 +58,11 @@
         </view>
       </view>
     </navigator>
-    <!-- <view class="choose_spec_wrapper">
+    <view class="choose_spec_wrapper">
       <view class="choose_spec_button" bindtap="showGoodchose" data-show="addShopModal" data-statu="open" data-id="{{item.id}}">
         选规格
       </view>
-    </view> -->
+    </view>
   </view>
   <view wx:if="{{bottom_show && allSize>=5}}" class='bottom_show'>已经到底啦</view>
 </view>
@@ -64,7 +72,7 @@
 </view>
 
 <!--底部购物车 保存 下单部分  -->
-<!-- <view wx:if="{{!overtime}}"   class="setCar">
+<view wx:if="{{!overtime}}" class="setCar" wx:if="{{lists.length > 0}}">
   <view class="setCar-car">
     <view class="setCar-carcontent" bindtap="addBtn" data-show="shopCarModal" data-statu="open">
       <image src="/images/goodscar.png"></image>
@@ -81,7 +89,7 @@
   <view class="setCar-serve active" bindtap='getMeaun'>
     下单
   </view>
-</view>  -->
+</view>
 <!--弹出层 商品详情  -->
 <!--mask-->
 <view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
@@ -227,7 +235,7 @@
                   <view class="num-reduce" bindtap="reduceBtn" data-id="{{item.id}}" data-index="{{shopIndex}}" bindtap='shopCarnumReduce' wx:if="{{shopCarnum>0}}">
                     <image src="/images/tob-list-reduce.png"></image>
                   </view>
-                  <view class="classname" style="width:300rpx;" wx:if="{{item.number>0}}">
+                  <view class="classname" wx:if="{{item.number>0}}">
                     <input name="name1" maxlength='3' type="number" bindblur="shopCarwritenum" data-index="{{shopIndex}}" data-id="{{item.id}}" style='text-align:center' value='{{item.number}}'></input>
                   </view>
                   <view class="num-add" data-id="{{item.id}}" bindtap='shopCarnumAdd' data-index="{{shopIndex}}">
@@ -323,5 +331,64 @@
       </view>
     </view>
   </form>
+</view>
+<!--筛选品牌/价格-->
+<!-- <view class="filter" style='display:block' wx:if="{{filterModal}}">
+  <form bindsubmit="filterSubmit" bindreset="filterReset">
+    <scroll-view scroll-y="true" scroll-top="0" wx:if="{{filter_type=='brand'}}" class="filter_content">
+      <checkbox-group bindchange="filterBrandChange" class="checkbox_group">
+        <label class="checkbox" wx:for="{{brand_list}}" wx:key="{{index}}">
+          <checkbox class='checkbox_check' value="{{index}}" />
+          <image class='{{item.checked?"checked_img":""}}' src='{{item.url}}'></image>
+        </label>
+      </checkbox-group>
+    </scroll-view>
+    <view wx:else class='filter_content_price'>
+      <view>
+        <input class='' type='number' placeholder-class="placeholder"  placeholder='最低价'></input>
+        <view class='line'></view>
+        <input class='' placeholder-class="placeholder" placeholder='最高价'></input>
+      </view> 
+    </view>
+    <view class='filter_result'>
+      <button class='reset' type='number' form-type="reset">重置</button>
+      <button class='submit' form-type="submit">确定</button>
+    </view>
+  </form>
+</view>  -->
+<!--筛选商品执行的动画-->
+<view animation="{{showSignRemarks}}" class="screening" wx:if="{{screeningShop}}">
+  <view class='screening-contetn'>
+    <form class='screening_form' bindsubmit="filterSubmit" bindreset="filterReset">
+      <view class='screening_form_content'>
+        <view class='screening_title'>价格区间</view>
+        <view class='screening-price'>
+          <input maxlength='8' placeholder='最低价' type='number' bindblur='getLowerPrice' value='{{minPrice}}'></input>
+          <view>—</view>
+          <input maxlength='8' placeholder='最高价' type='number' bindblur='getUperPrice' value='{{maxPrice}}'></input>
+        </view>
+        <view class='screening_title'>品牌</view>
+
+        <view class='screening_brand'>
+          <checkbox-group bindchange="filterBrandChange">
+            <block wx:for="{{brand_list}}" wx:key="{{index}}">
+              <label class='brand_pic {{item.checked?"brand_pic-active":""}}'>
+                <checkbox hidden='true' value="{{index}}" checked='{{item.checked}}' />
+                <image  data-id="{{item.id}}" src='{{item.productBrandFileUrl}}'></image>
+              </label>
+            </block>
+          </checkbox-group>
+        </view>
+      </view>
+      <view class='filter_result'>
+        <button class='reset' type='number' form-type="reset">重置</button>
+        <button class='submit' form-type="submit" data-show="{{rightSlide}}" bindtap="addBtn" data-statu="close">确定</button>
+      </view>
+    </form>
+
+  </view>
+
+
+
 </view>
 <template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

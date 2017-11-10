@@ -6,7 +6,6 @@ var openId;
 var customerStatus;
 var unionId;
 var shareMessageArg = {};
-var allPage;
 var shopingCartPageIndex;
 var ServenoneNum;
 var heightnoneNum;
@@ -19,6 +18,10 @@ var lastshoppingGoodsNum = 0;
 var pageIndex = 1;
 var allPage;
 var systemVersion;
+var brand_result = [];//品牌筛选结果
+var lowerPrice = "";
+var uperPrice = "";
+var search_focus;//聚焦时搜索的内容
 Page({
 
   /**
@@ -29,27 +32,15 @@ Page({
     showModalStatus: false, //遮层控制显示隐藏
     addShopModal: false,//添加商品 控制
     shopCarModal: false, //购物车弹窗 控制
+    filterModal: false,  //筛选弹窗
     colorIndex: 0, //控制 颜色显示隐藏
     mask_show: false,  //弹层显示
     overtime: false,  //连接超时
     shopCarnum: 1,  //选规格弹窗中的商品数量
     bottom_show: false,
-    lists: [{
-      productImage: "",
-      productName: "睿智金系列5UH81653NC04双电脑睿智 金系列5UH81653NC睿智金系列双电智金系列双电",
-      brandName: "西门子",
-      price: "300"
-    }, {
-      productImage: "",
-      productName: "睿智金系列5UH81653NC04双电脑睿智 金系列5UH81653NC睿智金系列双电智金系列双电",
-      brandName: "西门子",
-      price: "300"
-    }, {
-      productImage: "",
-      productName: "睿智金系列5UH81653NC04双电脑睿智 金系列5UH81653NC睿智金系列双电智金系列双电",
-      brandName: "西门子",
-      price: "300"
-    }]
+    screenLock: true,//筛选初始没有选中任何值
+    delete_search_show: false, //聚焦时显示删除icon
+    search_focus_control:false
   },
 
   /**
@@ -58,6 +49,7 @@ Page({
   onLoad: function (options) {
     shareMessageArg = options;
     var that = this
+
     console.log(options)
     systemVersion = getApp().globalData.systemVersion
     that.setData({
@@ -98,7 +90,7 @@ Page({
     //     allPage = res.data.data.pagination.allPage
     //   }
     // })
-    pageIndex=1;
+    pageIndex = 1;
     wx.request({
       url: api.queryCommodityByCondition,
       method: 'get',
@@ -125,18 +117,17 @@ Page({
             lists: res.data.data.results,
             // productCategoryId: optionsnum,
             customerStatus: customerStatus,
-            overtime: false,
-            search_content:"",
+            overtime: false
           })
           if (res.data.data.results.length == 0) {
             allPage = 0
             that.setData({
-              allSize:0
+              allSize: 0
             })
           } else {
             allPage = res.data.data.pagination.allPage
             that.setData({
-            allSize : res.data.data.pagination.allSize            
+              allSize: res.data.data.pagination.allSize
             })
           }
         } else {
@@ -174,7 +165,38 @@ Page({
 
   /** 生命周期函数--监听页面显示 */
   onShow: function () {
+    let that = this
     systemVersion = getApp().globalData.systemVersion
+    brand_result = [] //初始化品牌筛选结果
+    //查询购物车商品数量
+    wx.request({
+      url: api.queryCommodityNumFromShoppingCart,
+      data: {
+        openId: openId,
+        systemVersion: systemVersion
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.code == "0") {
+          that.setData({
+            shopCarnum: res.data.data.commodityNum,
+            shopCarTotalPrice: res.data.data.commonShoppingCartMoney,
+            shopCarVipTotalPrice: res.data.data.vipShoppingCartMoney,
+            categoryNum: res.data.data.commodityCount,
+            shopCarServePrice: res.data.data.shoppingCartServeMoney
+          })
+        } else {
+          tip.tip_msg(that, res.data.message)
+        }
+      }
+    })
+    //如果购物车弹窗是打开状态,设置隐藏
+    if (that.data.shopCarModal) {
+      that.setData({
+        shopCarModal: false,
+        showModalStatus: false
+      })
+    }
   },
 
   //弹出 商品 型号，颜色，规格选择框
@@ -360,14 +382,17 @@ Page({
     })
 
   },
-  //点击购物车显示购物车列表
+  //点击遮罩层隐藏其他弹层
   addBtn: function (e) {
     var that = this;
+    that.setData({
+      filterModal: false,
+      filter_type: false
+    })
     shopingCartPageIndex = 1;
     var currentStatu = e.currentTarget.dataset.statu;
     var showThis = e.currentTarget.dataset.show;
     var dataId = e.currentTarget.dataset.id;
-    console.log(showThis)
     if (!showThis) {
       that.setData({
         mask_show: false
@@ -384,6 +409,8 @@ Page({
       })
     }
 
+
+
   },
   //点击下单
   getMeaun: function () {
@@ -391,7 +418,7 @@ Page({
     getApp().TapFunc(function () {
       console.log(getCurrentPages()[getCurrentPages().length - 1].route)
 
-      console.log(that.data.shoppingcartLists.length)
+//      console.log(that.data.shoppingcartLists.length)
 
       wx.request({
         url: api.queryCommodityListFromShoppingCart,
@@ -439,9 +466,9 @@ Page({
   },
   //购物车请求列表事件
   getShoppingList: function (that) {
-    wx.showLoading({
-      title: '加载中...',
-    })
+    // wx.showLoading({
+    //   title: '加载中...',
+    // })
     wx.request({
       url: api.queryCommodityListFromShoppingCart,
       data: {
@@ -449,7 +476,7 @@ Page({
       },
       success: function (res) {
         console.log("获取列表成功")
-        wx.hideLoading()
+        // wx.hideLoading()
         console.log(res)
         that.setData({
           shoppingcartLists: res.data.data.results,
@@ -457,7 +484,7 @@ Page({
         console.log(that.data.shoppingcartLists)
       },
       fail: function () {
-        wx.hideLoading()
+        // wx.hideLoading()
         console.log("网络异常")
       }
     })
@@ -471,6 +498,10 @@ Page({
 
     let changeNumId = e.currentTarget.dataset.id//购物车当前商品id
 
+    //如果正在--,返回
+    if (reduceNumTimer) {
+      return;
+    }
     //如果定时器不存在,首次点击加号
     if (!updataNumTimer) {
 
@@ -554,7 +585,7 @@ Page({
           })
         }
       })
-    }, 1000)
+    }, 500)
 
   },
   // 购物车页面数量控制 减少
@@ -567,6 +598,10 @@ Page({
     let currentNum = shoppingcartLists[currentIndex].number - 1;
     // console.log(currentNum)
     console.log(that.data.shoppingcartLists[currentIndex].number)
+    //如果正在++,返回
+    if (updataNumTimer) {
+      return;
+    }
     if (!reduceNumTimer) {
       shoppingGoodsNumReduce = that.data.shoppingcartLists[currentIndex].number;
       lastshoppingGoodsNum = shoppingGoodsNumReduce
@@ -645,7 +680,7 @@ Page({
           })
         }
       })
-    }, 1000)
+    }, 500)
 
 
   },
@@ -897,31 +932,37 @@ Page({
     // let searchContent = that.data.search_placeholder
     console.log(e)
     let searchContent = e.detail.value.searchContent
-    
+
+    that.setData({
+      search_content: searchContent,
+      screenLock: true
+    })
     console.log(e.detail.value.searchContent)
-    that.getSearchResult(searchContent)    
+    that.getSearchResult(searchContent)
   },
   //输入法搜索
-  searchSubmitInput: function(e){
-    let that=this
+  searchSubmitInput: function (e) {
+    let that = this
     let searchContent = e.detail.value
     that.getSearchResult(searchContent)
   },
   //请求搜索结果
-  getSearchResult: function(searchContent){
-    let that=this
+  getSearchResult: function (searchContent) {
+    let that = this
+    //输入空格
+
+    
     //输入为空
     if (searchContent == "") {
       console.log("输入为空")
-      tip.tip_msg(that, "搜索内容不能为空")
-      return;
-    }
-    //输入空格
-    if (searchContent.replace(/^\s+$/g, "").length == 0) {
+      // tip.tip_msg(that, "搜索内容不能为空")
+      searchContent = that.data.search_placeholder
+    } else if (searchContent.replace(/^\s+$/g, "").length == 0) {
       console.log("输入为空格")
       tip.tip_msg(that, "搜索内容不能为空")
       return;
     }
+    console.log(searchContent)
 
     pageIndex = 1;
 
@@ -932,7 +973,7 @@ Page({
         openId: openId,
         //unionId: unionId,
         keywords: searchContent,
-        pageIndex: pageIndex
+        pageIndex: pageIndex,
       },
       header: {
         'content-type': 'application/json'
@@ -944,22 +985,33 @@ Page({
         // clearTimeout(timer)
         if (res.data.code == "0") {
           var data = res.data.results;
-          console.log(data)
-          console.log(customerStatus)
+          //点击搜索清空 最低价 最高价 搜索品牌
+          lowerPrice = "";
+          uperPrice = "";
+          brand_result = [];
+          let brand_list = that.data.brand_list;
+          if (brand_list != undefined){
+            brand_list.forEach((item) => {
+              item.checked = false
+            })
+          }
+          
           wx.hideLoading()
           that.setData({
-            lists:that.data.lists.slice(0,4)
+            lists: that.data.lists.slice(0, 4)
           })
           console.log(that.data.lists)
           that.setData({
-             lists: res.data.data.results,
+            lists: res.data.data.results,
             // productCategoryId: optionsnum,
-            customerStatus: customerStatus, 
+            customerStatus: customerStatus,
             // overtime: false
             bottom_show: false,
             searchContent: searchContent,
-            search_content: "",
+            search_content: searchContent,
             search_placeholder: searchContent,
+            minPrice: "",
+            maxPrice: ""
           })
           if (res.data.data.results.length == 0) {
             allPage = 0
@@ -1085,7 +1137,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    let that = this
+    let that = this;
+    let brandIds = brand_result.join(",")
     console.log("下拉")
     if (pageIndex > allPage) {
       console.log("已经到底了")
@@ -1103,7 +1156,10 @@ Page({
         openId: openId,
         //unionId: unionId,
         keywords: that.data.searchContent,
-        pageIndex: pageIndex
+        pageIndex: pageIndex,
+        productBrandIds: brandIds,
+        minPrice: lowerPrice,
+        maxPrice: uperPrice
       },
       header: {
         'content-type': 'application/json'
@@ -1134,6 +1190,195 @@ Page({
     })
   },
 
+  //失去焦点时获取用户搜索内容
+  getSearchContent: function (e) {
+    var that = this;
+    that.setData({
+      delete_search_show: false
+    })
+  },
+  //输入框聚焦时显示X
+  clearSearchContent: function (e){
+     search_focus=this.data.search_content;
+     this.setData({
+       delete_search_show: true
+     })
+  },
+  //点击X删除输入内容
+  delete_searchContent: function () {
+    console.log("点击删除")
+    this.setData({
+      search_content: "",
+      // search_focus_control:true
+    })
+  
+  },
+
+  search_focus: function(){
+
+  },
+  //失去焦点时获取最低价格
+  getLowerPrice: function (e) {
+    lowerPrice = e.detail.value;
+  },
+ 
+
+  //失去焦点时获取最高价格
+  getUperPrice: function (e) {
+    uperPrice = e.detail.value;
+  },
+
+  // 商品筛选
+  screeningShop: function (e) {
+    var that = this;
+    console.log(e.currentTarget.dataset)
+    var search_content = that.data.search_placeholder;
+    console.log(search_content)
+    var currentStatu = e.currentTarget.dataset.statu;
+    var showThis = e.currentTarget.dataset.show;
+    wx.request({
+      url: api.queryProductBrandByKeywords,
+      method: 'GET',
+      data: {
+        openId: openId,
+        systemVersion: systemVersion,
+        Keywords: search_content
+      },
+      success: function (res) {
+        if (that.data.brand_list == undefined ||  that.data.screenLock == true) {
+          var brand_list = res.data.data.results;
+          console.log(brand_list)
+
+        } else {
+          var brand_list = that.data.brand_list;
+        }
+        let screenValue = that.data.screenValue;
+               
+          that.setData({
+            brand_list: brand_list,
+            // screenLock: true,
+            mask_show:true
+          })
+        common.common(currentStatu, that, 300, showThis);
+      }
+    })
+  },
+  filterBrandChange: function (res) {
+    let that = this
+    var value = res.detail.value;
+    console.log(value)
+    brand_result = [];
+    let brand_list = that.data.brand_list;
+    brand_list.forEach((item) => {
+      item.checked = false
+    })
+  
+    value.forEach((item, index) => {
+      console.log(item)
+      // brand_list[item].checked = true
+      brand_list[item].checked = true
+      // if (brand_result.length != 0) {
+      //   for (var i = 0; i < brand_result.length; i++) {
+      //     if (brand_list[item].id == brand_result[i]) {
+      //       brand_result.splice(i, 1);
+      //     }
+      //   }
+      // }
+      brand_result.push(brand_list[item].id)
+    });
+    if(value.length == 0){
+      brand_result= [];
+    }
+    that.setData({
+      brand_list: brand_list,
+      screenValue: value
+    })
+    console.log(brand_result)
+  },
+  //筛选确认按钮
+  filterSubmit: function () {
+    var that = this;
+    var content = that.data.search_placeholder;
+    var brandIds = brand_result.join(",");
+    pageIndex = 1;
+    var minPrice = (lowerPrice == "") ? "" : parseInt(lowerPrice);
+    var maxPrice = (uperPrice == "") ? "" : parseInt(uperPrice);
+    console.log(minPrice, maxPrice,brandIds);
+    wx.showLoading({
+      title: '加载中...',
+    })
+    wx.request({
+      url: api.queryCommodityByCondition,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        openId: openId,
+        systemVersion: systemVersion,
+        keywords: content,
+        pageIndex: pageIndex,
+        productBrandIds: brandIds,
+        minPrice: minPrice,
+        maxPrice: maxPrice
+      },
+      success: function (res) {
+        pageIndex++
+        console.log(res)
+        if (minPrice != "" || maxPrice != "" || brandIds != "") {
+          that.setData({
+            screenLock: false
+          })
+        } else {
+          that.setData({
+            screenLock: true
+          })
+        }
+
+        if (res.data.code == "0") {
+          that.setData({
+            lists: that.data.lists.slice(0, 1)
+          })
+          that.setData({
+            lists: res.data.data.results,
+            bottom_show: false,
+            minPrice: minPrice,
+            maxPrice: maxPrice
+          })
+          wx.hideLoading()
+          if (res.data.data.results.length == 0) {
+            allPage = 0
+            that.setData({
+              allSize: 0
+            })
+          } else {
+            allPage = res.data.data.pagination.allPage;
+            that.setData({
+              allSize: res.data.data.pagination.allSize
+            })
+          }
+        } else {
+          tip.tip_msg(that, res.data.message)
+        }
+
+      }
+    })
+
+  },
+  //筛选重置
+  filterReset: function () {
+    let that = this;
+    let brand_list = that.data.brand_list
+    brand_result = [];
+    lowerPrice = "";
+    uperPrice = "";
+    brand_list.forEach((item) => {
+      item.checked = false
+    })
+    that.setData({
+      brand_list: brand_list,
+    })
+  },
   /**
    * 用户点击右上角分享
    */

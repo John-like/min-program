@@ -1,6 +1,6 @@
 <!--pages/component/user_center.wxml-->
 <import src="../../template/template.wxml" />
-<view>
+<view class="{{silderNo?'slider_no':''}}">
   <view class="user_info_con">
     <image src="../../../images/user_bg_02.png"></image>
     <view class='user_info'>
@@ -22,6 +22,11 @@
       <!-- <image class='contact_img' src='../../../images/about_user.png'></image> -->
       <text>客服</text>
     </view>
+    <!--二维码  -->
+    <view class='two_dimensional_code' data-statu="open" bindtap='showMyCode' wx:if="{{customerStatus=='authentication'}}">
+      <image src='../../../images/two_dimensional_code.png'></image>
+    </view>    
+    
   </view>
   <view class="user_function">
     <view class='user_function_info' url="../../user_center/user_data/user_data" bindtap='is_examine' data-link='0'>
@@ -34,27 +39,39 @@
       <text>资质认证</text>
       <image class="user_return" src="../../../images/return_user.png"></image>
     </view>
-    <!-- <view wx:if="{{customerStatus=='authentication'}}" class="user_function_info show_vip_price">
+     <view wx:if="{{customerStatus=='authentication'}}" class="user_function_info show_vip_price">
       <text>购物车是否显示认证会员价</text>
       <checkbox-group class="checkbox_wrapper" bindchange="showVIP">
         <label class="checkbox">
-          <checkbox class='checkbox_item' value="showVIP" checked="checked" />
-          <view class='checkbox_checked_con {{value.length==0?"checkbox_checked":""}}'>
+          <checkbox class='checkbox_item' value="{{showVIP}}" checked="{{switch_on?'checked':''}}" />
+          <view class='checkbox_checked_con {{switch_on?"":"checkbox_checked"}}'>
             <view></view>
           </view>
         </label>
       </checkbox-group>
-    </view> -->
-    <navigator class='user_function_info location' url="../../user_center/user_address/user_address">
+    </view>
+    <view wx:else>
+    </view> 
+    <view class='user_function_info location' bindtap='is_examine' data-link='2'>
       <image class="user_fct_icon" src="../../../images/location_user.png"></image>
       <text>收货地址管理</text>
       <image class="user_return" src="../../../images/return_user.png"></image>
-    </navigator>
+    </view>
+    <view class='user_function_info' bindtap='is_examine' data-link='3'>
+      <image class="user_fct_icon icon_bank" src="../../../images/user_center_bank.png"></image>
+      <text>银行卡管理</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </view>
+    <!-- <navigator class='user_function_info location_bot' url="../../user_center/user_payment_manage/user_payment_manage">
+      <image class="user_fct_icon icon_payment" src="../../../images/user_center_payment.png"></image>
+      <text>支付密码管理</text>
+      <image class="user_return" src="../../../images/return_user.png"></image>
+    </navigator> -->
     <view class="concat_customer" bindtap="concat">
       <image class="user_fct_icon" src="../../../images/concat_user.png"></image>
-      <text>{{system =='android'?"客服电话":"联系客服"}}</text>
-      <text wx:if="{{system =='android'}}" class="tel">4008208369</text>
-      <image wx:if="{{system !='android'}}" class="user_return" src="../../../images/return_user.png"></image>
+      <text>联系客服</text>
+      <!-- <text wx:if="{{system =='android'}}" class="tel">4008208369</text> -->
+      <image class="user_return" src="../../../images/return_user.png"></image>
     </view>
     <navigator url='../../user_center/user_about/user_about'>
       <image class="user_fct_icon" src="../../../images/about_user.png"></image>
@@ -62,5 +79,12 @@
       <image class="user_return" src="../../../images/return_user.png"></image>
     </navigator>
   </view>
+</view>
+<!--弹出层 我的二维码  -->
+<!--mask-->
+<view class="drawer_screen" bindtap='addBtn' wx:if="{{showModalStatus}}" data-statu="close"></view>
+<!--动画  -->
+<view animation="{{animationData}}" class="drawer_box user_code {{silderNo?'fixed':'absolute'}}" wx:if="{{showModalStatus}}">
+  <image src='{{screenCode}}'></image>
 </view>
 <template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

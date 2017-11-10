@@ -6,15 +6,15 @@
   <view wx:if="{{orderLists.length >0}}">
     <scroll-view class="order-title" scroll-x style="width: 100%" scroll-into-view="leftTOP">
       <!-- <block wx:for="{{orderPagination}}" wx:key="{{index}}"> -->
-        <view id="leftTOP" class="title-part {{curNav == item.id ? 'order_active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">
-          全部({{orderPagination.allSize}})
-          <view class="title_mark"> </view>
-        </view>
+      <view id="leftTOP" class="title-part {{curNav == item.id ? 'order_active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.id}}">
+        全部({{orderPagination.allSize}})
+        <view class="title_mark"> </view>
+      </view>
       <!-- </block> -->
     </scroll-view>
 
     <view class="order-contain">
-      <scroll-view style="height:{{scrollHeight}}px;"  bindscrolltolower="lower" scroll-y="{{true}}" scroll-into-view="top{{topindex}}" scroll-top="0">
+      <scroll-view style="height:{{scrollHeight}}px;" bindscrolltolower="lower" scroll-y="{{true}}" scroll-into-view="top{{topindex}}" scroll-top="0">
         <block wx:for="{{orderLists}}" wx:key="{{index}}">
           <view class="order-list" id="top{{index}}" data-index="{{index}}">
             <view class="list-title">
@@ -30,19 +30,22 @@
                   <view class="order-right">
                     <view class="classname">订单编号：{{item.code}}</view>
                     <view class="classname">下单时间：{{item.orderTimeStr}}</view>
-                    <view class="classname" wx:if="{{item.orderServeMoney}}">金额：{{item.orderMoney + item.orderServeMoney}}.00</view>
-                    <view class="classname" wx:else>金额：{{item.orderMoney}}.00</view>
+                    <view class="classname" wx:if="{{item.orderServeMoney}}">金额：{{item.orderMoney + item.orderServeMoney}}</view>
+                    <view class="classname" wx:else>金额：{{item.orderMoney}}</view>
                     <view class="orderRight_dot">{{item.description}}</view>
                   </view>
                 </view>
               </navigator>
               <view class="order-btn">
-                <!-- <navigator wx:if="{{item.send}}" class="btn-box" url="../firm_order/firm_order">
-                {{item.send}}
-              </navigator> -->
-                <!-- <view wx:if="{{item.status}}" bindtap='cancelItem' class="btn-box">
-                {{item.status}}
-              </view> -->
+                 <!-- <navigator wx:if="{{item.status}}" class="btn-box" url="../shipping_infor/shipping_infor">
+                 发货信息
+                </navigator>  -->
+                 <navigator wx:if="{{item.confirmBtn=='yes'}}" class="btn-box" url="../order_sign/order_sign?id={{item.id}}">
+                 发货信息
+                </navigator>
+                <view wx:if="{{item.statusStr=='待支付'}}" data-id='{{item.id}}' data-money="{{item.orderServeMoney?item.orderMoney+ item.orderServeMoney:item.orderMoney}}" data-statu="open" data-code="{{item.code}}" data-show="paymentModal" bindtap='goPay' class='btn-box pay-box'>
+                去支付
+                </view>
                 <!-- <view wx:if="{{item.ingsend}}" bindtap="addBtn" data-statu="open" class="btn-box" url="url">
                 {{item.ingsend}}
               </view> -->
@@ -50,9 +53,9 @@
             </view>
           </view>
         </block>
-         <view hidden='{{btmhidden}}' style='background:#f1f1f1; text-align:center;font-size:28rpx;line-height:70rpx;height:70rpx;color:#999;'>我到底线啦！</view>
+        <view hidden='{{btmhidden}}' style='background:#f1f1f1; text-align:center;font-size:28rpx;line-height:70rpx;height:70rpx;color:#999;'>我到底线啦！</view>
       </scroll-view>
-      
+
     </view>
   </view>
   <view wx:else class="order_default">
@@ -66,13 +69,13 @@
 
 <!--弹出层 商品详情  -->
 <!--mask-->
-<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!-- <view class="drawer_screen"  bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view> -->
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
-<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+<!-- <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}"> -->
 
   <!--drawer content-->
-  <view class="drawer_content">
+  <!-- <view class="drawer_content">
     <view class="order-sign">请确认您是否签收：</view>
     <view class="order-confirm">
       <view bindtap="rufuseSign">未签收</view>
@@ -90,5 +93,55 @@
       </view>
     </form>
   </view>
+</view> -->
+<!--弹出层 支付方式  -->
+<!--mask-->
+ <view class="drawer_screen" data-show="paymentModal" bindtap="closeBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>  
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{showSignRemarks}}" class="drawer_box payment" wx:if="{{paymentModal}}">
+  <image src='../../../images/cicle_cancel.png' bindtap='paymentClose' data-statu="close" data-show="paymentModal" class='payment_cancel'></image>
+  <text class='payment_way'>请选择支付方式</text>
+  <view class='payment_choose' bindtap='choosePayWay' data-payway="wechat">
+    <image class='payment_icon_wechat' src='../../../images/pay_wechat.png'></image>
+    <text>微信支付</text>
+  </view>
+   <view class='payment_choose' data-statu="open" data-show="bankModal" bindtap='choosePayWay' data-payway="bank">
+    <image class='payment_icon_bank' src='../../../images/pay_bank.png'></image>
+    <text class='bank'>银行卡</text>
+  </view> 
+  <view>
+    <view  class='payment_choose' bindtap='choosePayWay' data-payway="offline">
+      <image class='payment_icon_offline' src='../../../images/pay_offline.png'></image>
+      <text>线下转账</text>
+    </view>
+    <text class='free_extra'>(线下转账减免搬楼费)</text> 
+  </view>
+</view> 
+
+<!--弹出层 银行卡支付  -->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box pay_of_bank" wx:if="{{bankModal}}">
+  <image src='../../../images/card_close.png' class='card_close' data-show="paymentModal" data-statu="close" bindtap='cardPayClose'></image>
+  <view class='password_please'>
+    <text>请输入支付密码</text>
+  </view>
+  <view class='unit_price'>￥{{paymentAmount}}</view>
+  <view class='card_type' bindtap='skipToBank'>
+    <image src='{{cardMsg.logo_url}}' class='bank_logo'></image>
+    <view class='bank_msg'>
+      <text>{{cardMsg.cardKind}}</text>
+      <text>{{cardMsg.cardType}}</text>
+      <text>({{cardMsg.cardNum_ab}})</text>
+    </view>
+    <image src='../../../images/user_add_card.png' class='jump'></image>
+  </view>
+  <view class='pay_word'>
+    <input type='number' cursor-spacing="100" name="password" focus="{{psw_focus}}" maxlength='6' class='password' placeholder-class="placeholder_psw" bindinput="verifyCode" bindblur="input_focus"></input> 
+    <view class='hidden_word' bindtap='input_focus'>
+      <input password type='number' maxlength='1' wx:for="{{arr}}" wx:key="{{index}}" value="{{psw[index]}}" bindfocus="hidden_focus"></input> 
+    </view>
+    <view class='line'></view>
+  </view> 
 </view>
 <template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

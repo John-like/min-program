@@ -51,6 +51,7 @@ wx-text {
 .area_user wx-text {
   font-size: 28rpx;
   color: #333;
+  letter-spacing: 0rpx;
 }
 
 .area_info {
@@ -142,7 +143,7 @@ wx-text {
   align-items: flex-start;
   position: relative;
   width: 660rpx;
-  height: 120rpx;
+  height: 150rpx;
   /* overflow: hidden; */
 }
 
@@ -160,7 +161,7 @@ wx-text {
   width: 560rpx;
   /* margin-top: -6rpx;     */
   flex: 1;
-  height: 110rpx;
+  height: 150rpx;
   line-height: 30rpx; 
   padding-top: 8rpx;
   color: #333;
@@ -177,10 +178,11 @@ wx-text {
   left: 104rpx;
   color: #aaa;
   display: block;
-  width: 200rpx;
+  /* width: 200rpx; */
   line-height: 30rpx;
   height: 30rpx;
   font-size: 24rpx;
+  width: 560rpx;
 }
 
 .total {
@@ -439,3 +441,67 @@ wx-navigator:hover {
   text-align: center;
   font-size: 28rpx;
 }
+
+/*支付方式  */
+.payment {
+  position: fixed;
+  top: 283rpx;
+  left: 105rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 114rpx;
+  justify-content: space-around;
+  width: 540rpx;
+  height: 634rpx;
+  border-radius: 22rpx;
+  box-sizing: border-box;
+}
+.payment wx-text {
+  font-weight: bold;
+}
+.payment .payment_way {
+  margin-top: 25rpx;
+  font-size: 30rpx;
+  color: #000;
+}
+.payment .payment_icon_wechat {
+  width: 46rpx;
+  height: 37rpx;
+}
+.payment .payment_icon_bank {
+  width: 41rpx;
+  height: 33rpx;
+}
+.payment .payment_icon_offline {
+  width: 42rpx;
+  height: 42rpx;
+}
+.payment .payment_choose {
+  /* display: flex;
+  justify-content: space-around; */
+  width: 256rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.payment_choose wx-image {
+  float: left;
+  margin-left: 20rpx;
+  margin-right: 35rpx;
+}
+.payment_choose wx-text {
+  float: left;
+}
+.payment .free_extra {
+  letter-spacing: 2rpx;
+  font-size: 24rpx;
+  color: #dc3235;
+}
+.payment .payment_cancel {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  width: 42rpx;
+  height: 42rpx;
+}
+

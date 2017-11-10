@@ -18,6 +18,7 @@ var unionId = "";
 var shareMessageArg = {};
 var startPoint;
 var systemVersion;
+var referrerMobile;
 Page({
   data: {
     // 页面配置  
@@ -70,6 +71,10 @@ Page({
   onLoad: function (options) {
     console.log(options);
     systemVersion = getApp().globalData.systemVersion;
+    referrerMobile = getApp().globalData.referrerMobile;
+    this.setData({
+      referrerMobile: referrerMobile
+    })
     //根据用户状态判断是否弹出手机注册页面
     if (options &&options.arg) {
       if (options.arg == "toRegistered") {
@@ -77,14 +82,15 @@ Page({
       }
     }
     console.log(app.globalData)
-    if(app.globalData.markStatu == 'open') {
-      alert.alert('open', this, 300);
-    }
     shareMessageArg = options;
     var that = this; 
     openId = wx.getStorageSync('openId');
     unionId = wx.getStorageSync('unionId');
     customerStatus = wx.getStorageSync('customerstatusStr');
+    //扫码注册用户未注册时弹出手机注册页面
+    if (referrerMobile && (customerStatus == "unregister")) {
+      alert.alert('open', this, 300);
+    }
     that.setData({
       customerStatus: customerStatus
     })
@@ -168,6 +174,42 @@ Page({
           }
         }
       })
+      //获取首页banner 轮播
+      wx.request({
+        url: api.queryContentTurnsImage,
+        data: {
+          openId: openId,
+          systemVersion: systemVersion
+          //unionId: unionId,
+        },
+        success: function (res) {
+          console.log(res.data.data.results)
+          if (res.data.code == 0) {
+              that.setData({
+                bannerList:res.data.data.results
+              })
+          }
+        }
+        
+      })
+      //获取首页底部热门品牌
+      wx.request({
+        url: api.queryRecommendCommodity,
+        data: {
+          openId: openId,
+          systemVersion: systemVersion
+          //unionId: unionId,
+        },
+        success: function (res) {
+          console.log(res.data.data.results)
+          if (res.data.code == 0) {
+            that.setData({
+              btmImgList: res.data.data.results
+            })
+          }
+        }
+
+      })
     }
 
   },
@@ -207,6 +249,10 @@ Page({
   onShow: function () {
     console.log("onShow")
     systemVersion = getApp().globalData.systemVersion;
+    referrerMobile = getApp().globalData.referrerMobile;
+    this.setData({
+      referrerMobile: referrerMobile
+    })
     var that = this;
     let currentTime = Date.parse(new Date())
     that.setData({
@@ -440,6 +486,13 @@ Page({
       }
     })
   },
+  //跳转到购买须知详情
+  readProtocalDetail: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../purchase_notes/purchase_notes',
+    })
+  },
   //立即注册
   formSubmit: function (e) {
     var that = this;
@@ -450,7 +503,7 @@ Page({
     console.log(value.mobile)
     console.log(value.code)
     console.log(value.referreMobile)
-    if (value.mobile == "") {
+    if (value.mobile.trim() == "") {
       console.log(tip.tip_msg)
       tip.tip_msg(that, "手机号不能为空");
       return;
@@ -458,11 +511,11 @@ Page({
       tip.tip_msg(that, "请输入正确的手机格式");
       return;
     }
-    if (value.code == "") {
+    if (value.code.trim() == "") {
       tip.tip_msg(that, "验证码不能为空")
       return;
     }
-    if (value.referreMobile != "") {
+    if (value.referreMobile.trim() != "") {
       if (!regMobile.test(value.referreMobile)) {
         tip.tip_msg(that, "请输入正确的手机格式");
         return;
@@ -478,6 +531,7 @@ Page({
         openId: openId,
         unionId: unionId,
         mobile: value.mobile,
+        referrerMobile: referrerMobile,
         code: value.code,
         systemVersion: systemVersion
       },
@@ -500,10 +554,6 @@ Page({
         }
       }
     })
-  },
-  //换一批
-  hotRefresh: function () {
-
   },
   //搜索聚焦跳转至搜索页面
   focus_search: function(){

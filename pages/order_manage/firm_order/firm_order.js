@@ -1,6 +1,7 @@
 // pages/order_manage/firm_order/firm_order.js
 const tip = require("../../../utils/tip.js");
 const alert = require("../../../utils/alert.js");
+const common = require("../../../utils/common.js");
 //获取应用实例
 var app = getApp();
 //获取api接口文档
@@ -21,6 +22,7 @@ Page({
   data: {
     showModalStatus: false,
     isChooseProtocal: false,//同意平台协议
+    paymentModal:false,
     set_color_num: 1,
     orderGoodsTotalPrice: 0,
     orderGoodsServePrice: 0,
@@ -169,7 +171,11 @@ Page({
   },
 
   formSubmit: function (e) {
-
+    // var currentStatu = e.target.dataset.statu;
+    // var showThis = e.target.dataset.show;
+    // console.log(currentStatu, showThis)
+    // common.common(currentStatu, this, 200, showThis);
+    // return;
     var that = this;
 
     getApp().TapFunc(function () {
@@ -200,10 +206,10 @@ Page({
         formRes.customerAddressId = that.data.user.id; //设置收货地址id
       }
 
-      if (value.agreement.length == 0) {
-        tip.tip_msg(that, "请同意平台协议");
-        return;
-      }
+      // if (value.agreement.length == 0) {
+      //   tip.tip_msg(that, "请同意平台协议");
+      //   return;
+      // }
 
       console.log("提交")
       formRes.systemVersion=systemVersion
@@ -273,6 +279,7 @@ Page({
 
     this.addBtn(e);
   },
+  //点击显示人工调色
   show_setColor: function (e) {
     var that = this;
     var currentStatu = e.currentTarget.dataset.statu;
@@ -281,7 +288,15 @@ Page({
   addBtn: function (e) {
     var that = this;
     var currentStatu = e.currentTarget.dataset.statu;
-    alert.alert(currentStatu, that, 300);
+    var showThis = e.currentTarget.dataset.show;
+    common.common(currentStatu, that, 200, showThis);
+  },
+  //关闭支付方式弹窗
+  paymentClose: function (e) {
+    var that = this;
+    var currentStatu = e.currentTarget.dataset.statu;
+    var showThis = e.currentTarget.dataset.show;
+    common.common(currentStatu, that, 200, showThis);
   },
   show_protocol: function () {
     // wx.previewImage({
@@ -408,7 +423,51 @@ Page({
     wx.switchTab({
       url: "../../index/index/index"
     })
-  }
+  },
+// 选择支付方式
+  choosePayWay: function (e) {
+    // let pay_way = e.currentTarget.dataset.payway;
+    // console.log(pay_way);
+    // if(pay_way == "wechat") {
+    //   console.log("pay_wechat");
+    //   wx.request({
+    //     url: "http://192.168.5.143/jiawang-wechart/customer/createPrePayInfo",
+    //     method: "POST",
+    //     header: {
+    //       'content-type': 'application/x-www-form-urlencoded'
+    //     },
+    //     data: {
+    //       openId: openId,
+    //       totalMoney: 1
+    //     },
+    //     success: function (res) {
+    //       console.log(res);
+    //       var data = res.data.data;
+    //       var nonceStr = data.nonceStr;
+    //       var packages = data.package;
+    //       var timeStamp = data.timeStamp;
+    //       var signType = data.signType;
+    //       var paySign = data.paySign;
 
+    //       wx.requestPayment({
+    //         'timeStamp': timeStamp,
+    //         'nonceStr': nonceStr,
+    //         'package': packages,
+    //         'signType': signType,
+    //         'paySign': paySign,
+    //         'success': function (res) {
+    //           console.log(res);
+    //         },
+    //         'fail': function (res) {
+    //         }
+    //       })
+    //     }
+    //   })
+  //   } else if (pay_way == "offline") {
+  //     wx.navigateTo({
+  //       url: '../pay_offline/pay_offline',
+  //     })
+  //   }
+  }
 
 })

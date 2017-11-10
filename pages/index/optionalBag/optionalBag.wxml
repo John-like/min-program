@@ -2,11 +2,11 @@
 <import src="../../template/template.wxml" />
 <template is="tip" data="{{message:message,control:control,animationData:animationData}}" />
 <view class="contain">
- 
+
   <!--头部 搜索-->
   <view class='searchBar'>
-    <view class='search_con'>
-      <input placeholder='瓷地砖' bindfocus="focus_search"></input>
+    <view class='search_con'  >
+      <view   bindtap="focus_search">瓷地砖</view>
       <image src='../../../images/search_logo.png'></image>
     </view>
     <view class='user_contact'>
@@ -17,7 +17,7 @@
   </view>
   <view class="space"></view>
   <view style='height:78rpx'>
-  
+
   </view>
   <!-- 套餐包包含种类 -->
   <view class="tc-main">
@@ -37,15 +37,16 @@
             {{rightTitle}}
           </view>
         </view>
-        <!-- <view class='right-title-con2'>
-          <view>
+        <view class='right-title-con2' bindtap='screeningShop' data-show="screeningShop" data-statu="open" data-id="{{curNav}}">
+          <view class="{{screenLock?'':'screenRed'}}">
             筛选
           </view>
-          <view class="scring_icon" bindtap='screeningShop' data-show="screeningShop" data-statu="open" data-id="{{curNav}}">
-            <image src='/images/zc_screening.png'></image>
+          <view class="scring_icon">
+            <image hidden="{{!screenLock}}" src='/images/zc_screening.png'></image>
+            <image hidden="{{screenLock}}" src='/images/zc_screening_red.png'></image>
           </view>
-        </view> -->
-        <scroll-view class='{{mask_show?"overHidden":""}}' scroll-y="{{!mask_show}}" scroll-top="0" style="height:{{scrollHeightRight}}rpx;" lower-threshold="4" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{right_top}}">
+        </view>
+        <scroll-view class='{{mask_show?"overHidden":""}}' scroll-y="{{!mask_show}}" scroll-top="0" style="height:{{scrollHeightRight}}rpx;" lower-threshold="10"  bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{right_top}}">
           <!--content1  -->
           <block wx:for="{{lists}}" wx:key="*this">
             <view class="right-content" data-id="{{item.id}}" id="{{index==0 ? right_top :''}}">
@@ -60,7 +61,7 @@
               <view class="right-word">
                 <navigator hover-class='none' url="../goods-detail/goods-detail?id={{item.id}}">
                   <view class="right-word-title">
-                  <image src='/images/hot.png' wx:if="{{item.sortWeight==999}}"></image> 
+                    <image src='/images/hot.png' wx:if="{{item.sortWeight==999}}"></image>
                     {{item.productName}}
                   </view>
                   <view class="right-word-name {{item.brandName?'':'color_fff'}}">
@@ -99,8 +100,11 @@
             </view>
 
           </block>
-
-          <view wx:if="{{showNomore}}" style="widht:100%;height:40px;text-align:center;">
+          <view class='searchResult_no' wx:if="{{lists.length==0}}">
+            <image src='../../../images/search_noResult.png'></image>
+            <text>您寻找的商品还在筹备中</text>
+          </view>
+          <view wx:if="{{showNomore}}" style="widht:100%;height:100px;text-align:center;">
             暂无更多商品
           </view>
         </scroll-view>
@@ -353,17 +357,17 @@
         <view class='setCar-total'>
           <view class='setCar-total-view'>
             <view wx:if="{{shopCarVipTotalPrice&&(shopCarVipTotalPrice<shopCarTotalPrice)&&(customerStatus=='authentication')}}">
-              <view style='text-decoration: line-through;color: #999;font-size: 22rpx;'>
+              <view class='shop_total'>
                 总计：
-                <text style='color: #999;font-size:20rpx;'>￥{{shopCarTotalPrice}}</text>
+                <text>￥{{shopCarTotalPrice}}</text>
               </view>
-              <view style='font-size:22rpx'>
+              <view class='shop_vip'>
                 会员价总计：
-                <text style='color: #d71518;font-size:24rpx;'>￥{{shopCarVipTotalPrice}}</text>
+                <text>￥{{shopCarVipTotalPrice}}</text>
               </view>
-              <view style='font-size:22rpx' wx:if="{{shopCarServePrice&&(shopCarServePrice>0)}}">
+              <view class='shop_serve' wx:if="{{shopCarServePrice&&(shopCarServePrice>0)}}">
                 服务费：
-                <text style='color: #d71518;font-size:20rpx;'>￥{{shopCarServePrice}}</text>
+                <text>￥{{shopCarServePrice}}</text>
               </view>
             </view>
             <view wx:else>
@@ -399,72 +403,34 @@
 <!--筛选商品执行的动画-->
 <view animation="{{showSignRemarks}}" class="screening" wx:if="{{screeningShop}}">
   <view class='screening-contetn'>
-    <form class='screening_form'>
+    <form class='screening_form' bindsubmit="screenSubmit" bindreset="filterReset">
       <view class='screening_form_content'>
         <view class='screening_title'>价格区间</view>
         <view class='screening-price'>
-          <input maxlength='8' placeholder='最低价'></input>
+          <input maxlength='8' type='number' name="minPrice" placeholder='最低价' value="{{minPrice}}"></input>
           <view>—</view>
-          <input maxlength='8' placeholder='最高价'></input>
+          <input maxlength='8'  type='number' name="maxPrice" placeholder='最高价' value="{{maxPrice}}"></input>
         </view>
         <view class='screening_title'>品牌</view>
 
         <view class='screening_brand'>
-          <view class='brand_pic brand_pic-active'>
-            <image src='/images/tob_zh_logo1.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo1.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
-          <view class='brand_pic'>
-            <image src='/images/tob_zh_logo2.png'></image>
-          </view>
+          <checkbox-group bindchange='screenImg'>
+            <block wx:for="{{screenbrand}}" wx:key="{{index}}">
+              <label class="brand_pic {{item.checked==true?'brand_pic-active':''}}">
+                <checkbox value="{{index}}" data-index="{{index}}" checked='{{item.checked}}' hidden='true'></checkbox>
+                <image src='{{item.productBrandFileUrl}}'></image>
+                <!-- {{item.checked?"checked_img":""}}' -->
+              </label>
+            </block>
+          </checkbox-group>
         </view>
+
       </view>
       <view class='screening_btm'>
-        <view>重置</view>
-        <view class='screening_btm_sure'>确定</view>
+        <button class='screening_btm_rest' type='number' form-type="reset">重置</button>
+        <button class='screening_btm_sure' data-id="{{curNav}}" data-show="{{rightSlide}}" bindtap="addBtn" formType="submit" data-statu="close">确定</button>
       </view>
     </form>
 
   </view>
-
-
-
 </view>

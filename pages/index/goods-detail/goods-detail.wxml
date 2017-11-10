@@ -219,7 +219,7 @@
         </view>
       </view>
     </view>
-    <button class="btn_ok" bindtap="addBtn" data-statu="close" formType="submit" data-growing-title="商品详情页中的选择规格">确定</button>
+    <button class="btn_ok" bindtap="addBtn" data-statu="close" formType="submit" data-growing-title="商品详情页中的选择规格">加入购物车</button>
   </form>
 
 </view>

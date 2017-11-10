@@ -40,6 +40,14 @@ Page({
           console.log(res)
           var res = res.data;
           if (res.code == 0) {
+          
+            let identity = res.data.identity
+            if (identity.length==18) {
+              identity = identity.substring(0, 6) + "********" + identity.substring(14,18)
+            } else {
+              identity = identity.substring(0, 6) + "******" + identity.substring(12, 15)
+            }
+            res.data.identity=identity;
             that.setData({
               user: res.data
             })

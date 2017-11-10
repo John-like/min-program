@@ -102,7 +102,9 @@ page {
   display: flex;
   color: #333;
 }
-
+.screenRed{
+  color: #d71518;
+}
 .scring_icon wx-image {
   width: 36rpx;
   height: 36rpx;
@@ -123,7 +125,8 @@ page {
 .right-content {
   display: flex;
   border-bottom: 1px solid #f1f1f1;
-  margin-bottom: 30rpx;
+  margin-bottom: 40rpx;
+  padding-bottom: 8rpx;
   position: relative;
 }
 
@@ -487,14 +490,14 @@ wx-navigator:hover {
   box-sizing: border-box;
 }
 
-.searchBar .search_con wx-input {
+.searchBar .search_con wx-view {
   width: 636rpx;
   height: 64rpx;
   border-radius: 8rpx;
   background: #efefef;
   line-height: 64rpx;
   font-size: 28rpx;
-  color: #333;
+  color: #999;
   padding-left: 109rpx;
   box-sizing: border-box;
 }
@@ -533,3 +536,30 @@ wx-navigator:hover {
   height: 50rpx;
   display: block;
 }
+/*购物车价格  */
+.setCar-total-view {
+  box-sizing: border-box;
+}
+.setCar-total-view .shop_total {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 20rpx;
+}
+ .shop_total wx-text {
+  color: #999;font-size:20rpx;
+} 
+.setCar-total-view .shop_vip {
+  font-size:20rpx;
+}
+.shop_vip wx-text {
+  color: #d71518;
+  font-size:20rpx;
+}
+.setCar-total-view .shop_serve {
+  font-size:20rpx;
+}
+.shop_serve wx-text {
+  color: #d71518;
+  font-size:20rpx;
+}
+

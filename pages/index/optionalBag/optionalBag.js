@@ -19,6 +19,9 @@ var shoppingGoodsNum = 0;
 var shoppingGoodsNumReduce = 0;
 var lastshoppingGoodsNum = 0;
 var systemVersion;
+var minPrice = '';
+var maxPrice = '';
+var screenResultid = [];
 Page({
   data: {
     navLeftItems: {}, //左侧tab
@@ -74,6 +77,15 @@ Page({
     heightnone: "", //属性显示隐藏
     Servenone: "", //服务显示隐藏
     rightSlide: 'left',
+    screenitems: [
+      { name: 'USA', value: '美国' },
+      { name: 'CHN', value: '中国', checked: 'true' },
+      { name: 'BRA', value: '巴西' },
+      { name: 'JPN', value: '日本' },
+      { name: 'ENG', value: '英国' },
+      { name: 'TUR', value: '法国' },
+    ],
+    screenLock:true//筛选初始没有选中任何值
   },
 
   onLoad: function (options) {
@@ -191,7 +203,7 @@ Page({
           console.log(parseInt(res.windowHeight * 2))
           that.setData({
             scrollHeightLeft: parseInt(res.windowHeight) + 380,
-            scrollHeightRight: parseInt(res.windowHeight) + 340
+            scrollHeightRight: parseInt(res.windowHeight) + 320
           })
         }
       });
@@ -249,7 +261,8 @@ Page({
     if (that.data.shopCarModal) {
       that.setData({
         shopCarModal: false,
-        showModalStatus: false
+        showModalStatus: false,
+        mask_show:false
       })
     }
 
@@ -260,32 +273,38 @@ Page({
   lower: function () {
     var that = this;
     ++pageIndex;
-   
+    console.log(111)
     if (pageIndex > allPage) {
       that.setData({
-        showNomore:true
+        showNomore: true
       })
       return;
     } else {
+      let getmoreData = {
+        openId: openId,
+        productCategoryId: that.data.productCategoryId,
+        pageIndex: pageIndex,
+        systemVersion: systemVersion,
+        minPrice: minPrice,
+        maxPrice: maxPrice
+      }
+     if (screenResultid.length != 0) {
+        getmoreData.productBrandIds = screenResultid
+      }
       wx.request({
         url: api.getCommodityByCategoryId,
         method: 'GET',
-        data: {
-          openId: openId,
-          productCategoryId: that.data.productCategoryId,
-          pageIndex: pageIndex,
-          systemVersion: systemVersion
-        },
+        data: getmoreData,
         header: {
           'Accept': 'application/json'
         },
         success: function (res) {
-           
-            that.setData({
-              lists: that.data.lists.concat(res.data.data.results),
-              pagination: res.data.data.pagination,
-             
-            })
+
+          that.setData({
+            lists: that.data.lists.concat(res.data.data.results),
+            pagination: res.data.data.pagination,
+
+          })
 
         }
       })
@@ -303,7 +322,7 @@ Page({
     let id = e.target.dataset.id;
     // index = parseInt(e.target.dataset.index)
     var right = e.target.dataset.name; //当前点击目标的分类名称
-
+    screenResultid = [];
     wx.request({
       url: api.getCommodityByCategoryId,
       method: 'GET',
@@ -320,14 +339,16 @@ Page({
       success: function (res) {
         wx.hideLoading()
         console.log(res)
-
+        minPrice = '';
+        maxPrice = "";
         that.setData({
           curNav: id,
           productCategoryId: id,
           rightTitle: right,
           lists: res.data.data.results,
-          right_top: "right_top" + that.data.productCategoryId,
-          showNomore: false
+          right_top: "right_top" + id,
+          showNomore: false,
+          screenLock:true
         })
         allPage = res.data.data.pagination.allPage;
 
@@ -359,7 +380,6 @@ Page({
   // },
   //商品选择 动态属性处理函数
   radioCheckedChange: function (e) {
-
     var that = this;
     var NavNum = that.data.NavNum
     var nameIndex = e.target.dataset.name
@@ -541,7 +561,7 @@ Page({
     formRes.openId = openId;
     formRes.attribute = JSON.stringify(formRes.attribute);
     formRes.serve = JSON.stringify(formRes.serve);
-    formRes.systemVersion=systemVersion
+    formRes.systemVersion = systemVersion
     wx.request({
       url: api.addCommodityToShoppingCart,
       method: 'POST',
@@ -611,94 +631,94 @@ Page({
     if (reduceNumTimer) {
       return;
     }
-   
 
-     //如果定时器不存在,首次点击加号
-     if (!updataNumTimer) {
-       shoppingGoodsNum = that.data.shoppingcartLists[currentIndex].number;
-       lastshoppingGoodsNum = shoppingGoodsNum
-       console.log("请求前的商品数量++" + lastshoppingGoodsNum)
-     }
-     // if (shoppingcartLists[currentIndex].number >= 999) {
-     //   tip.tip_msg(that, "单个添加数量已达上限")
-     //   return;
-     // }
-     console.log(shoppingGoodsNum)
-     shoppingGoodsNum++;
-     if (shoppingGoodsNum > 999) {
-       shoppingGoodsNum = 999;
-       tip.tip_msg(that, "单个添加数量已达上限")
-       return;
-     }
-     that.data.shoppingcartLists[currentIndex].number = shoppingGoodsNum;
-      that.setData({
-        shoppingcartLists: that.data.shoppingcartLists
+
+    //如果定时器不存在,首次点击加号
+    if (!updataNumTimer) {
+      shoppingGoodsNum = that.data.shoppingcartLists[currentIndex].number;
+      lastshoppingGoodsNum = shoppingGoodsNum
+      console.log("请求前的商品数量++" + lastshoppingGoodsNum)
+    }
+    // if (shoppingcartLists[currentIndex].number >= 999) {
+    //   tip.tip_msg(that, "单个添加数量已达上限")
+    //   return;
+    // }
+    console.log(shoppingGoodsNum)
+    shoppingGoodsNum++;
+    if (shoppingGoodsNum > 999) {
+      shoppingGoodsNum = 999;
+      tip.tip_msg(that, "单个添加数量已达上限")
+      return;
+    }
+    that.data.shoppingcartLists[currentIndex].number = shoppingGoodsNum;
+    that.setData({
+      shoppingcartLists: that.data.shoppingcartLists
     })
-     console.log(shoppingGoodsNum)
-     let currentNum = shoppingcartLists[currentIndex].number++;
-     if (updataNumTimer) {
-       console.log("定时器存在,取消修改请求")
-       return;
-     }
-     //修改购物车商品数量
-     updataNumTimer = setTimeout(function () {
-       console.log("1s后执行")
+    console.log(shoppingGoodsNum)
+    let currentNum = shoppingcartLists[currentIndex].number++;
+    if (updataNumTimer) {
+      console.log("定时器存在,取消修改请求")
+      return;
+    }
+    //修改购物车商品数量
+    updataNumTimer = setTimeout(function () {
+      console.log("1s后执行")
 
-       wx.request({
-         url: api.updateNumFromShoppingCart,
-         method: 'POST',
-         header: {
-           'content-type': 'application/x-www-form-urlencoded'
-         },
-         data: {
-           openId: openId,
-           shoppingCartItemId: changeNumId,
-           unionId: unionId,
+      wx.request({
+        url: api.updateNumFromShoppingCart,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          openId: openId,
+          shoppingCartItemId: changeNumId,
+          unionId: unionId,
           num: shoppingGoodsNum,
           systemVersion: systemVersion
-         },
-         success: function (res) {
-           clearTimeout(updataNumTimer);
-           updataNumTimer = null;
-           console.log(res)
-           //that.getShoppingList(that)
-           shoppingcartLists[currentIndex].number = shoppingGoodsNum;
-           that.setData({
-             shoppingcartLists: shoppingcartLists
-           })
-           //查询购物车商品数量
-           wx.request({
-             url: api.queryCommodityNumFromShoppingCart,
-             data: {
-               openId: openId,
-               systemVersion: systemVersion
-             },
-             success: function (res) {
-               if (res.data.code == "0") {
-                 that.setData({
-                   shopCarnum: res.data.data.commodityNum,
-                   shopCarTotalPrice: res.data.data.commonShoppingCartMoney,
-                   shopCarVipTotalPrice: res.data.data.vipShoppingCartMoney,
-                   categoryNum: res.data.data.commodityCount,
-                   shopCarServePrice: res.data.data.shoppingCartServeMoney
-                 })
-               } else {
-                 tip.tip_msg(that, res.data.message)
-               }
-             }
-           })
-         },
-         fail: function () {
-           clearTimeout(updataNumTimer);
-           updataNumTimer = null;
-           tip.tip_msg(that, "网络异常,请重试")
-           shoppingcartLists[currentIndex].number = lastshoppingGoodsNum;
-           that.setData({
-             shoppingcartLists: shoppingcartLists
-           })
-         }
-       })
-     }, 500)
+        },
+        success: function (res) {
+          clearTimeout(updataNumTimer);
+          updataNumTimer = null;
+          console.log(res)
+          //that.getShoppingList(that)
+          shoppingcartLists[currentIndex].number = shoppingGoodsNum;
+          that.setData({
+            shoppingcartLists: shoppingcartLists
+          })
+          //查询购物车商品数量
+          wx.request({
+            url: api.queryCommodityNumFromShoppingCart,
+            data: {
+              openId: openId,
+              systemVersion: systemVersion
+            },
+            success: function (res) {
+              if (res.data.code == "0") {
+                that.setData({
+                  shopCarnum: res.data.data.commodityNum,
+                  shopCarTotalPrice: res.data.data.commonShoppingCartMoney,
+                  shopCarVipTotalPrice: res.data.data.vipShoppingCartMoney,
+                  categoryNum: res.data.data.commodityCount,
+                  shopCarServePrice: res.data.data.shoppingCartServeMoney
+                })
+              } else {
+                tip.tip_msg(that, res.data.message)
+              }
+            }
+          })
+        },
+        fail: function () {
+          clearTimeout(updataNumTimer);
+          updataNumTimer = null;
+          tip.tip_msg(that, "网络异常,请重试")
+          shoppingcartLists[currentIndex].number = lastshoppingGoodsNum;
+          that.setData({
+            shoppingcartLists: shoppingcartLists
+          })
+        }
+      })
+    }, 500)
   },
   // 购物车页面数量控制 减少
   shopCarnumReduce: function (e) {
@@ -809,7 +829,7 @@ Page({
     let changeNumId = e.currentTarget.dataset.id//购物车当前商品id
 
     let currentNum = e.detail.value;
-    
+
     console.log(currentNum);
     if (currentNum <= 0) {
       console.log(e)
@@ -822,14 +842,14 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
-       },
+      },
       data: {
         openId: openId,
         shoppingCartItemId: changeNumId,
         unionId: unionId,
         num: currentNum,
         systemVersion: systemVersion
-       },
+      },
       success: function (res) {
         console.log(res)
         that.getShoppingList(that)
@@ -840,7 +860,7 @@ Page({
           data: {
             openId: openId,
             systemVersion: systemVersion
-           },
+          },
           success: function (res) {
             if (res.data.code == "0") {
               that.setData({
@@ -852,11 +872,11 @@ Page({
               })
             } else {
               tip.tip_msg(that, res.data.message)
-              }
             }
-          })
-        }
-      })
+          }
+        })
+      }
+    })
 
 
 
@@ -1125,21 +1145,127 @@ Page({
   // 商品筛选
   screeningShop: function (e) {
     var that = this;
-    console.log(e.currentTarget.dataset)
     var currentStatu = e.currentTarget.dataset.statu;
     var showThis = e.currentTarget.dataset.show;
     var dataId = e.currentTarget.dataset.id;
-
-    console.log(showThis)
 
     that.setData({
       mask_show: true,
       rightSlide: 'right'
     })
+    wx.request({
+      url: api.queryProductBrandByCategoryId,
+      method: 'GET',
+      data: {
+        openId: openId,
+        systemVersion: systemVersion,
+        productCategoryId: dataId
+      },
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        if (that.data.screenbrand == undefined || that.data.screenLock == true) {
+          var screenbrand = res.data.data.results;
+        } else {
+          var screenbrand = that.data.screenbrand;
+        }
+        that.setData({
+          screenbrand: screenbrand
+        })
+        common.common(currentStatu, that, 300, showThis);
+      }
 
+    })
+  },
+  //选中相应品牌图片
+  screenImg: function (e) {
+    let that = this;
+    let screenbrand = that.data.screenbrand;
+    let currentindex = e.detail.value;
+    screenResultid = [];
+    screenbrand.forEach((item, index) => {
+      item.checked = false
+    })
+    currentindex.forEach((item, index) => {
+      screenbrand[item].checked = true
+      screenResultid.push(screenbrand[item].id)
+    })
+    console.log(screenResultid)
+    that.setData({
+      screenbrand: screenbrand
+    })
 
-    common.common(currentStatu, that, 300, showThis);
+  },
 
+  //筛选确认按钮
+  screenSubmit: function (e) {
+    //右侧 商品列表
+    var that = this;
+    pageIndex = 1;
+    let screenId = e.detail.target.dataset.id;
+    minPrice = e.detail.value.minPrice;
+    maxPrice = e.detail.value.maxPrice;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    screenResultid = screenResultid.toString()
+    // console.log(screenResultid)
+    var screenSubmitdata = {
+      openId: openId,
+      productCategoryId: screenId,
+      systemVersion: systemVersion,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      productBrandIds: screenResultid,
+      pageIndex: pageIndex
+    }
+
+    wx.request({
+      url: api.getCommodityByCategoryId,
+      method: 'GET',
+      data: screenSubmitdata,
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        var data = res.data.data.results;
+        wx.hideLoading();
+        if (minPrice != "" || minPrice != "" || screenResultid!=""){
+         that.setData({
+           screenLock:false
+         })
+        }else{
+          that.setData({
+            screenLock: true
+          })
+        }
+        that.setData({
+          lists: res.data.data.results,
+          screenSubmitdata: screenSubmitdata,
+          showNomore:false,
+          right_top: "right_top" + screenId,
+          minPrice: minPrice,
+          maxPrice: maxPrice
+        })
+
+      }
+
+    })
+  },
+  //筛选重置
+  filterReset: function () {
+    let that = this;
+    let screenbrand = that.data.screenbrand;
+    screenResultid = [];
+    screenbrand.forEach((item, index) => {
+      item.checked = false
+    })
+    that.setData({
+      screenbrand: screenbrand,
+      minPrice: "",
+      maxPrice: ""
+    })
   },
   //搜索聚焦跳转至搜索页面
   focus_search: function () {

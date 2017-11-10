@@ -82,6 +82,19 @@ const common = function (currentStatu, that, time, showThis) {
             screeningShop: false,
           }
         );
+      } else if (showThis == "paymentModal") {
+        that.setData({
+          paymentModal: false,
+          bankModal: false
+        })
+      } else if (showThis == "colorModal") {
+        that.setData({
+          colorModal: false
+        })
+      } else if (showThis == "bankModal") {
+        that.setData({
+          bankModal: false
+        })
       } else{
         that.setData(
           {
@@ -89,6 +102,9 @@ const common = function (currentStatu, that, time, showThis) {
             addShopModal: false,
             shopCarModal: false,
             screeningShop: false,
+            paymentModal: false,
+            colorModal: false,
+            bankModal: false
           }
         );
       }
@@ -132,6 +148,19 @@ const common = function (currentStatu, that, time, showThis) {
           screeningShop: true,
         }
       );
+    } else if (showThis == "paymentModal") { 
+      that.setData({
+        paymentModal: true
+      })
+    } else if (showThis == "colorModal") {
+      that.setData({
+        colorModal: true
+      })
+    } else if (showThis == "bankModal") {
+      that.setData({
+        bankModal: true,
+        paymentModal: false
+      })
     }
 
   }

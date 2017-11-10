@@ -23,6 +23,7 @@ wx-text {
   height: 20rpx;
   margin-right: 23rpx;
   margin-left: 30rpx;
+  transition: all 1s;
 }
 .shipping_time .first {
   flex:1;

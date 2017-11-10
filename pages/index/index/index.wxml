@@ -12,8 +12,8 @@
     </view>
   </view> -->
   <view class='searchBar'>
-    <view bindtap="focus_search" class='search_con'>
-      <input placeholder='墙地砖' disabled bindfocus="focus_search"></input>
+    <view class='search_con'>
+      <view placeholder='墙地砖' disabled bindtap="focus_search">墙地砖</view>
       <image src='../../../images/search_logo.png'></image>
     </view>
     <view class='user_contact'>
@@ -22,11 +22,11 @@
       <image class='contact_img' src='../../../images/service.png'></image>
     </view>
   </view>
-  <swiper class='header-banner'>
-    <block>
+  <swiper class='header-banner' indicator-dots="true" indicator-color="" indicator-active-color="#ccc">
+    <block wx:for="{{bannerList}}" wx:key="{{index}}">
       <swiper-item bindtap="userGuide">
-        <image src='https://go.jiaw.com/upload/E39F69C49084979E9E70B306BD8E7B5B.jpg' class="slide-image" />
-        <!-- <image src='https://go.jiaw.com/upload/static_list_1.png' class="slide-image" /> -->
+        <image src="{{item.turnsImageFileUrl}}" class="slide-image" />
+        <!-- <image src='https://go.jiaw.com/upload/E39F69C49084979E9E70B306BD8E7B5B.jpg' class="slide-image" /> -->
       </swiper-item>
     </block>
   </swiper>
@@ -42,21 +42,27 @@
   </view>
   <view class='superValue'>
     <text>热卖推荐</text>
-    <block>
+   
       <view class="superValue_item">
-        <navigator url="../goods-detail/goods-detail?id=620">
+        <block  wx:for="{{btmImgList}}" wx:key="{{index}}">
+         <navigator url="../goods-detail/goods-detail?id={{item.id}}">
+            <image src="{{item.productImageUrl}}" class="slide-image" />
+         </navigator>
+         </block>
+        <!-- <navigator url="../goods-detail/goods-detail?id=620">
           <image src="https://go.jiaw.com/upload/690DFC3A4FCBA97530C58AF51C4E0E45.jpg" class="slide-image" />
         </navigator>
-        <navigator url="../goods-detail/goods-detail?id=621">
+         <navigator url="../goods-detail/goods-detail?id=621">
           <image src="https://go.jiaw.com/upload/24CCF2E2A6A33031D4D684A082A64EAC.jpg" class="slide-image" />
         </navigator>
         <navigator url="../goods-detail/goods-detail?id=619">
           <image src="https://go.jiaw.com/upload/D5F43470784BF0B6B544ABBC9327AC7B.jpg" class="slide-image" />
-        </navigator>
+        </navigator>  -->
       </view>
-    </block>
+  
   </view>
 </view>
+<!-- unregister -->
 <view data-show="addFirstModel" wx:if="{{customerStatus == 'unregister'}}" data-statu="open" class='register_first' catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" bindtap='showFirstOrderRegistor'>
     <image src='/images/first_order_img.png' class='discount'></image>
     <image src='/images/first_order_discount.png' animation="{{animationCloudData}}" class='discount_eight'></image> 
@@ -81,14 +87,14 @@
           <input type='number' class='register_input' name="code" placeholder='请输入验证码' placeholder-class="placeholder"></input>
           <view class="input_button {{getCodeDisable ? 'get_code_disable' : ''}}" bindtap='getCode' data-phone="{{phoneNumber}}">{{codeMsg == "获取验证码" ? codeMsg : codeMsg + "秒后再试"}}</view>
         </view>
-        <view class='register_item register_referre'>
+         <view class='register_item register_referre'>
           <label class='register_input_word'>推荐人</label>
-          <input type='number' class='register_input' name='referreMobile' placeholder='请输入推荐人手机号码' placeholder-class='placeholder'></input>
-        </view>
+          <input type='number' class='register_input' name='referreMobile' value='{{referrerMobile?referrerMobile:""}}' placeholder='请输入推荐人手机号码' placeholder-class='placeholder'></input>
+        </view> 
         <view class='register_submit'>
           <button class="input_submit" formType="submit" data-statu="close">立即注册</button>
         </view>
-        <view class='register_protocal'>
+        <view class='register_protocal' bindtap='readProtocalDetail'>
           <text>点击注册即表示已阅读并同意遵守</text>
           <text>《家饰佳购购买须知》</text>
         </view>

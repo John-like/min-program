@@ -37,6 +37,14 @@
             超值组合
           </view>
         </view>
+         <!-- <view class='right-title-con2'>
+          <view>
+            筛选
+          </view>
+          <view class="scring_icon" bindtap='screeningShop' data-show="screeningShop" data-statu="open" data-id="{{curNav}}">
+            <image src='/images/zc_screening.png'></image>
+          </view>
+        </view> -->
         <scroll-view scroll-y="{{!mask_show}}" class='{{mask_show?"overHidden":""}}' scroll-top="0" style="height:{{scrollHeightRight}}rpx;" lower-threshold="4" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{right_top}}">
           <!--content1  -->
           <block wx:for="{{lists}}" wx:key="*this">
@@ -134,7 +142,7 @@
 </view>
 <!--弹出层 商品详情  -->
 <!--mask-->
-<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_screen" bindtap="addBtn"  data-show="{{rightSlide}}" data-statu="close" wx:if="{{showModalStatus}}"></view>
 
 <!--添加商品执行的动画-->
 <view animation="{{showSignRemarks}}" class="drawer_box" wx:if="{{addShopModal}}">
@@ -237,7 +245,7 @@
         </view>
       </view>
     </view>
-    <button class="btn_ok" bindtap="addBtn" data-statu="close" formType="submit" data-growing-title="超值组合中的选规格">确定</button>
+    <button class="btn_ok" bindtap="addBtn" data-statu="close" formType="submit" data-growing-title="超值组合中的选规格">加入购物车</button>
   </form>
 
 </view>
@@ -373,4 +381,40 @@
       </view>
     </view>
   </form>
+</view>
+
+
+<!--筛选商品执行的动画-->
+<view animation="{{showSignRemarks}}" class="screening" wx:if="{{screeningShop}}">
+  <view class='screening-contetn'>
+    <form class='screening_form' bindsubmit="screenSubmit" bindreset="filterReset">
+      <view class='screening_form_content'>
+        <view class='screening_title'>价格区间</view>
+        <view class='screening-price'>
+          <input maxlength='8' type='number' name="minPrice" placeholder='最低价' value="{{minPrice}}"></input>
+          <view>—</view>
+          <input maxlength='8'  type='number' name="maxPrice" placeholder='最高价' value="{{maxPrice}}"></input>
+        </view>
+        <view class='screening_title'>品牌</view>
+
+        <view class='screening_brand'>
+          <checkbox-group bindchange='screenImg'>
+            <block wx:for="{{screenbrand}}" wx:key="{{index}}">
+              <label class="brand_pic {{item.checked==true?'brand_pic-active':''}}">
+                <checkbox value="{{index}}" data-index="{{index}}" checked='{{item.checked}}' hidden='true'></checkbox>
+                <image src='{{item.productBrandFileUrl}}'></image>
+                <!-- {{item.checked?"checked_img":""}}' -->
+              </label>
+            </block>
+          </checkbox-group>
+        </view>
+
+      </view>
+      <view class='screening_btm'>
+        <button class='screening_btm_rest' type='number' form-type="reset">重置</button>
+        <button class='screening_btm_sure' data-id="{{curNav}}" data-show="{{rightSlide}}" bindtap="addBtn" formType="submit" data-statu="close">确定</button>
+      </view>
+    </form>
+
+  </view>
 </view>

@@ -1,6 +1,6 @@
 <!--pages/order_manage/firm_order/firm_order.wxml-->
 <import src="../../template/template.wxml" />
-<form bindsubmit="formSubmit">
+<form bindsubmit="formSubmit" data-statu="open" data-show="paymentModal">
   <view class='wrapper'>
   <!-- url='../../user_center/user_address/user_address?choose="true"' class='nav_choose_area' -->
     <view bindtap='chooseGoodsAddress' class='nav_choose_area'>
@@ -108,14 +108,14 @@
         <text></text>
         <image class='img_return' src='../../../images/return_user.png'></image>
       </view> -->
-      <!-- <view class='setting_color' data-statu="open" bindtap="show_setColor">
+      <!-- <view class='setting_color' data-show="colorModal" data-statu="open" bindtap="show_setColor">
         <text>设置人工调色</text>
         <image class='img_return' src='../../../images/return_user.png'></image>
       </view> -->
       <view class='leave_message'>
         <text>留言：</text>
-        <textarea class='{{ios?"ios_textarea":""}}' maxlength="60" name="leave_message" bindfocus="focus_message" bindblur="blur_message" placeholder-class="placeholder"></textarea>
-        <text class='{{has_message?"hide":"has_message"}}'>点击给商家留言</text>
+        <textarea class='{{ios?"ios_textarea":""}}' maxlength="120" name="leave_message" bindfocus="focus_message" bindblur="blur_message" placeholder-class="placeholder"></textarea>
+        <text class='{{has_message?"hide":"has_message"}}'>如有送到时间，调色要求，测量时间或其他需求，请在此备注</text>
       </view>
       <!-- <checkbox-group bindchange="follow" name="follow">
         <label class="checkbox">
@@ -123,29 +123,31 @@
           <text>关注公众号，实时了解订单进展</text>
         </label>
       </checkbox-group> -->
-      <checkbox-group bindchange="agreeStateChange" name="agreement">
+      <!-- <checkbox-group bindchange="agreeStateChange" name="agreement">
         <label class="checkbox">
           <checkbox value="" checked="true" color='#289dee' />
           <text>同意签署</text>
         </label>
         <text bindtap='show_protocol'>《平台协议》</text>
-      </checkbox-group>
+      </checkbox-group> -->
     </view>
   </view>
 
   <view class='total'>
     <text wx:if="{{orderGoodsServePrice}}">合计(含服务费)：￥{{orderGoodsTotalPrice}}</text>
     <text wx:else>合计：￥{{orderGoodsTotalPrice}}</text>
-    <button formType="submit" disabled='{{isChooseProtocal}}' class='{{isChooseProtocal?"":"active"}}' data-growing-title="确认订单中的提交">提交</button>
+     <!-- disabled='{{isChooseProtocal}}' 
+     class='{{isChooseProtocal?"":"active"}}'  -->
+    <button formType="submit" class='active' data-growing-title="确认订单中的提交">提交</button>
   </view>
 </form>
 
 <!--弹出层 设置人工调色  -->
 <!--mask-->
-<view class="drawer_screen" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_screen" data-show="colorModal" bindtap="addBtn" data-statu="close" wx:if="{{colorModal}}"></view>
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
-<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{colorModal}}">
   <form bindsubmit="form_submit_color">
 
     <!--drawer content-->
@@ -180,6 +182,30 @@
   </form>
 </view>
 
+<!--弹出层 支付方式  -->
+<!--mask-->
+<view class="drawer_screen" data-show="paymentModal" bindtap="addBtn" data-statu="close" wx:if="{{showModalStatus}}"></view> 
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{showSignRemarks}}" class="drawer_box payment" wx:if="{{paymentModal}}">
+  <image src='../../../images/cicle_cancel.png' bindtap='paymentClose' data-statu="close" data-show="paymentModal" class='payment_cancel'></image>
+  <text class='payment_way'>请选择支付方式</text>
+  <view class='payment_choose' bindtap='choosePayWay' data-payway="wechat">
+    <image class='payment_icon_wechat' src='../../../images/pay_wechat.png'></image>
+    <text>微信支付</text>
+  </view>
+   <view class='payment_choose' bindtap='choosePayWay' data-payway="bank">
+    <image class='payment_icon_bank' src='../../../images/pay_bank.png'></image>
+    <text class='bank'>银行卡</text>
+  </view> 
+  <view>
+    <view  class='payment_choose' bindtap='choosePayWay' data-payway="offline">
+      <image class='payment_icon_offline' src='../../../images/pay_offline.png'></image>
+      <text>线下转账</text>
+    </view>
+    <text class='free_extra'>(线下转账减免搬楼费)</text> 
+  </view>
+</view> 
 
 <!-- 提示信息   -->
 <template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

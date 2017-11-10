@@ -59,7 +59,26 @@
   /* padding-left: 20rpx;  */
   position: relative;
 }
-
+.user_name {
+  margin-top: 20rpx;
+  padding-left: 74rpx;
+}
+.user_name label {
+  font-size: 36rpx;
+}
+.user_name input {
+  width: 605rpx;
+  height: 69rpx;
+  padding-left: 21rpx;
+  margin-top: 23rpx;
+  border: 1rpx solid #c9c9c9;
+  border-radius: 6rpx;
+  font-size: 30rpx;
+}
+.user_name .placeholder {
+  font-size: 22rpx;
+  color: #ddd;
+}
 .arrow_botoom {
   position: absolute;
   right: 12rpx;
@@ -103,9 +122,12 @@
   text-align: center;
   margin-top: 73rpx;
 }
+.tip_personal {
+  padding-bottom: 30rpx;
+}
 .upload_wrapper {
-  width: 240rpx;
-  height: 150rpx; 
+  width: 140rpx;
+  height: 240rpx; 
   position: relative;
   margin-right: 40rpx;
 }
@@ -161,8 +183,6 @@
   background: #289ded;
   color: #fff;
 }
-
-
 
 /*提示信息位置  */
 .tip_message_con {

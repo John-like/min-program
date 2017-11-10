@@ -1,9 +1,10 @@
+<import src="../../template/template.wxml" />
 <view class="contain">
-  <view class='search_box'>
-  <!--顶部搜索框  -->
+  <view class='search'>
+    <!--顶部搜索框  -->
     <form bindsubmit='formSubmit' data-placeholder='{{placeholderWord}}'>
       <view class='search_all search_content'>
-        <input type='text' name="content" class='search_box' placeholder='{{placeholderWord}}' placeholder-class='placeholder'></input>
+        <input type='text' name="content" confirm-type="search" bindconfirm="searchConfirm" class='search_box' placeholder='{{placeholderWord}}' placeholder-class='placeholder'></input>
         <button plain="true" formType="submit" class='search_text'>搜索</button>
       </view>
     </form>
@@ -19,7 +20,7 @@
     </view>
     <view wx:else>
       <view class='lately_search_record'>
-        <view  bindtap='latelySearch' data-search="{{item}}" url='../search_result/search_result?search_content={{item}}' class='lately_record_item' wx:for="{{search_history}}" wx:key="*this">{{item}}</view> 
+        <view bindtap='latelySearch' data-search="{{item}}" url='../search_result/search_result?search_content={{item}}' class='lately_record_item' wx:for="{{search_history}}" wx:key="*this">{{item}}</view>
       </view>
     </view>
   </view>
@@ -30,12 +31,12 @@
       <view class='lately_search_clear' bindtap='hotRefresh'>换一批</view>
     </view>
     <view class='lately_search_record search_hot_record'>
-      <view class='lately_record_item' data-hot="{{item}}" bindtap='searchHot' wx:for="{{search_hot}}" wx:key="{{index}}">{{item}}        </view>
+      <view class='lately_record_item' data-hot="{{item}}" bindtap='searchHot' wx:for="{{search_hot}}" wx:key="{{index}}">{{item}} </view>
     </view>
   </view>
   <!--为你推荐  -->
   <view class='recommend' hidden='false'>
-  <!--标题  -->
+    <!--标题  -->
     <view class='recommend_title'>
       <text>为你推荐</text>
       <view class='line_left lines'>
@@ -47,7 +48,7 @@
     </view>
     <!--内容  -->
     <view class='recommend_content search_all'>
-      <navigator url='../goods-detail/goods-detail' class='recommend_content_item'  wx:for="{{recommendCommodity}}" wx:key="{{index}}">
+      <navigator url='../goods-detail/goods-detail' class='recommend_content_item' wx:for="{{recommendCommodity}}" wx:key="{{index}}">
         <image src='{{item.img}}' class='recommend_goods_img'></image>
         <text>{{item.text}}</text>
         <text class='price'>￥{{item.price}}</text>
@@ -55,3 +56,4 @@
     </view>
   </view>
 </view>
+<template is="tip" data="{{message:message,control:control,animationData:animationData}}" />

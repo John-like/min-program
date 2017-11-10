@@ -180,7 +180,8 @@ Page({
     if (that.data.shopCarModal) {
       that.setData({
         shopCarModal: false,
-        showModalStatus: false
+        showModalStatus: false,
+        mask_show: false
       })
     }
   },
@@ -243,7 +244,8 @@ Page({
     var dataId = e.currentTarget.dataset.id;
     if(showThis) {
       that.setData({
-        chooseNum: 1
+        chooseNum: 1,
+        isScroll:false
       })
     }
     wx.request({

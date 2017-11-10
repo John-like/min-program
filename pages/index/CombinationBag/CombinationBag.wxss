@@ -91,6 +91,21 @@ page {
   left: 0;
   z-index: 100;
 }
+.right-title-con2 {
+  padding: 26rpx 0rpx;
+  position: absolute;
+  top: 0;
+  right: 8rpx;
+  z-index: 100;
+  display: flex;
+  color: #333;
+}
+
+.scring_icon wx-image {
+  width: 36rpx;
+  height: 36rpx;
+  padding: 4rpx 20rpx 0rpx 10rpx;
+}
 
 .right-title {
   border-left: 5px solid #d71518;

@@ -20,14 +20,14 @@
   background: #fff;
   box-sizing: border-box;
 }
-.searchBar .search_con wx-input {
+.searchBar .search_con wx-view {
   width: 636rpx;
   height: 64rpx;
   border-radius: 8rpx;
   background: #efefef;
   line-height: 64rpx;
   font-size: 28rpx;
-  color: #333;
+  color: #999;
   padding-left: 109rpx;
   box-sizing: border-box;
 }

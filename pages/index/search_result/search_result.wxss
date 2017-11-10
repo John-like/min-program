@@ -11,24 +11,39 @@
   /* border-bottom: 20rpx solid #efefef; */
    border-bottom: 4rpx solid #efefef; 
 }
-
+.search_zIndex {
+  z-index: 105;
+}
 .search_bar .search {
   margin-bottom: 12rpx;
   border-bottom: 1rpx solid #f2f2f2;
   width: 750rpx;
 }
 
-.search_bar .search input {
-  font-size: 28rpx;
-  color: #333;
+.search .search_delete {
+   position: absolute;
+   top: 16rpx;
+   left: 594rpx;
+   width: 46rpx;
+   height: 46rpx;
+   z-index: 101;
+}
+.search_bar .input_con {
   width: 630rpx;
   height: 64rpx;
   background: #efefef;
-  margin-left: 22rpx;
-  padding-left: 46rpx;
-  border-radius: 8rpx;
-  box-sizing: border-box;
   display: inline-block;
+  margin-left: 22rpx;
+  border-radius: 8rpx;
+}
+.search_bar .search input {
+  font-size: 28rpx;
+  color: #333;
+  width: 580rpx;
+  height: 64rpx;
+  /* background: #efefef; */
+  padding-left: 46rpx;
+  box-sizing: border-box;
 }
 
 .search_bar .search button {
@@ -48,7 +63,41 @@
 
 /*筛选选项  */
 
-.options_title {
+.options {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 87rpx;
+  padding-left: 22rpx;
+  padding-right: 38rpx;
+}
+.options wx-text {
+  height: 87rpx;
+  line-height: 87rpx;
+  font-size: 27rpx;
+  font-weight: bold;
+  color: #333;
+}
+.right-title-con2 {
+  padding: 26rpx 0rpx;
+  position: absolute;
+  top: 0;
+  right: 8rpx;
+  z-index: 100;
+  display: flex;
+  color: #333;
+  font-size: 30rpx;
+}
+.screenRed{
+  color: #d71518;
+}
+.scring_icon wx-image {
+  width: 36rpx;
+  height: 36rpx;
+  padding: 4rpx 20rpx 0rpx 10rpx;
+}
+
+/* .options_title {
   height: 87rpx;
   width: 100%;
   display: flex;
@@ -84,23 +133,21 @@
 .options_title .checked .arrow_bottom {
   border-top: 18rpx solid #f33;
   transform: rotate(180deg);
-}
+} */
 
 /*商品列表  */
 
-.overHidden {
-  overflow: hidden;
-}
-
 .goods_lists {
   width: 100%;
-  /* height: 1020rpx;  */
-   /* height: 1112rpx;   */
   align-items: center;
-  margin-top: 90rpx;
-  /* margin-top: 200rpx; */
-  /* margin-bottom: 110rpx; */
+  margin-top: 170rpx; 
+  margin-bottom: 100rpx;   
 }
+.overHidden {
+  overflow: hidden;
+  position: fixed;
+}
+
 .goods_list_wrapper {
   position: relative;
 }
@@ -417,3 +464,117 @@ wx-navigator:hover{
   margin: 0 auto;
   width: 100%;
 }
+/*筛选弹窗  */
+/* .filter {
+  width: 100%;
+  position: fixed;
+  top: 170rpx;
+  left: 0;
+  z-index: 100;
+  background: #fff;
+}
+.filter_result {
+  width:100%;
+  height: 88rpx;
+   border-top: 1rpx solid #f4f4f4;
+}
+.filter_result button{
+  width: 50%;
+  display: inline-block;
+  border: none;
+  background: #fff;
+  border-radius: 0;
+  font-size: 28rpx;
+}
+.filter_result button::after{
+  border: none;
+}
+.filter_result .submit {
+  background: #f23030;
+  color: #fff;
+}
+.filter_content {
+  height: 300rpx;
+  width: 610rpx;
+  margin: 18rpx auto 0;
+}
+.filter_content .checkbox_check {
+  display: none;
+}
+.filter_content .checkbox wx-image {
+  width: 190rpx;
+  height: 86rpx;
+  border-radius: 4rpx;
+  border: 1rpx solid #c7c7c7;
+} */
+/* .filter_content .checkbox .checked_img {
+  border: 1rpx solid #f23030;
+} */
+.filter_result {
+  position: absolute;
+  left: 0;
+  bottom: -5rpx;
+  width:100%;
+  /* height: 88rpx; */
+   border-top: 2rpx solid #ccc;
+}
+.filter_result button{
+  width: 50%;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: inline-block;
+  border: none;
+  background: #fff;
+  border-radius: 0;
+  font-size: 32rpx;
+}
+.filter_result button::after{
+  border: none;
+}
+.filter_result .submit {
+  background: #f23030;
+  color: #fff;
+}
+.checkbox_group {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+}
+/* .filter_content .checkbox_group {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+} */
+
+/*价格筛选  */
+.filter_content_price {
+  height:188rpx;
+  overflow: hidden;
+}
+.filter_content_price > wx-view {
+  width: 610rpx;
+  height: 64rpx;
+  margin:60rpx auto 0;
+  display: flex;
+  align-items: center;
+}
+.filter_content_price input {
+  width: 286rpx;
+  height: 100%;
+  background: #efefef;
+  border-radius: 8rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.filter_content_price .line {
+  width: 22rpx;
+  height: 2rpx;
+  margin: 0 8rpx;
+  background: #333;
+}
+.filter_content_price .placeholder {
+  font-size: 28rpx;
+  color: #ccc;
+  text-align: center;
+}
+

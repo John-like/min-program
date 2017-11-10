@@ -31,21 +31,61 @@
 
         </view>
       </view>
-      <!-- <view class='id_cards'>
-        <text>身份证</text>
+      <view class='user_name'>
+        <view wx:if="{{type=='personage'}}">
+          <label>姓名</label>
+          <input type='text' name='name' value='{{userName}}' placeholder='请输入姓名' bindblur='saveNameInput' placeholder-class="placeholder"></input>
+        </view>
+        <view wx:else>
+          <label>企业名称</label>
+          <input type='text' name='companyName' value='{{saveEnterpriseName}}' placeholder='请输入企业名称' bindblur='saveEnterpriseName' placeholder-class="placeholder"></input>
+        </view>
+      </view>  
+      <view class='id_cards' wx:if="{{type=='personage'}}">
+        <text>{{type=='personage'?"身份证（正面）":"营业执照"}}</text>
         <view class='id_img_wrapper'>
-          <view wx:for="{{IDimg}}" wx:key="{{index}}">
+          <view wx:for="{{IDimg_front}}" wx:key="{{index}}">
             <view class='upload_wrapper'>
-              <image mode=" widthFix" class='uploadedImg' src='{{item}}'></image>
-              <image bindtap='deleteID' mode=" widthFix" class='delete' src='../../../images/delete.png' data-index="{{index}}"></image>
+              <image mode="widthFix" class='uploadedImg' src='{{item}}'  data-img_url="{{item}}" bindtap='previewPhoto'></image>
+              <image bindtap='deleteID' mode=" widthFix" class='delete' src='../../../images/delete.png' data-aspect="front" data-index="{{index}}"></image>
             </view>
           </view>
-          <view wx:if="{{!IDimg || IDimg.length < 2}}">
-            <image bindtap='addIdImg' class='add_img {{IDimg.length==1?"add_img1":""}}' src="../../../images/add_img.png"></image>
+          <view wx:if="{{!IDimg_front || IDimg_front.length < 1}}">
+            <image bindtap='addIdImg' data-aspect="front" class='add_img {{IDimg.length==1?"add_img1":""}}' src="../../../images/add_img.png"></image>
           </view>
         </view>
-      </view> -->
-      <view wx:if="{{type=='personage'}}" class='id_cards_info'>
+      </view> 
+      <!--企业 营业执照  -->
+      <view class='id_cards' wx:else>
+        <text>营业执照</text>
+        <view class='id_img_wrapper'>
+          <view wx:for="{{IDimg_enterprise}}" wx:key="{{index}}">
+            <view class='upload_wrapper'>
+              <image mode="widthFix" class='uploadedImg' src='{{item}}' data-img_url="{{item}}" bindtap='previewPhoto'></image>
+              <image bindtap='deleteID' mode=" widthFix" class='delete' src='../../../images/delete.png' data-aspect="enterprise" data-index="{{index}}"></image>
+            </view>
+          </view>
+          <view wx:if="{{!IDimg_enterprise || IDimg_enterprise.length < 1}}">
+            <image bindtap='addIdImg' data-aspect="enterprise" class='add_img {{IDimg.length==1?"add_img1":""}}' src="../../../images/add_img.png"></image>
+          </view>
+        </view>
+      </view> 
+
+      <view  wx:if="{{type=='personage'}}" class='id_cards'>
+        <text>身份证（反面）</text>
+        <view class='id_img_wrapper'>
+          <view wx:for="{{IDimg_reverse}}" wx:key="{{index}}">
+            <view class='upload_wrapper'>
+              <image mode="widthFix" class='uploadedImg' src='{{item}}' data-img_url="{{item}}" bindtap='previewPhoto'></image>
+              <image bindtap='deleteID' mode=" widthFix" class='delete' src='../../../images/delete.png' data-aspect="reverse" data-index="{{index}}"></image>
+            </view>
+          </view>
+          <view wx:if="{{!IDimg_reverse || IDimg_reverse.length < 1}}">
+            <image bindtap='addIdImg' data-aspect="reverse" class='add_img {{IDimg.length==1?"add_img1":""}}' src="../../../images/add_img.png"></image>
+          </view>
+        </view>
+      </view>
+      <!-- <view wx:if="{{type=='personage'}}" class='id_cards_info'>
         <view class='id_cards_name'>
           <text>姓名 </text>
           <input name="name" maxlength="10" placeholder='请输入姓名'></input>
@@ -64,11 +104,11 @@
           <text>统一社会信用代码 </text>
           <input name="license" placeholder='请输入统一社会信用代码' ></input>
         </view>
-      </view>
+      </view> -->
       <view class='commit'>
         <button form-type='submit'>提交</button>
       </view>
-      <view class="tip">
+      <view class="tip {{type=='personage'?'tip_personal':''}}" bindtap='readProtocal'>
         <text>点击提交即表示已阅读并同意遵守《家饰佳购会员须知》</text>
       </view>
     </form>

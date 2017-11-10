@@ -2,7 +2,7 @@
 //获取api接口文档
 const api = require('utils/api');
 var token;
-var markStatu;
+var referrerMobile;
 App({
   data: ({
     //userId: {},
@@ -11,11 +11,13 @@ App({
   onLaunch: function (options) {
     console.log("onLaunch")
     console.log(options)
-    // if(options.scene == 1011) {
-    //   markStatu='open';
-    //   this.globalData.markStatu = markStatu
-    //   console.log(this.globalData.markStatu)
-    // }
+    if(options.scene == 1011 && options.query.referrerMobile) {
+      referrerMobile = options.query.referrerMobile;
+      this.globalData.referrerMobile = referrerMobile;
+      console.log(this.globalData.referrerMobile)
+    } else {
+      this.globalData.referrerMobile = "";
+    }
     //console.log(options)
     //调用API从本地缓存中获取数据
     var that = this;
@@ -116,10 +118,11 @@ App({
               code: code,
               encryptedData: encryptedData,
               iv: iv,
-              systemVersion: systemVersion
+              // systemVersion: systemVersion
             },
             success: function (s) {
               console.log('登录请求成功')
+              console.log(s)
               var loginData = s.data.data;
               var openId = loginData.openId
               //console.log(loginData.openId)
@@ -262,8 +265,8 @@ App({
     // unionId: "",
     // areaAll: null,
     tapTime:0,
-    markStatu: markStatu,
-    systemVersion:"1.0.2"
+    referrerMobile: referrerMobile,
+    systemVersion:"1.0.4"
   },
 })
 //growingio代码

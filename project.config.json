@@ -13,15 +13,7 @@
 	"condition": {
 		"weapp": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "1011",
-					"pathName": "pages/index/authenticate/authenticate",
-					"query": "name=aaa",
-					"scene": "1011"
-				}
-			]
+			"list": []
 		},
 		"search": {
 			"current": -1,

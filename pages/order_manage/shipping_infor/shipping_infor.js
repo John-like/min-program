@@ -4,13 +4,19 @@ var customerStatus;
 var unionId;
 var shareMessageArg = {};
 var systemVersion;
+var openControl ;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    open:true
+  open:'',
+    test:[
+      {id:3},
+      { id: 2 },
+      { id: 154 },
+    ],
   },
 
   /**
@@ -44,9 +50,17 @@ Page({
   },
 
   // 点击折叠当前订单
-  shrink: function(){
+  shrink: function(e){
+    
+    var listIndex = e.currentTarget.dataset.id
+    console.log(listIndex)
+    if (openControl != e.target.dataset.id) {
+      openControl = e.target.dataset.id;
+    } else {
+      openControl = "";
+    }
     this.setData({
-      open:!this.data.open
+      open: openControl
     })
   }
  

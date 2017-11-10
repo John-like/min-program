@@ -19,6 +19,9 @@ Page({
   onLoad: function (options) {
     shareMessageArg = options;
     systemVersion = getApp().globalData.systemVersion
+    this.setData({
+      systemVersion: systemVersion 
+    })
     openId = wx.getStorageSync('openId');
     unionId = wx.getStorageSync('unionId');
     customerStatus = wx.getStorageSync('customerstatusStr');

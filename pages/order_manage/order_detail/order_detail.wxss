@@ -10,12 +10,9 @@ page{
   padding-bottom: 100rpx;
 }
 .container_overflow {
+  width: 100%;
   height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
   position: fixed;
-  top: 0;
-  left: 0;
 }
 /*头部 message  */
 .message-title{
@@ -83,6 +80,9 @@ page{
   height: 150rpx;
   margin-right: 30rpx;
 }
+.message-main .order_remark {
+  margin-top: 6rpx;
+}
 .goods_name {
   font-size: 28rpx;
   color: #333;
@@ -94,16 +94,18 @@ page{
 }
 .order_item .orderDetail_num{
  position: relative;
-  height: 40rpx
+ margin-top: 10rpx;
 }
 .orderDetail_num wx-view{
   display: block;
+  width: 60%;
+  overflow: hidden;
 }
 .orderDetail_num .orderDetailNum{
  color: #333;
-
+width: 40%;
 position: absolute;
-right: 10rpx;
+left: 62%;
 top:0rpx;
 }
 .order_item .orederDetail_attribute{
@@ -302,3 +304,176 @@ wx-navigator:hover{
 /* .hide_css {
   margin-bottom: 410rpx;
 }  */
+
+/*支付方式  */
+.payment {
+  position: fixed;
+  top: 283rpx;
+  left: 105rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 114rpx;
+  justify-content: space-around;
+  width: 540rpx;
+  height: 634rpx;
+  border-radius: 22rpx;
+  box-sizing: border-box;
+}
+.payment wx-text {
+  font-weight: bold;
+}
+.payment .payment_way {
+  margin-top: 25rpx;
+  font-size: 30rpx;
+  color: #000;
+}
+.payment .payment_icon_wechat {
+  width: 46rpx;
+  height: 37rpx;
+}
+.payment .payment_icon_bank {
+  width: 41rpx;
+  height: 33rpx;
+}
+.payment .payment_icon_offline {
+  width: 42rpx;
+  height: 42rpx;
+}
+.payment .payment_choose {
+  /* display: flex;
+  justify-content: space-around; */
+  width: 256rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.payment_choose wx-image {
+  float: left;
+  margin-left: 20rpx;
+  margin-right: 35rpx;
+}
+.payment_choose wx-text {
+  float: left;
+}
+.payment .free_extra {
+  letter-spacing: 2rpx;
+  font-size: 24rpx;
+  color: #dc3235;
+}
+.payment .payment_cancel {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  width: 42rpx;
+  height: 42rpx;
+}
+  
+/*银行卡支付弹窗  */
+.pay_of_bank {
+  position: fixed;
+  top: 283rpx;
+  left: 105rpx;
+  width: 560rpx;
+  height: 524rpx;
+  border-radius: 8rpx;
+}
+.card_close {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+.password_please {
+  width: 100%;
+  height: 97rpx;
+  line-height: 97rpx;
+  text-align: center;
+  border-bottom: 1rpx solid #f1f1f1;
+  color: #333;
+  font-size: 34rpx;
+}
+.unit_price {
+  width: 100%;
+  height: 182rpx;
+  line-height: 182rpx;
+  text-align: center;
+  font-size: 54rpx;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 5rpx;
+}
+.card_type {
+  display: flex;
+  width: 501rpx;
+  height: 85rpx;
+  line-height: 85rpx;
+  margin-left: 33rpx;
+  border-top: 1rpx solid #d4d4d4;
+  border-bottom: 1rpx solid #d4d4d4;
+  font-size: 31rpx;
+}
+.card_type .bank_logo {
+  width: 55rpx;
+  height: 55rpx;
+  margin-top: 15rpx;
+}
+.card_type .bank_msg {
+  flex: 3;
+  margin-left: 23rpx;
+}
+.card_type .jump {
+  width: 17rpx;
+  height: 26rpx;
+  margin-top: 30rpx;
+}
+/*密码框  */
+.pay_word {
+  position: relative;
+  width: 492rpx;
+  height: 85rpx;
+}
+.pay_word .password {
+  width: 100%;
+  height: 0; 
+  border-top: 2rpx solid #c7c7c7;
+  margin-top: 36rpx;
+  margin-left: 37rpx;
+  color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0);
+  font-size: 0;
+  line-height: 0;
+  min-height: 0;
+}
+.placeholder_psw {
+  letter-spacing: 100rpx;
+}
+.hidden_word {
+  position: absolute;
+  display: flex;
+   z-index: -1; 
+  /* top: 57rpx; */
+  left: 36rpx;
+  width: 492rpx;
+  height: 85rpx;
+  background: #fff;
+}
+.hidden_word wx-input {
+  width: 83rpx;
+  height: 86rpx;
+  font-size: 50rpx;
+  text-align: center;
+  border-left: 2rpx solid #c7c7c7;
+  border-bottom: 2rpx solid #c7c7c7;
+}
+.hidden_word .last {
+  border-right: none;
+}
+.line {
+  position: absolute;
+  bottom: -4rpx;
+  right: -35rpx;
+  width: 2rpx;
+  height: 86rpx;
+  background: #c7c7c7;
+}

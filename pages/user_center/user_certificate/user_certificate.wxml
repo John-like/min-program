@@ -26,22 +26,21 @@
         {{user.name}}
       </view>
     </view>
-    <view class='certificate_row'>
+    <!-- <view class='certificate_row'>
       <view class='certificate_left'>
         身份证号：
       </view>
       <view class='certificate_right'>
         {{user.identity}}
       </view>
-    </view>
+    </view> -->
     <view class='certificate_row certificate_row_last'>
       <view class='certificate_left'>
         认证状态：
       </view>
       <view class='certificate_right'>
        {{user.statusStr=='authentication'?"已认证":"认证中"}}
-      </view>
-     
+      </view> 
     </view>
   </view>
   
@@ -63,14 +62,14 @@
         {{user.companyName}}
       </view>
     </view>
-    <view class='certificate_row'>
-      <view class='certificate_left' style='margin-right:20rpx;'>
+    <!-- <view class='certificate_row'>
+       <view class='certificate_left' style='margin-right:20rpx;'>
         统一社会信息代码：
-      </view>
+      </view> 
       <view class='certificate_right'>
        {{user.license}}
       </view>
-    </view>
+    </view> -->
     <view class='certificate_row certificate_row_last'>
       <view class='certificate_left'>
         认证状态：
